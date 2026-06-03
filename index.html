@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 晨报 · 2026.06.03</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff8f5;
+  --surface:#ffffff;
+  --surface-hover:#fff0ea;
+  --text:#2d1a12;
+  --text-secondary:#8a6e60;
+  --accent-start:#ff6b35;
+  --accent-end:#e84400;
+  --accent-mid:#ff8c42;
+  --section-model:#ff6b35;
+  --section-product:#ff8c42;
+  --section-industry:#ffa94d;
+  --section-paper:#ffb366;
+  --section-tip:#ffc080;
+  --border:rgba(255,107,53,0.12);
+  --shadow:rgba(255,107,53,0.06);
+  --radius:14px;
+  --max-w:1100px;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:linear-gradient(180deg,#fff8f5 0%,#fff0e8 40%,#fff8f5 100%)}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 20px 60px}
+
+/* Hero */
+.hero{
+  position:relative;
+  padding:60px 20px 48px;
+  text-align:center;
+  background:linear-gradient(135deg,rgba(255,107,53,0.08) 0%,rgba(232,68,0,0.04) 100%);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-60%;left:-20%;width:140%;height:200%;
+  background:radial-gradient(ellipse at 30% 20%,rgba(255,107,53,0.05) 0%,transparent 60%),
+              radial-gradient(ellipse at 70% 80%,rgba(232,68,0,0.03) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em;position:relative}
+.hero .sub{color:var(--text-secondary);font-size:.95rem;margin-top:8px;position:relative}
+.hero .sub span{margin:0 6px}
+.stats-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px;position:relative}
+.stat-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 16px;border-radius:100px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  font-size:.82rem;color:var(--text-secondary);
+  transition:all .25s;
+}
+.stat-chip:hover{background:var(--surface-hover);transform:translateY(-1px);border-color:var(--accent-start)}
+.stat-chip .num{font-weight:700;font-size:.95rem;color:var(--text)}
+.stat-chip .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot-model{background:var(--section-model)}
+.dot-product{background:var(--section-product)}
+.dot-industry{background:var(--section-industry)}
+.dot-paper{background:var(--section-paper)}
+.dot-tip{background:var(--section-tip)}
+
+/* Nav */
+.nav-bar{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin:0 auto;max-width:var(--max-w);padding:20px 20px 0;
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(180deg,rgba(255,248,245,0.95) 60%,transparent);
+  backdrop-filter:blur(12px);
+  padding-bottom:16px;
+}
+.nav-bar a{
+  text-decoration:none;font-size:.8rem;padding:6px 14px;
+  border-radius:100px;color:var(--text-secondary);
+  background:var(--surface);
+  border:1px solid var(--border);
+  transition:all .25s;white-space:nowrap;
+}
+.nav-bar a:hover{background:var(--surface-hover);color:var(--text);border-color:var(--accent-start)}
+
+/* Section */
+.section{margin-top:36px}
+.section-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:18px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.section-header h2{font-size:1.2rem;font-weight:700}
+.section-header .badge{
+  font-size:.72rem;padding:2px 10px;border-radius:100px;
+  font-weight:600;color:#fff;
+}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:700px){.card-grid{grid-template-columns:1fr 1fr}}
+.card{
+  background:var(--surface);border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:18px 20px 16px;
+  transition:all .3s ease;
+  opacity:0;transform:translateY(24px);
+  animation:fadeUp .5s ease forwards;
+}
+.card:hover{background:var(--surface-hover);border-color:var(--accent-start);transform:translateY(-2px);box-shadow:0 6px 24px var(--shadow)}
+.card-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;
+  font-size:.75rem;font-weight:700;
+  background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+  color:#fff;margin-right:10px;flex-shrink:0;
+}
+.card-title{
+  display:flex;align-items:flex-start;gap:0;
+  font-size:.95rem;font-weight:600;line-height:1.5;
+  margin-bottom:6px;
+}
+.card-source{
+  display:inline-block;font-size:.7rem;padding:1px 8px;
+  border-radius:100px;background:rgba(255,107,53,0.08);
+  color:var(--text-secondary);margin-left:34px;margin-bottom:6px;
+}
+.card-summary{
+  font-size:.84rem;line-height:1.6;
+  color:var(--text-secondary);margin-left:34px;margin-bottom:10px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-time{
+  font-size:.75rem;color:rgba(0,0,0,0.3);margin-left:34px;
+}
+.card-link{
+  display:inline-block;margin-left:34px;margin-top:6px;
+  font-size:.78rem;color:var(--accent-start);
+  text-decoration:none;font-weight:500;
+  transition:color .2s;
+}
+.card-link:hover{color:var(--accent-end);text-decoration:underline}
+
+/* Footer */
+.footer{
+  text-align:center;padding:40px 20px 32px;
+  color:rgba(0,0,0,0.25);font-size:.78rem;
+  border-top:1px solid var(--border);margin-top:48px;
+}
+
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0)}
+}
+.card:nth-child(1){animation-delay:0s}
+.card:nth-child(2){animation-delay:.06s}
+.card:nth-child(3){animation-delay:.12s}
+.card:nth-child(4){animation-delay:.18s}
+.card:nth-child(5){animation-delay:.24s}
+.card:nth-child(6){animation-delay:.30s}
+.card:nth-child(7){animation-delay:.36s}
+.card:nth-child(8){animation-delay:.42s}
+.card:nth-child(9){animation-delay:.48s}
+.card:nth-child(10){animation-delay:.54s}
+.card:nth-child(11){animation-delay:.60s}
+.card:nth-child(12){animation-delay:.66s}
+.card:nth-child(13){animation-delay:.72s}
+.card:nth-child(14){animation-delay:.78s}
+.card:nth-child(15){animation-delay:.84s}
+.card:nth-child(16){animation-delay:.90s}
+.card:nth-child(17){animation-delay:.96s}
+.card:nth-child(18){animation-delay:1.02s}
+.card:nth-child(19){animation-delay:1.08s}
+.card:nth-child(20){animation-delay:1.14s}
+.card:nth-child(21){animation-delay:1.20s}
+.card:nth-child(22){animation-delay:1.26s}
+.card:nth-child(23){animation-delay:1.32s}
+.card:nth-child(24){animation-delay:1.38s}
+.card:nth-child(25){animation-delay:1.44s}
+.card:nth-child(26){animation-delay:1.50s}
+.card:nth-child(27){animation-delay:1.56s}
+.card:nth-child(28){animation-delay:1.62s}
+@media(max-width:699px){
+  .hero{padding:40px 16px 36px}
+  .card{padding:14px 14px 12px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>☀️ AI 晨报</h1>
+  <div class="sub"><span>2026.06.03</span><span>·</span><span>星期三</span><span>·</span><span>共 28 条</span></div>
+  <div class="stats-bar">
+    <span class="stat-chip"><span class="dot dot-model"></span>模型发布/更新 <span class="num">3</span></span>
+    <span class="stat-chip"><span class="dot dot-product"></span>产品发布/更新 <span class="num">7</span></span>
+    <span class="stat-chip"><span class="dot dot-industry"></span>行业动态 <span class="num">7</span></span>
+    <span class="stat-chip"><span class="dot dot-paper"></span>论文研究 <span class="num">3</span></span>
+    <span class="stat-chip"><span class="dot dot-tip"></span>技巧与观点 <span class="num">8</span></span>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <a href="#s-models">🤖 模型发布/更新</a>
+  <a href="#s-products">🚀 产品发布/更新</a>
+  <a href="#s-industry">🌐 行业动态</a>
+  <a href="#s-paper">📄 论文研究</a>
+  <a href="#s-tips">💡 技巧与观点</a>
+</div>
+
+<div class="wrap">
+
+<section class="section" id="s-models">
+  <div class="section-header">
+    <h2>🤖 模型发布/更新</h2>
+    <span class="badge" style="background:var(--section-model)">3</span>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title"><span class="card-num">1</span>微软首款高级推理AI模型MAI-Thinking-1发布</div>
+      <div class="card-source">🎯 The Verge：AI（RSS）</div>
+      <div class="card-summary">微软在Build 2026上发布自研推理模型MAI-Thinking-1，定位中等规模，在软件工程基准测试中达到领先水平，完全使用干净数据从头训练。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://www.theverge.com/tech/941664/microsoft-ai-model-reasoning-mai-thinking-1-build-2026" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">2</span>Holo3.1：快速本地计算机使用智能体</div>
+      <div class="card-source">🎯 Hugging Face：Blog（RSS）</div>
+      <div class="card-summary">基于Qwen的计算机使用智能体系列，提供0.8B至35B四种尺寸，首次发布量化检查点。35B模型在AndroidWorld基准得分从67%提升至79.3%。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://huggingface.co/blog/Hcompany/holo31" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title"><span class="card-num">3</span>阶跃星辰Step 3.7 Flash发布，专为高效推理设计</div>
+      <div class="card-source">🎯 X：阶跃星辰 StepFun (@StepFun_ai)</div>
+      <div class="card-summary">196B MoE架构推理模型，采用多矩阵分解注意力机制，KV-cache成本仅为DeepSeek的约22%，已通过Fireworks AI提供，Apache 2.0许可。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/StepFun_ai/status/2061655529731342402" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="s-products">
+  <div class="section-header">
+    <h2>🚀 产品发布/更新</h2>
+    <span class="badge" style="background:var(--section-product)">7</span>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title"><span class="card-num">4</span>Claude Code 新增动态工作流功能</div>
+      <div class="card-source">🎯 Claude：Blog（网页）</div>
+      <div class="card-summary">模型可在运行时即兴创建和协调多智能体框架处理复杂任务，通过执行JavaScript文件生成子代理，适用于研究、安全分析、代码审查等场景。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">5</span>Claude Platform 新增 CLI 工具</div>
+      <div class="card-source">🎯 X：Claude Devs (@ClaudeDevs)</div>
+      <div class="card-summary">新增CLI使每个API端点可从终端运行，支持调用Messages API、启动Claude托管智能体，结果可直接管道传输到shell。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/ClaudeDevs/status/2061877343078244459" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">6</span>OpenAI Codex 发布 Python SDK</div>
+      <div class="card-source">🎯 X：Vista (@vista8)</div>
+      <div class="card-summary">pip install openai-codex即可集成，相当于内置顶级编程和生图Agent，关键是可以复用Codex登录态。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/vista8/status/2061846741885018296" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">7</span>Google DeepMind 开源科学智能体工具包</div>
+      <div class="card-source">🎯 X：Google AI for Developers (@googleaidevs)</div>
+      <div class="card-summary">开源Science Skills工具包，以科学基础和更高token效率加速科研智能体工作流，已在GitHub发布。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/googleaidevs/status/2061924472245153863" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">8</span>微软开源 Adaptive Spec-driven Scoring 框架</div>
+      <div class="card-source">🎯 TechCrunch：AI（RSS）</div>
+      <div class="card-summary">开发者可通过文本描述快速生成AI行为测试，用于模型评估与回归测试。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://techcrunch.com/2026/06/02/new-microsoft-tool-lets-devs-spin-up-ai-behavior-tests-using-text-descriptions" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">9</span>Runway API 推出 Aleph 2.0 视频编辑功能</div>
+      <div class="card-source">🎯 X：Runway (@runwayml)</div>
+      <div class="card-summary">支持多镜头序列中编辑最长30秒、1080p分辨率视频，仅修改目标部分，可直接集成到应用中。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/runwayml/status/2061895998545244342" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title"><span class="card-num">10</span>GitHub Copilot应用：智能体原生的桌面体验 + Replit Fabric集成</div>
+      <div class="card-source">🎯 GitHub Blog / X：Replit</div>
+      <div class="card-summary">GitHub将Copilot应用定位为智能体原生桌面体验；Replit与微软合作，工具可直接发布到Microsoft Fabric内置安全与治理。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="s-industry">
+  <div class="section-header">
+    <h2>🌐 行业动态</h2>
+    <span class="badge" style="background:var(--section-industry)">7</span>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title"><span class="card-num">11</span>Alphabet拟融资800亿美元，Anthropic提交IPO申请</div>
+      <div class="card-source">🎯 Bloomberg：Technology（RSS）</div>
+      <div class="card-summary">Alphabet拟股权融资800亿美元用于AI基础设施；Anthropic秘密提交IPO申请领先OpenAI；SpaceX和HPE也有重要资本动态。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://www.bloomberg.com/news/videos/2026-06-02/bloomberg-tech-6-2-2026-video" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">12</span>Nathan Lambert离开Ai2，结束2.5年OLMO项目工作</div>
+      <div class="card-source">🎯 X：Nathan Lambert (@natolambert)</div>
+      <div class="card-summary">Ai2研究员Nathan Lambert宣布离职，曾主导OLMO和Tulu等开源模型项目，称其职业生涯巅峰。将短期休息后继续深耕开源模型与开放科学。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/natolambert/status/2061813361848029631" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">13</span>Anthropic扩展Project Glasswing计划</div>
+      <div class="card-source">🎯 Anthropic：Newsroom（网页）</div>
+      <div class="card-summary">扩展至约150个新组织，覆盖15国电力、水务、医疗等关键基础设施行业，利用Claude Mythos Preview扫描漏洞并协助修复。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://www.anthropic.com/news/expanding-project-glasswing" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">14</span>SK海力士计划五年内晶圆产能翻倍</div>
+      <div class="card-source">🎯 IT之家（RSS）</div>
+      <div class="card-summary">会长崔泰源宣布应对AI普及带来的持续存储供应短缺，预计供需紧张可能延续至2030年。SK海力士市值已首次突破1万亿美元。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://www.ithome.com/0/958/810.htm" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">15</span>Anthropic支持美国AI行政令实施</div>
+      <div class="card-source">🎯 X：Anthropic (@AnthropicAI)</div>
+      <div class="card-summary">Anthropic回应白宫AI行政令，称其是加强美国AI领导地位的重要一步，并表示期待与白宫合作支持实施。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/AnthropicAI/status/2061924580222968183" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">16</span>OpenAI呼吁全球推进青年AI安全</div>
+      <div class="card-source">🎯 OpenAI：官网动态（RSS）</div>
+      <div class="card-summary">OpenAI呼吁通过设立专门的AI安全研究所，在全球范围内采取行动保障青少年使用AI时的安全并创造发展机遇。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://openai.com/index/advancing-youth-safety-and-opportunity-through-global-leadership" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title"><span class="card-num">17</span>Travelers借助OpenAI在全国部署AI理赔助手</div>
+      <div class="card-source">🎯 OpenAI：官网动态（RSS）</div>
+      <div class="card-summary">美国保险公司Travelers与OpenAI合作构建AI驱动的理赔助手，引导客户完成理赔流程并提供全天候支持以扩展业务运营规模。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://openai.com/index/travelers" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="s-paper">
+  <div class="section-header">
+    <h2>📄 论文研究</h2>
+    <span class="badge" style="background:var(--section-paper)">3</span>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title"><span class="card-num">18</span>微软Aurora天气预报速度超传统超算数千倍</div>
+      <div class="card-source">🎯 X：Microsoft Research (@MSFTResearch)</div>
+      <div class="card-summary">微软研究团队在Build 2026上展示Aurora天气预报模型，速度比传统超级计算机快数千倍。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/MSFTResearch/status/2061927189977727450" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">19</span>Anthropic可解释性研究：区分因果效应相似的特征</div>
+      <div class="card-source">🎯 Anthropic：Transformer Circuits</div>
+      <div class="card-summary">提出新方法通过分析特征的下游连接来预测实际影响，使用TWERA虚拟权重加权排序，为识别模型内部真正的因果组件提供新途径。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://transformer-circuits.pub/2026/may-update/index.html" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title"><span class="card-num">20</span>Codex正在成为每个人的生产力工具</div>
+      <div class="card-source">🎯 OpenAI：官网动态（RSS）</div>
+      <div class="card-summary">The Next Era of Knowledge Work报告指出，Codex正通过AI增强的研究、数据分析、工作流自动化与内容创作变革知识工作生产力。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://openai.com/index/codex-for-knowledge-work" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="s-tips">
+  <div class="section-header">
+    <h2>💡 技巧与观点</h2>
+    <span class="badge" style="background:var(--section-tip)">8</span>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title"><span class="card-num">21</span>开源电脑清理skill，免费替代CleanMyMac</div>
+      <div class="card-source">🎯 X：卡兹克 (@Khazix0918)</div>
+      <div class="card-summary">作者使用Codex对MacBook进行只读存储分析，发现B站缓存视频等大量可清理空间，开源跨平台AI清理skill实测释放近120G空间。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/Khazix0918/status/2061669881725309048" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">22</span>商汤开源SenseNova-Skills AI办公技能套件</div>
+      <div class="card-source">🎯 X：商汤 SenseTime (@SenseTime_AI)</div>
+      <div class="card-summary">开源AI办公技能套件，提供图像信息图表生成、数据分析、PPT创建和深度研究四大核心功能。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/SenseTime_AI/status/2061822148076093625" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">23</span>Karpathy 分享学习方法论</div>
+      <div class="card-source">🎯 X：Rohan Paul (@rohanpaul_ai)</div>
+      <div class="card-summary">Andrej Karpathy 在社交媒体上分享了自己的学习方法论，引发广泛关注和讨论。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/rohanpaul_ai/status/2061601689841648120" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">24</span>Claude Code团队分享：智能体编程重塑工程组织</div>
+      <div class="card-source">🎯 Claude：Blog（网页）</div>
+      <div class="card-summary">规划转向JIT模式，上下文收集变为"先问Claude"，代码审查中Claude处理风格与测试。工程瓶颈从写代码转向验证、审查与安全维护。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://claude.com/blog/running-an-ai-native-engineering-org" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">25</span>Claude Code 自我检查与反馈闭环技巧</div>
+      <div class="card-source">🎯 X：Claude Devs (@ClaudeDevs)</div>
+      <div class="card-summary">教你如何编码手动检查，让Claude在交回工作前自己关闭反馈循环检查成果。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://x.com/ClaudeDevs/status/2061900434722496604" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">26</span>Gemini Spark：最令人印象深刻也最可怕的AI体验</div>
+      <div class="card-source">🎯 The Verge：订阅版科技（RSS）</div>
+      <div class="card-summary">Google DeepMind的Gemini Spark展现强大能力令人印象深刻，但其带来的影响和潜力也引发了深刻的恐惧感。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://www.theverge.com/ai-artificial-intelligence/941388/gemini-spark-ai-agent-trip-planning" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="card-num">27</span>开放模型的繁荣生态</div>
+      <div class="card-source">🎯 Tomer Tunguz 博客</div>
+      <div class="card-summary">OpenRouter数据显示开放模型产生69.1%的token使用量。DeepSeek、MiniMax、Kimi、MiMo、Qwen等竞争激烈，领导地位频繁更迭。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://www.tomtunguz.com/the-thriving-ecosystem-of-open-models" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title"><span class="card-num">28</span>Gary Marcus：为什么事情终将崩塌</div>
+      <div class="card-source">🎯 Gary Marcus：The Road to AI We Can Trust（RSS）</div>
+      <div class="card-summary">知名AI批评者探讨AI发展面临的根本性挑战，指出数学理论局限性与人类心理复杂性是导致AI系统最终可能出现问题的根源。</div>
+      <div class="card-time">🕐 今天上午 08:00</div>
+      <a class="card-link" href="https://garymarcus.substack.com/p/why-things-will-eventually-fall-apart" target="_blank" rel="noopener noreferrer">查看原文 →</a>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  📡 数据来源：AI HOT（aihot.virxact.com）· 共 28 条资讯 · 生成时间 2026.06.03 10:41 GMT+8
+</div>
+
+</div>
+
+</body>
+</html>
