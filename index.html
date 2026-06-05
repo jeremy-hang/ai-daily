@@ -3,488 +3,356 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 晨报 · 2026.06.04</title>
-
+<title>AI 晨报 — 2026-06-05</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#fff8f5;
-  --surface:#ffffff;
-  --surface-hover:#fff0ea;
-  --text:#2d1a12;
-  --text-secondary:#8a6e60;
-  --accent-start:#ff6b35;
-  --accent-end:#e84400;
-  --accent-mid:#ff8c42;
-  --section-model:#ff6b35;
-  --section-product:#ff8c42;
-  --section-industry:#ffa94d;
-  --section-paper:#ffb366;
-  --section-tip:#ffc080;
-  --border:rgba(255,107,53,0.12);
-  --shadow:rgba(255,107,53,0.06);
-  --radius:14px;
-  --max-w:1100px;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
-  color:var(--text);
-  background:var(--bg);
-}
-html{scroll-behavior:smooth}
-body{min-height:100vh;background:linear-gradient(180deg,#fff8f5 0%,#fff0e8 40%,#fff8f5 100%)}
-.wrap{max-width:var(--max-w);margin:0 auto;padding:0 20px 60px}
 
-/* Hero */
+:root {
+  --orange-50: #FFF7ED;
+  --orange-100: #FFEDD5;
+  --orange-200: #FED7AA;
+  --orange-300: #FDBA74;
+  --orange-400: #FB923C;
+  --orange-500: #F97316;
+  --orange-600: #EA580C;
+  --orange-700: #C2410C;
+  --white: #FFFFFF;
+  --gray-50: #FAFAF9;
+  --gray-100: #F5F5F4;
+  --gray-200: #E7E5E4;
+  --gray-300: #D6D3D1;
+  --gray-400: #A8A29E;
+  --gray-500: #78716C;
+  --gray-600: #57534E;
+  --gray-700: #44403C;
+  --gray-800: #292524;
+  --gray-900: #1C1917;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.6;
+  min-height: 100vh;
+}
 .hero{
   position:relative;
-  padding:60px 20px 48px;
-  text-align:center;
-  background:linear-gradient(135deg,rgba(255,107,53,0.08) 0%,rgba(232,68,0,0.04) 100%);
-  border-bottom:1px solid var(--border);
-  overflow:hidden;
+  background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 30%, #FB923C 60%, #EA580C 85%, #C2410C 100%);
+  padding: 80px 20px 60px;
+  text-align: center;
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hero::before{
-  content:'';position:absolute;top:-60%;left:-20%;width:140%;height:200%;
-  background:radial-gradient(ellipse at 30% 20%,rgba(255,107,53,0.05) 0%,transparent 60%),
-              radial-gradient(ellipse at 70% 80%,rgba(232,68,0,0.03) 0%,transparent 50%);
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.4) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.15) 0%, transparent 40%);
   pointer-events:none;
 }
-.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em;position:relative}
-.hero .sub{color:var(--text-secondary);font-size:.95rem;margin-top:8px;position:relative}
-.hero .sub span{margin:0 6px}
-.stats-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px;position:relative}
-.stat-chip{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:7px 16px;border-radius:100px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  font-size:.82rem;color:var(--text-secondary);
-  transition:all .25s;
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:800px;
+  margin:0 auto;
 }
-.stat-chip:hover{background:var(--surface-hover);transform:translateY(-1px);border-color:var(--accent-start)}
-.stat-chip .num{font-weight:700;font-size:.95rem;color:var(--text)}
-.stat-chip .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
-.dot-model{background:var(--section-model)}
-.dot-product{background:var(--section-product)}
-.dot-industry{background:var(--section-industry)}
-.dot-paper{background:var(--section-paper)}
-.dot-tip{background:var(--section-tip)}
-
-/* Nav */
+.hero-badge{
+  display:inline-block;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.hero-title{
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 800;
+  color: var(--white);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.hero-date{
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.hero-stats{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin-bottom: 16px;
+}
+.stat-item{
+  text-align:center;
+}
+.stat-num{
+  display:block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--white);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.stat-label{
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+.hero-section-stats{
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  line-height: 1.4;
+}
 .nav-bar{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
-  margin:0 auto;max-width:var(--max-w);padding:20px 20px 0;
-  position:sticky;top:0;z-index:100;
-  background:linear-gradient(180deg,rgba(255,248,245,0.95) 60%,transparent);
-  backdrop-filter:blur(12px);
-  padding-bottom:16px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 16px;
+  overflow-x: auto;
 }
-.nav-bar a{
-  text-decoration:none;font-size:.8rem;padding:6px 14px;
-  border-radius:100px;color:var(--text-secondary);
-  background:var(--surface);
-  border:1px solid var(--border);
-  transition:all .25s;white-space:nowrap;
+.nav-inner{
+  display:flex;
+  gap:4px;
+  max-width:1200px;
+  margin:0 auto;
+  padding: 10px 0;
 }
-.nav-bar a:hover{background:var(--surface-hover);color:var(--text);border-color:var(--accent-start)}
-
-/* Section */
-.section{margin-top:36px}
+.nav-link{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration:none;
+  color: var(--gray-600);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space:nowrap;
+  transition: all var(--transition);
+}
+.nav-link:hover{background:var(--orange-100);color:var(--orange-600)}
+.nav-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  border-radius:10px;
+  background:var(--orange-100);
+  color:var(--orange-600);
+  font-size:0.75rem;
+  font-weight:600;
+}
+.nav-link:hover .nav-count{background:var(--orange-200)}
+.main{
+  max-width:1200px;
+  margin:0 auto;
+  padding: 40px 20px 60px;
+}
+.section{
+  margin-bottom: 50px;
+}
 .section-header{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:18px;padding-bottom:10px;
-  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--orange-200);
 }
-.section-header h2{font-size:1.2rem;font-weight:700}
-.section-header .badge{
-  font-size:.72rem;padding:2px 10px;border-radius:100px;
-  font-weight:600;color:#fff;
+.section-badge{
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--orange-700);
 }
-
-/* Cards */
-.card-grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:700px){.card-grid{grid-template-columns:1fr 1fr}}
+.section-count{
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  background: var(--gray-100);
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+.card-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
 .card{
-  background:var(--surface);border-radius:var(--radius);
-  border:1px solid var(--border);
-  padding:18px 20px 16px;
-  transition:all .3s ease;
-  opacity:0;transform:translateY(24px);
-  animation:fadeUp .5s ease forwards;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  padding: 20px;
+  display:flex;
+  gap: 16px;
+  transition: all var(--transition);
+  position:relative;
+  animation: cardIn 0.5s ease-out both;
+  animation-delay: var(--card-delay);
 }
-.card:hover{background:var(--surface-hover);border-color:var(--accent-start);transform:translateY(-2px);box-shadow:0 6px 24px var(--shadow)}
-.card-num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:24px;height:24px;border-radius:50%;
-  font-size:.75rem;font-weight:700;
-  background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
-  color:#fff;margin-right:10px;flex-shrink:0;
+.card:hover{
+  border-color: var(--orange-300);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
 }
-.card-title{
-  display:flex;align-items:flex-start;gap:0;
-  font-size:.95rem;font-weight:600;line-height:1.5;
-  margin-bottom:6px;
-}
-.card-source{
-  display:inline-block;font-size:.7rem;padding:1px 8px;
-  border-radius:100px;background:rgba(255,107,53,0.08);
-  color:var(--text-secondary);margin-left:34px;margin-bottom:6px;
-}
-.card-summary{
-  font-size:.84rem;line-height:1.6;
-  color:var(--text-secondary);margin-left:34px;margin-bottom:10px;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
-}
-.card-time{
-  font-size:.75rem;color:rgba(0,0,0,0.3);margin-left:34px;
-}
-.card-link{
-  display:inline-block;margin-left:34px;margin-top:6px;
-  font-size:.78rem;color:var(--accent-start);
-  text-decoration:none;font-weight:500;
-  transition:color .2s;
-}
-.card-link:hover{color:var(--accent-end);text-decoration:underline}
-
-/* Footer */
-.footer{
-  text-align:center;padding:40px 20px 32px;
-  color:rgba(0,0,0,0.25);font-size:.78rem;
-  border-top:1px solid var(--border);margin-top:48px;
-}
-
-@keyframes fadeUp{
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
 }
-.card:nth-child(1){animation-delay:0s}
-.card:nth-child(2){animation-delay:.06s}
-.card:nth-child(3){animation-delay:.12s}
-.card:nth-child(4){animation-delay:.18s}
-.card:nth-child(5){animation-delay:.24s}
-.card:nth-child(6){animation-delay:.30s}
-.card:nth-child(7){animation-delay:.36s}
-.card:nth-child(8){animation-delay:.42s}
-.card:nth-child(9){animation-delay:.48s}
-.card:nth-child(10){animation-delay:.54s}
-.card:nth-child(11){animation-delay:.60s}
-.card:nth-child(12){animation-delay:.66s}
-.card:nth-child(13){animation-delay:.72s}
-.card:nth-child(14){animation-delay:.78s}
-.card:nth-child(15){animation-delay:.84s}
-.card:nth-child(16){animation-delay:.90s}
-.card:nth-child(17){animation-delay:.96s}
-.card:nth-child(18){animation-delay:1.02s}
-.card:nth-child(19){animation-delay:1.08s}
-.card:nth-child(20){animation-delay:1.14s}
-.card:nth-child(21){animation-delay:1.20s}
-.card:nth-child(22){animation-delay:1.26s}
-.card:nth-child(23){animation-delay:1.32s}
-.card:nth-child(24){animation-delay:1.38s}
-.card:nth-child(25){animation-delay:1.44s}
-.card:nth-child(26){animation-delay:1.50s}
-.card:nth-child(27){animation-delay:1.56s}
-.card:nth-child(28){animation-delay:1.62s}
-@media(max-width:699px){
-  .hero{padding:40px 16px 36px}
-  .card{padding:14px 14px 12px}
+.card-number{
+  flex-shrink:0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--orange-400), var(--orange-600));
+  color: var(--white);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.card-body{
+  flex:1;
+  min-width:0;
+}
+.card-meta{
+  margin-bottom: 8px;
+}
+.card-source{
+  display:inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--orange-500);
+  background: var(--orange-50);
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+.card-title{
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-summary{
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.card-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--orange-500);
+  text-decoration:none;
+  transition: all var(--transition);
+  padding: 4px 0;
+}
+.card-btn:hover{color:var(--orange-700);gap:8px}
+.footer{
+  text-align:center;
+  padding: 40px 20px;
+  color: var(--gray-400);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--gray-200);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer a{color:var(--orange-500);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.footer p + p{margin-top:4px}
+.scroll-top{
+  position:fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange-400), var(--orange-600));
+  color: var(--white);
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all var(--transition);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  z-index: 200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.scroll-top.visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.scroll-top:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+@media(max-width:768px){
+  .hero{padding: 60px 16px 40px;min-height:auto}
+  .hero-stats{gap:24px}
+  .stat-num{font-size:1.6rem}
+  .card-grid{grid-template-columns:1fr}
+  .nav-inner{padding:8px 0}
+  .nav-link{padding:6px 12px;font-size:0.8rem}
+}
+@media(max-width:480px){
+  .hero{padding: 40px 12px 30px}
+  .hero-title{font-size:1.8rem}
+  .hero-stats{gap:16px}
+  .card{padding:16px}
 }
 </style>
-
-<div class="hero">
-  <h1>☀️ AI 晨报</h1>
-  <div class="sub"><span>2026.06.04</span><span>·</span><span>星期四</span><span>·</span><span>共 32 条</span></div>
-  <div class="stats-bar">
-    <span class="stat-chip"><span class="dot dot-model"></span>模型发布/更新 <span class="num">4</span></span>
-    <span class="stat-chip"><span class="dot dot-product"></span>产品发布/更新 <span class="num">8</span></span>
-    <span class="stat-chip"><span class="dot dot-industry"></span>行业动态 <span class="num">8</span></span>
-    <span class="stat-chip"><span class="dot dot-paper"></span>论文研究 <span class="num">4</span></span>
-    <span class="stat-chip"><span class="dot dot-tip"></span>技巧与观点 <span class="num">8</span></span>
-  </div>
-</div>
-
-<div class="nav-bar">
-  <a href="#s-models">🤖 模型发布/更新</a>
-  <a href="#s-products">🚀 产品发布/更新</a>
-  <a href="#s-industry">🌐 行业动态</a>
-  <a href="#s-paper">📄 论文研究</a>
-  <a href="#s-tips">💡 技巧与观点</a>
-</div>
-
-<div class="wrap">
-
-<section class="section" id="s-models">
-  <div class="section-header">
-    <h2>🤖 模型发布/更新</h2>
-    <span class="badge" style="background:var(--section-model)">4</span>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-title"><span class="card-num">1</span>Grok Imagine 1.5 预览版发布</div>
-      <div class="card-source">🎯 X：cb_doge (@cb_doge)</div>
-      <div class="card-summary">Grok Imagine 1.5 预览版已发布，即日起可在 API 中体验。SpaceXAI 正在发力。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/cb_doge/status/2062242490745594085" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">2</span>MiniMax M3 1M token 解码加速 15.6 倍</div>
-      <div class="card-source">🎯 X：MiniMax (@MiniMax_AI)</div>
-      <div class="card-summary">MiniMax M3 在 1M token 场景下解码速度提升 15.6 倍，由 Fireworks AI 提供推理支持。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/MiniMax_AI/status/2062316914618388758" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">3</span>Miso One 开源语音模型：8B 参数、110ms 延迟</div>
-      <div class="card-source">🎯 X：Kim (@kimmonismus)</div>
-      <div class="card-summary">开源 8B 参数 TTS 模型，支持一次语音克隆，推理延迟仅 110ms，权重已开源至 GitHub。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/kimmonismus/status/2062210845308780639" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">4</span>Ideogram v4.0 发布：2K 分辨率和 JSON 提示支持</div>
-      <div class="card-source">🎯 X：Krea AI (@krea_ai)</div>
-      <div class="card-summary">原生 2K 分辨率，出色的文字渲染效果，支持 JSON 格式提示词。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/krea_ai/status/2062227837130887567" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="s-products">
-  <div class="section-header">
-    <h2>🚀 产品发布/更新</h2>
-    <span class="badge" style="background:var(--section-product)">8</span>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-title"><span class="card-num">5</span>Meta WhatsApp Business AI 智能体全球上线</div>
-      <div class="card-source">🎯 TechCrunch：AI（RSS）</div>
-      <div class="card-summary">Meta 为 WhatsApp Business 打造的 AI 智能体面向全球商家开放，按模型 token 使用量收费。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://techcrunch.com/2026/06/03/metas-ai-agent-for-whatsapp-business-is-now-available-globally" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">6</span>NousResearch 发布 Hermes Agent 桌面应用公测版</div>
-      <div class="card-source">🎯 X：硅基流动 (@SiliconFlowAI)</div>
-      <div class="card-summary">官方 Hermes Agent 桌面应用公测版现已推出。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/SiliconFlowAI/status/2062042813852995899" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">7</span>xAI Grok 语音模型上线 Vapi 平台</div>
-      <div class="card-source">🎯 X：xAI (@xai)</div>
-      <div class="card-summary">Grok STT 和 TTS 现已在企业语音 AI 平台 Vapi 上线，支持构建自定义语音智能体。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/xai/status/2062209374039499178" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">8</span>Grok 模型登陆 Cloudflare AI Gateway</div>
-      <div class="card-source">🎯 X：xAI (@xai)</div>
-      <div class="card-summary">Grok 模型现已可在 Cloudflare AI Gateway 上使用。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/xai/status/2062294202625696081" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">9</span>OpenShell v0.0.55 发布：新增 Vertex AI 推理支持</div>
-      <div class="card-source">🎯 X：NVIDIA AI (@NVIDIAAI)</div>
-      <div class="card-summary">新增 Google Vertex AI 推理提供者，改进策略可见性和 Podman 检测。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/NVIDIAAI/status/2062210034109677665" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">10</span>Replit 上线 SEO Agent 助应用被发现</div>
-      <div class="card-source">🎯 X：Replit (@Replit)</div>
-      <div class="card-summary">SEO Agent 自动扫描应用并建议修复措施，帮助应用在网页搜索和 AI 搜索中被发现。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/Replit/status/2062211976995188871" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">11</span>OpenClaw 2026.6.1 发布：新增 Windows 节点与技能工坊</div>
-      <div class="card-source">🎯 X：OpenClaw (@openclaw)</div>
-      <div class="card-summary">新增原生 Windows 节点主机、技能工坊和工作板编排，支持 MiniMax M3。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/openclaw/status/2062288421406785710" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">12</span>黄仁勋与纳德拉共议智能体 AI 时代</div>
-      <div class="card-source">🎯 X：NVIDIA (@nvidia)</div>
-      <div class="card-summary">黄仁勋与 Satya Nadella 共同出席 MSBuild，展示 NVIDIA 与微软从 Windows 到 AI 工厂的协作。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/nvidia/status/2062228974273716457" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="s-industry">
-  <div class="section-header">
-    <h2>🌐 行业动态</h2>
-    <span class="badge" style="background:var(--section-industry)">8</span>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-title"><span class="card-num">13</span>微软与 OpenAI 分道扬镳，双方准备正面交锋</div>
-      <div class="card-source">🎯 The Verge：订阅版科技（RSS）</div>
-      <div class="card-summary">微软与 OpenAI 合作关系彻底破裂，Mustafa Suleyman 表示微软必须独立证明自己的能力。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://www.theverge.com/ai-artificial-intelligence/942242/microsoft-build-ai-agents-openai-competition" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">14</span>Satya Nadella 谈微软 Build 大会主旨演讲</div>
-      <div class="card-source">🎯 X：Satya Nadella (@satyanadella)</div>
-      <div class="card-summary">Nadella 分享 Build 2026 主旨演讲亮点，强调共建前沿智能生态系统。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/satyanadella/status/2062022060176801826" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">15</span>欧盟公布全面技术主权计划，推动芯片与 AI 自主发展</div>
-      <div class="card-source">🎯 Bloomberg：Technology（RSS）</div>
-      <div class="card-summary">欧盟计划扩大本土半导体、AI 和云计算供应链，减少对美国和亚洲的依赖。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://www.bloomberg.com/news/articles/2026-06-03/europe-unveils-sweeping-tech-sovereignty-plan-to-boost-chips-ai" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">16</span>ChatGPT 月活破 10 亿，史上最快</div>
-      <div class="card-source">🎯 IT之家（RSS）</div>
-      <div class="card-summary">Sensor Tower 估计 ChatGPT 月活突破 10 亿，Claude 达 5600 万同比增 640%。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://www.ithome.com/0/959/083.htm" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">17</span>DeepSeek 首轮融资拟筹 500 亿元，腾讯、宁德时代参投</div>
-      <div class="card-source">🎯 IT之家（RSS）</div>
-      <div class="card-summary">DeepSeek 首轮融资约 500 亿元，腾讯拟投 100 亿、宁德时代拟投 50 亿，估值 3500-4000 亿。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://www.ithome.com/0/959/249.htm" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">18</span>Suno 完成 4 亿美元 D 轮融资，估值 54 亿美元</div>
-      <div class="card-source">🎯 X：Suno (@suno)</div>
-      <div class="card-summary">AI 音乐公司 Suno 完成 4 亿美元 D 轮融资，估值 54 亿美元。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/suno/status/2062183524887675243" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">19</span>Qwen Cloud 全球 AI 黑客马拉松启动</div>
-      <div class="card-source">🎯 X：阿里云 (@alibaba_cloud)</div>
-      <div class="card-summary">首届 Qwen Cloud 全球 AI 黑客马拉松启动，5 大高级赛道，总奖金池超 7 万美元。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/alibaba_cloud/status/2062113338994172169" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">20</span>宏利香港与阿里云达成 AI 战略合作</div>
-      <div class="card-source">🎯 X：阿里云 (@alibaba_cloud)</div>
-      <div class="card-summary">宏利香港与阿里云构建 AI 创新框架，加速负责任 AI 在业务中的部署。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/alibaba_cloud/status/2062006591377829922" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="s-paper">
-  <div class="section-header">
-    <h2>📄 论文研究</h2>
-    <span class="badge" style="background:var(--section-paper)">4</span>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-title"><span class="card-num">21</span>斯坦福研究：AI 表现优于法学教授</div>
-      <div class="card-source">🎯 Hacker News 热门</div>
-      <div class="card-summary">斯坦福法学院研究表明 AI 表现优于法学教授，引发广泛关注。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://law.stanford.edu/press/ai-outperforms-law-professors-in-stanford-law-study" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">22</span>NVIDIA Research 在 CVPR 2026 发表三篇论文</div>
-      <div class="card-source">🎯 NVIDIA AI Blog</div>
-      <div class="card-summary">GraspGen-X 零样本抓取基础模型、LCDrive 自动驾驶、NitroGen 具身智能体训练。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://blogs.nvidia.com/blog/cvpr-research-grasping-driving-agent-training" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">23</span>Anthropic 分析 832 个 AI 恶意账户</div>
-      <div class="card-source">🎯 Anthropic：Research</div>
-      <div class="card-summary">中高风险攻击者半年从 33% 跃至 56%，67.3% 使用 AI 编写恶意软件。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">24</span>微软研究：装瓶厂 AI 从聊天到决策</div>
-      <div class="card-source">🎯 X：Microsoft Research</div>
-      <div class="card-summary">中西部装瓶厂三个月试点，展示 AI 超越聊天进入真实决策领域的应用。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/MSFTResearch/status/2062204914223169635" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="s-tips">
-  <div class="section-header">
-    <h2>💡 技巧与观点</h2>
-    <span class="badge" style="background:var(--section-tip)">8</span>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-title"><span class="card-num">25</span>李飞飞团队发文：世界模型的功能分类</div>
-      <div class="card-source">🎯 X：Fei-Fei Li (@drfeifei)</div>
-      <div class="card-summary">World Labs 团队梳理被滥用的术语「世界模型」，基于 POMDP 框架分类三派系统。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/drfeifei/status/2062247238143996275" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">26</span>智能体工程实战窍门全录</div>
-      <div class="card-source">🎯 X：邵猛 (@shao__meng)</div>
-      <div class="card-summary">22 条实战技巧，从 Research→Plan→Work 循环到 plan.md 约束智能体行为。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/shao__meng/status/2061974983094755575" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">27</span>优步每月 1500 美元的 AI 使用上限</div>
-      <div class="card-source">🎯 Hacker News 热门</div>
-      <div class="card-summary">优步将 AI 工具月使用上限设为 1500 美元，为行业 AI 工具定价提供参考信号。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://simonwillison.net/2026/Jun/3/uber-caps-usage" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">28</span>Anthropic 用 Claude 赋能自助数据分析</div>
-      <div class="card-source">🎯 Claude：Blog</div>
-      <div class="card-summary">Anthropic 用 Claude 自动化 95% 业务分析查询，准确率约 95%，数据科学团队转向战略工作。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://claude.com/blog/how-anthropic-enables-self-service-data-analytics-with-claude" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">29</span>Google 开源水文建模框架</div>
-      <div class="card-source">🎯 Google Research：Blog</div>
-      <div class="card-summary">Google Research 开源基于 PyTorch 的水文建模框架，采用与 Flood Hub 相同的模型架构。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://research.google/blog/the-next-chapter-in-flood-resilience-open-sourcing-googles-hydrology-framework" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">30</span>Karpathy 的 llm-wiki 项目获超五千星</div>
-      <div class="card-source">🎯 X：硅基流动 (@SiliconFlowAI)</div>
-      <div class="card-summary">Karpathy 的 llm-wiki 项目让 LLM 构建并维护维基，每次使用都会更智能。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://x.com/SiliconFlowAI/status/2062054848762450324" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">31</span>Reachy Mini 添加 MCP 工具</div>
-      <div class="card-source">🎯 Hugging Face：Blog（RSS）</div>
-      <div class="card-summary">Reachy Mini 推出公开 MCP canary Space，支持远程工具调用。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://huggingface.co/blog/adding-mcp-tools-to-reachy-mini" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-    <div class="card">
-      <div class="card-title"><span class="card-num">32</span>超越聊天机器人的直接偏好优化</div>
-      <div class="card-source">🎯 Hugging Face：Blog（RSS）</div>
-      <div class="card-summary">Dharma-AI 在 HF 博客探讨直接偏好优化（DPO）在聊天机器人之外的更广泛应用。</div>
-      <div class="card-time">🕐 今天上午 08:00</div>
-      <a class="card-link" href="https://huggingface.co/blog/Dharma-AI/direct-preference-optimization-beyond-chatbots" target="_blank" rel="noopener noreferrer">查看原文 →</a>
-    </div>
-  </div>
-</section>
-
-<div class="footer">
-  📡 数据来源：AI HOT（aihot.virxact.com）· 共 32 条资讯 · 生成时间 2026.06.04 13:55 GMT+8
-</div>
-
-</div>
-
+</head>
+<body>
+<header class="hero"><div class="hero-bg"></div><div class="hero-content"><div class="hero-badge">AI HOT</div><h1 class="hero-title">AI 晨报</h1><p class="hero-date">2026-06-05</p><div class="hero-stats"><div class="stat-item"><span class="stat-num">29</span><span class="stat-label">今日资讯</span></div><div class="stat-item"><span class="stat-num">5</span><span class="stat-label">版块</span></div><div class="stat-item"><span class="stat-num">5</span><span class="stat-label">类别</span></div></div><div class="hero-section-stats">模型发布/更新 4条 · 产品发布/更新 8条 · 行业动态 7条 · 论文研究 3条 · 技巧与观点 7条</div></div></header><nav class="nav-bar"><div class="nav-inner"><a href="#sec0" class="nav-link">模型发布/更新 <span class="nav-count">4</span></a><a href="#sec1" class="nav-link">产品发布/更新 <span class="nav-count">8</span></a><a href="#sec2" class="nav-link">行业动态 <span class="nav-count">7</span></a><a href="#sec3" class="nav-link">论文研究 <span class="nav-count">3</span></a><a href="#sec4" class="nav-link">技巧与观点 <span class="nav-count">7</span></a></div></nav><main class="main"><section class="section" id="sec0"><div class="section-header"><div class="section-badge">模型发布/更新</div><span class="section-count">4 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 0.05s"><div class="card-number">1</div><div class="card-body"><div class="card-meta"><span class="card-source">Hugging Face：Blog（RSS）</span></div><h3 class="card-title">Nemotron 3.5 Content Safety：面向全球企业AI的可定制多模态安全</h3><p class="card-summary">Nemotron 3.5 Content Safety基于Gemma 3 4B IT，提供128K上下文窗口，支持用户提示、可选图像与助手响应的统一多模态安全评估。新增自定义策略执行，允许企业用自然语言定义专属安全规则；THINK模式可输出...</p><div class="card-actions"><a href="https://huggingface.co/blog/nvidia/nemotron-3-5-content-safety" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.10s"><div class="card-number">2</div><div class="card-body"><div class="card-meta"><span class="card-source">X：硅基流动 SiliconFlow (@SiliconFlowAI)</span></div><h3 class="card-title">Nex-N2-Pro 发布：基于 Qwen3.5 的 397B MoE 推理模型，性能达 GPT-5.5 水平</h3><p class="card-summary">neolab 推出 Nex-N2-Pro，基于 Qwen3.5-397B-A17B，总参数 397B 的 MoE 推理模型，支持 262K 上下文与多模态（VLM），性能达到 GPT-5.5 和 Claude Opus 4.7 级别。模型可...</p><div class="card-actions"><a href="https://x.com/SiliconFlowAI/status/2062549952266723493" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.15s"><div class="card-number">3</div><div class="card-body"><div class="card-meta"><span class="card-source">NVIDIA Technical Blog（开发者技术博客 · RSS）</span></div><h3 class="card-title">NVIDIA Nemotron 3 Ultra 为长时间运行的智能体带来更快、更高效的推理能力</h3><p class="card-summary">NVIDIA 发布 Nemotron 3 Ultra 模型，专为长时间运行的 AI 智能体设计。该模型能够在多轮对话中保持上下文、调用工具、调用子智能体，并高效处理复杂工作流。随着多智能体协作导致模型 token 数量快速增长，Nemotr...</p><div class="card-actions"><a href="https://developer.nvidia.com/blog/nvidia-nemotron-3-ultra-powers-faster-more-efficient-reasoning-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.20s"><div class="card-number">4</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Google AI for Developers (@googleaidevs)</span></div><h3 class="card-title">Google Magenta RealTime 2 (MRT2) 实时音乐模型发布</h3><p class="card-summary">Google AI for Developers 宣布推出开放权重的实时音乐模型 Magenta RealTime 2 (MRT2)。该模型可通过 MIDI 键盘、实时文本提示甚至手势进行演奏。MRT2 在 MacBook 上原生运行，延迟...</p><div class="card-actions"><a href="https://x.com/googleaidevs/status/2062603374789263646" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec1"><div class="section-header"><div class="section-badge">产品发布/更新</div><span class="section-count">8 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 0.25s"><div class="card-number">5</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Replit (@Replit)</span></div><h3 class="card-title">Replit Agent 联手 Shopify 快速建店</h3><p class="card-summary">我们与 Shopify 合作，让你从想法到上线商店只需几分钟 只需告诉 Replit Agent 你想卖什么。它会： - 构建自定义店铺页面 - 创建你的 Shopify 商店 - 帮你添加商品 在 Shopify 中认领店铺，设置支付，即...</p><div class="card-actions"><a href="https://x.com/Replit/status/2062594881625940379" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.30s"><div class="card-number">6</div><div class="card-body"><div class="card-meta"><span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span></div><h3 class="card-title">Dreaming: ChatGPT 推出更强的记忆系统，更好记住用户偏好</h3><p class="card-summary">ChatGPT 推出名为 Dreaming 的新记忆系统，能够更有效地记住用户偏好，并在跨对话场景中保持上下文的新鲜感和相关性，从而提升助手的个性化体验。</p><div class="card-actions"><a href="https://openai.com/index/chatgpt-memory-dreaming" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.35s"><div class="card-number">7</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Gemini (@GeminiApp)</span></div><h3 class="card-title">Gemini macOS 双击 Command 附加活动窗口</h3><p class="card-summary">使用适用于 macOS 的 Gemini 应用，获取针对屏幕内容的定制帮助。💻 只需同时按下两个 Command ⌘ 键，即可将当前活动窗口无缝附加到聊天中，无需手动截图或切换标签页。</p><div class="card-actions"><a href="https://x.com/GeminiApp/status/2062652523945836770" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.40s"><div class="card-number">8</div><div class="card-body"><div class="card-meta"><span class="card-source">X：OpenAI Developers (@OpenAIDevs)</span></div><h3 class="card-title">OpenAI API 新增内容审核评分</h3><p class="card-summary">Moderation scores 现已在 Responses API 和 Completions API 中可用。 在与生成相同的请求流程中返回审核信号，然后由你的应用决定如何使用它们进行记录、路由、审核或拦截。 https://deve...</p><div class="card-actions"><a href="https://x.com/OpenAIDevs/status/2062619558440267801" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.45s"><div class="card-number">9</div><div class="card-body"><div class="card-meta"><span class="card-source">MarkTechPost（RSS）</span></div><h3 class="card-title">Meet OpenJarvis：一个本地优先的设备端个人AI智能体框架，支持工具、记忆与学习</h3><p class="card-summary">Stanford 研究人员发布 OpenJarvis，一个完全在设备端运行推理、智能体、记忆与学习的开源框架。它将个人 AI 系统分解为五个可组合原语：Intelligence、Engine、Agents、Tools &amp; Memory 和 ...</p><div class="card-actions"><a href="https://www.marktechpost.com/2026/06/03/meet-openjarvis-a-local-first-framework-for-on-device-personal-ai-agents-with-tools-memory-and-learning" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.50s"><div class="card-number">10</div><div class="card-body"><div class="card-meta"><span class="card-source">Hacker News 热门（buzzing.cc 中文翻译）</span></div><h3 class="card-title">Anthropic 开源 AI 驱动漏洞发现框架</h3><p class="card-summary">Anthropic 将其用于 AI 驱动漏洞发现的开源框架代码托管在 GitHub 上。该框架借助 AI 技术进行漏洞发现，旨在帮助识别软件中的安全缺陷。</p><div class="card-actions"><a href="https://github.com/anthropics/defending-code-reference-harness" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.55s"><div class="card-number">11</div><div class="card-body"><div class="card-meta"><span class="card-source">X：NotebookLM (@NotebookLM)</span></div><h3 class="card-title">NotebookLM 来源归属功能上线</h3><p class="card-summary">今天，我们推出又一项呼声很高的功能：来源归属！🥳 无需再猜测。现在你可以看到每个创作物背后所用的确切公式（提示词 + 来源）。想要调整？只需轻点“迭代”，随心定制 💖</p><div class="card-actions"><a href="https://x.com/NotebookLM/status/2062653124326863077" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.60s"><div class="card-number">12</div><div class="card-body"><div class="card-meta"><span class="card-source">X：OpenAI Developers (@OpenAIDevs)</span></div><h3 class="card-title">Codex 推出 iOS 应用构建插件</h3><p class="card-summary">更多 iOS 应用循环，现已集成至 Codex。 Build iOS Apps 插件让 Codex 可在应用内浏览器查看和测试你的 iOS 应用，打开 SwiftUI 预览，并无需离开 Codex 即可热重载编辑。</p><div class="card-actions"><a href="https://x.com/OpenAIDevs/status/2062599291479478275" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec2"><div class="section-header"><div class="section-badge">行业动态</div><span class="section-count">7 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 0.65s"><div class="card-number">13</div><div class="card-body"><div class="card-meta"><span class="card-source">The Verge：订阅版科技（RSS）</span></div><h3 class="card-title">台积电难以跟上AI需求：“我们只能支持这么多”</h3><p class="card-summary">全球最大芯片制造商台积电表示，通过美国本土生产满足客户需求可能需要“非常长的时间”，凸显AI需求带来的产能压力。</p><div class="card-actions"><a href="https://www.theverge.com/tech/943066/tsmc-ai-demand-struggles" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.70s"><div class="card-number">14</div><div class="card-body"><div class="card-meta"><span class="card-source">X：小互 (@xiaohu)</span></div><h3 class="card-title">Cloudflare Radar：机器人流量首次超过人类占比57.5%</h3><p class="card-summary">Cloudflare Radar 实时统计显示，过去一周（5月28日至6月4日）全球所有 HTML 网页请求流量中，57.5% 来自机器人（爬虫、AI 抓取、自动化脚本），仅42.5%来自真人浏览器，机器人流量首次超过人类。按所有 HTTP...</p><div class="card-actions"><a href="https://x.com/xiaohu/status/2062367357868355622" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.75s"><div class="card-number">15</div><div class="card-body"><div class="card-meta"><span class="card-source">IT之家（RSS）</span></div><h3 class="card-title">联合国报告：2030年AI数据中心水电消耗将翻倍</h3><p class="card-summary">联合国大学水、环境与健康研究所报告指出，受AI需求驱动，去年全球数据中心耗电448太瓦时（AI占五分之一），耗水4.5万亿升，碳排放1.89亿吨。预计到2030年，年耗电量将翻倍至945太瓦时（AI占40%），耗水增至9.3万亿升，碳排放升...</p><div class="card-actions"><a href="https://www.ithome.com/0/959/607.htm" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.80s"><div class="card-number">16</div><div class="card-body"><div class="card-meta"><span class="card-source">Bloomberg：Technology（RSS）</span></div><h3 class="card-title">微软AI负责人：Anthropic模型太贵，正自研更便宜的替代模型</h3><p class="card-summary">微软AI部门负责人表示，Anthropic推出的模型成本过高，公司目前正在内部研发更廉价的替代模型，以降低成本。</p><div class="card-actions"><a href="https://www.bloomberg.com/news/newsletters/2026-06-04/microsoft-says-anthropic-models-are-too-expensive" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.85s"><div class="card-number">17</div><div class="card-body"><div class="card-meta"><span class="card-source">X：OpenRouter (@OpenRouter)</span></div><h3 class="card-title">DeepSeek连续四周登顶Token份额榜</h3><p class="card-summary">DeepSeek 现已连续四周在我们平台的 token 份额排行榜上位居第一: https://openrouter.ai/rankings</p><div class="card-actions"><a href="https://x.com/OpenRouter/status/2062538625225548118" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.90s"><div class="card-number">18</div><div class="card-body"><div class="card-meta"><span class="card-source">X：NVIDIA (@nvidia)</span></div><h3 class="card-title">Nemotron Parakeet ASR 印尼语准确率达 97.7%</h3><p class="card-summary">当法律和监督依赖于转录内容时，70-80% 是不够的。 http://Rafiqspace.ai 通过微调 Nemotron Parakeet ASR 达到了 97.7% 的印尼语准确率（2.3% WER）—— 优于全球工具，同时每小时成本...</p><div class="card-actions"><a href="https://x.com/nvidia/status/2062647600424128773" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.95s"><div class="card-number">19</div><div class="card-body"><div class="card-meta"><span class="card-source">GitHub Blog</span></div><h3 class="card-title">GitHub Universe 回归：齐聚智能体时代</h3><p class="card-summary">GitHub Universe 2026 将于 10 月 28–29 日重返旧金山 Fort Mason Center，主题聚焦智能体（agentic）时代。</p><div class="card-actions"><a href="https://github.blog/news-insights/company-news/github-universe-is-back-all-together-now-in-the-agentic-era" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec3"><div class="section-header"><div class="section-badge">论文研究</div><span class="section-count">3 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 1.00s"><div class="card-number">20</div><div class="card-body"><div class="card-meta"><span class="card-source">Google Research：Blog（网页）</span></div><h3 class="card-title">Google Research 发布被动心率监测系统 PHRM</h3><p class="card-summary">Google Research 开发了一种被动心率监测系统（PHRM），利用智能手机前置摄像头在日常使用中（人脸解锁后数秒内）捕捉面部视频，通过深度学习估算心率，平均绝对百分比误差（MAPE）低于10%（对比心电图金标准），满足各肤色人群的...</p><div class="card-actions"><a href="https://research.google/blog/towards-passive-heart-health-monitoring-via-smartphone-camera" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.05s"><div class="card-number">21</div><div class="card-body"><div class="card-meta"><span class="card-source">Hugging Face：Blog（RSS）</span></div><h3 class="card-title">Nemotron 预训练的任务种子合成问答生成</h3><p class="card-summary">在 Nemotron-3 Nano 模型的 100B token 续训练实验中，任务种子合成数据生成（Task-Seeded SDG）使 MMLU-Pro 提升 1.8 分，平均代码提升 1.9 分，常识理解提升 1.6 分，GPQA 提升...</p><div class="card-actions"><a href="https://huggingface.co/blog/nvidia/task-seeded-sdg" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.10s"><div class="card-number">22</div><div class="card-body"><div class="card-meta"><span class="card-source">X：NVIDIA AI (@NVIDIAAI)</span></div><h3 class="card-title">NVIDIA PPISP：补偿光度变化提升3D重建</h3><p class="card-summary">辐射场的质量取决于其背后的图像。 PPISP 可帮助补偿不同拍摄之间的光度变化，使 3D 重建在光照和相机设置不完全一致时更加鲁棒。 🔗 项目：https://nvda.ws/43JeJpk</p><div class="card-actions"><a href="https://x.com/NVIDIAAI/status/2062358080222876041" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec4"><div class="section-header"><div class="section-badge">技巧与观点</div><span class="section-count">7 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 1.15s"><div class="card-number">23</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Kim (@kimmonismus)</span></div><h3 class="card-title">OpenAI称AI递归自我改进迹象初现</h3><p class="card-summary">OpenAI刚刚写道：“我们也看到了当今系统中递归自我改进（RSI）的早期迹象：AI开发本身正被AI加速。 我们预计这将加剧开发者与国家之间的竞争压力，并带来现有机构无法应对的治理挑战。 随着RSI的出现，社会将需要找到塑造AI发展轨迹的方...</p><div class="card-actions"><a href="https://x.com/kimmonismus/status/2062517474277675102" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.20s"><div class="card-number">24</div><div class="card-body"><div class="card-meta"><span class="card-source">LMSYS：Blog（Chatbot Arena 团队）</span></div><h3 class="card-title">Boson AI 与 LMSYS 发布基于 SGLang-Omni 的 Higgs Audio v3 TTS 端到端服务</h3><p class="card-summary">Boson AI 与 LMSYS 联合推出基于 SGLang-Omni 推理框架的 Higgs Audio v3 TTS 端到端服务。该模型约 4B 参数，基于 Qwen3-4B 骨干，支持 100 种语言（内部评测覆盖 111 种），在 ...</p><div class="card-actions"><a href="https://www.lmsys.org/blog/2026-06-04-higgs-audio-v3-tts" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.25s"><div class="card-number">25</div><div class="card-body"><div class="card-meta"><span class="card-source">Hugging Face：Blog（RSS）</span></div><h3 class="card-title">Nemotron 3.5 ASR：为你的语言、领域或口音进行微调</h3><p class="card-summary">Nemotron 3.5 ASR 是一个 600M 参数的多语言流式语音识别模型，单个检查点覆盖 40 种语言-地区（含英、西、德、法、意、日、韩、中、阿拉伯等）。采用 Cache-Aware FastConformer 编码器与 RNNT...</p><div class="card-actions"><a href="https://huggingface.co/blog/nvidia/fine-tuning-nemotron-35-asr" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.30s"><div class="card-number">26</div><div class="card-body"><div class="card-meta"><span class="card-source">Ethan Mollick：One Useful Thing（RSS）</span></div><h3 class="card-title">共存与协同智能的终结</h3><p class="card-summary">Ethan Mollick 在 One Useful Thing 博客中，以“共存与协同智能的终结”为题，并附带介绍了如何向 AI 推销一本书。</p><div class="card-actions"><a href="https://www.oneusefulthing.org/p/co-existence-and-the-end-of-co-intelligence" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.35s"><div class="card-number">27</div><div class="card-body"><div class="card-meta"><span class="card-source">OpenRouter：Announcements（RSS）</span></div><h3 class="card-title">OpenRouter 翻遍 11 款 LLM 找最快的决策模型：Claude vs. Grok 领衔</h3><p class="card-summary">OpenRouter 用总价 482 美元的推理花费，让 11 款大语言模型在 30 轮实时决策的“大逃杀”挑战中正面竞争。实验结果表明，传统的静态 benchmark 排名无法反映模型在需要即时反应的智能体任务（如自主控制机器人）中的真实...</p><div class="card-actions"><a href="https://openrouter.ai/announcements/royale-last-agent-standing" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.40s"><div class="card-number">28</div><div class="card-body"><div class="card-meta"><span class="card-source">Dwarkesh Patel：Podcast &amp; Blog（RSS）</span></div><h3 class="card-title">Alex Imas 和 Phil Trammell：AGI 后什么仍然稀缺？</h3><p class="card-summary">经济学家 Alex Imas 和 Phil Trammell 指出，AGI 时代机器人数量可以快速复制增长，但人类独特技能（以芭蕾舞演员为例）的数量保持不变，揭示了即使技术大幅进步，某些稀缺资源仍不可替代。</p><div class="card-actions"><a href="https://www.dwarkesh.com/p/alex-imas-phil-trammell" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.45s"><div class="card-number">29</div><div class="card-body"><div class="card-meta"><span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span></div><h3 class="card-title">OpenAI 发布《智能时代的生物防御》行动计划，以 AI 驱动生物韧性</h3><p class="card-summary">OpenAI 提出一项名为“Biodefense in the Intelligence Age”的行动计划，旨在利用 AI 增强生物防御与韧性。该计划聚焦于构建 AI 驱动的生物安全能力，以应对未来可能出现的生物威胁。</p><div class="card-actions"><a href="https://openai.com/index/biodefense-in-the-intelligence-age" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section></main><footer class="footer"><p>本期共收录 <strong>29</strong> 条资讯，数据来源：<a href="https://aihot.virxact.com" target="_blank" rel="noopener noreferrer">AI HOT</a></p><p>自动生成于 6月5日 08:00</p></footer><button class="scroll-top" id="scrollTop" title="回到顶部">↑</button><script>var btn=document.getElementById("scrollTop");window.addEventListener("scroll",function(){if(window.scrollY>300)btn.classList.add("visible");else btn.classList.remove("visible")});btn.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});</script>
 </body>
 </html>
