@@ -3,356 +3,468 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 晨报 — 2026-06-05</title>
+<title>服务器行业情报中心 · by 识野Insight</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class'}</script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
-
-:root {
-  --orange-50: #FFF7ED;
-  --orange-100: #FFEDD5;
-  --orange-200: #FED7AA;
-  --orange-300: #FDBA74;
-  --orange-400: #FB923C;
-  --orange-500: #F97316;
-  --orange-600: #EA580C;
-  --orange-700: #C2410C;
-  --white: #FFFFFF;
-  --gray-50: #FAFAF9;
-  --gray-100: #F5F5F4;
-  --gray-200: #E7E5E4;
-  --gray-300: #D6D3D1;
-  --gray-400: #A8A29E;
-  --gray-500: #78716C;
-  --gray-600: #57534E;
-  --gray-700: #44403C;
-  --gray-800: #292524;
-  --gray-900: #1C1917;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: var(--gray-50);
-  color: var(--gray-800);
-  line-height: 1.6;
-  min-height: 100vh;
-}
-.hero{
-  position:relative;
-  background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 30%, #FB923C 60%, #EA580C 85%, #C2410C 100%);
-  padding: 80px 20px 60px;
-  text-align: center;
-  overflow: hidden;
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero-bg{
-  position:absolute;
-  inset:0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.4) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.15) 0%, transparent 40%);
-  pointer-events:none;
-}
-.hero-content{
-  position:relative;
-  z-index:1;
-  max-width:800px;
-  margin:0 auto;
-}
-.hero-badge{
-  display:inline-block;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(8px);
-  color: var(--white);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  padding: 6px 18px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-.hero-title{
-  font-size: clamp(2.4rem, 6vw, 3.8rem);
-  font-weight: 800;
-  color: var(--white);
-  text-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-.hero-date{
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.9);
-  font-weight: 500;
-  margin-bottom: 30px;
-}
-.hero-stats{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  margin-bottom: 16px;
-}
-.stat-item{
-  text-align:center;
-}
-.stat-num{
-  display:block;
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--white);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.stat-label{
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.8);
-  font-weight: 500;
-}
-.hero-section-stats{
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.85);
-  font-weight: 500;
-  line-height: 1.4;
-}
-.nav-bar{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--gray-200);
-  padding: 0 16px;
-  overflow-x: auto;
-}
-.nav-inner{
-  display:flex;
-  gap:4px;
-  max-width:1200px;
-  margin:0 auto;
-  padding: 10px 0;
-}
-.nav-link{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  text-decoration:none;
-  color: var(--gray-600);
-  font-size: 0.85rem;
-  font-weight: 500;
-  white-space:nowrap;
-  transition: all var(--transition);
-}
-.nav-link:hover{background:var(--orange-100);color:var(--orange-600)}
-.nav-count{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:20px;
-  height:20px;
-  padding:0 6px;
-  border-radius:10px;
-  background:var(--orange-100);
-  color:var(--orange-600);
-  font-size:0.75rem;
-  font-weight:600;
-}
-.nav-link:hover .nav-count{background:var(--orange-200)}
-.main{
-  max-width:1200px;
-  margin:0 auto;
-  padding: 40px 20px 60px;
-}
-.section{
-  margin-bottom: 50px;
-}
-.section-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--orange-200);
-}
-.section-badge{
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--orange-700);
-}
-.section-count{
-  font-size: 0.85rem;
-  color: var(--gray-400);
-  font-weight: 500;
-  background: var(--gray-100);
-  padding: 2px 10px;
-  border-radius: 10px;
-}
-.card-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
-}
-.card{
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 1px solid var(--gray-200);
-  padding: 20px;
-  display:flex;
-  gap: 16px;
-  transition: all var(--transition);
-  position:relative;
-  animation: cardIn 0.5s ease-out both;
-  animation-delay: var(--card-delay);
-}
-.card:hover{
-  border-color: var(--orange-300);
-  box-shadow: var(--shadow);
-  transform: translateY(-2px);
-}
-@keyframes cardIn{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.card-number{
-  flex-shrink:0;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--orange-400), var(--orange-600));
-  color: var(--white);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-.card-body{
-  flex:1;
-  min-width:0;
-}
-.card-meta{
-  margin-bottom: 8px;
-}
-.card-source{
-  display:inline-block;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--orange-500);
-  background: var(--orange-50);
-  padding: 3px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 160px;
-}
-.card-title{
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--gray-800);
-  line-height: 1.5;
-  margin-bottom: 8px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.card-summary{
-  font-size: 0.85rem;
-  color: var(--gray-500);
-  line-height: 1.6;
-  margin-bottom: 12px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.card-actions{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.card-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--orange-500);
-  text-decoration:none;
-  transition: all var(--transition);
-  padding: 4px 0;
-}
-.card-btn:hover{color:var(--orange-700);gap:8px}
-.footer{
-  text-align:center;
-  padding: 40px 20px;
-  color: var(--gray-400);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--gray-200);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.footer a{color:var(--orange-500);text-decoration:none}
-.footer a:hover{text-decoration:underline}
-.footer p + p{margin-top:4px}
-.scroll-top{
-  position:fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--orange-400), var(--orange-600));
-  color: var(--white);
-  border: none;
-  font-size: 1.4rem;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: all var(--transition);
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  z-index: 200;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.scroll-top.visible{
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.scroll-top:hover{
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-@media(max-width:768px){
-  .hero{padding: 60px 16px 40px;min-height:auto}
-  .hero-stats{gap:24px}
-  .stat-num{font-size:1.6rem}
-  .card-grid{grid-template-columns:1fr}
-  .nav-inner{padding:8px 0}
-  .nav-link{padding:6px 12px;font-size:0.8rem}
-}
-@media(max-width:480px){
-  .hero{padding: 40px 12px 30px}
-  .hero-title{font-size:1.8rem}
-  .hero-stats{gap:16px}
-  .card{padding:16px}
-}
+  body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;}
+  select{-webkit-appearance:none;appearance:none}
+  .txt-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .txt-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .fadein{animation:fadein .22s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .flash{animation:flashring 2.2s ease}
+  @keyframes flashring{0%,60%{box-shadow:0 0 0 3px rgba(59,130,246,.55)}100%{box-shadow:0 0 0 3px rgba(59,130,246,0)}}
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+  .dark ::-webkit-scrollbar-thumb{background:#334155}
+  .skip-clear .fadein{animation:none}
 </style>
 </head>
-<body>
-<header class="hero"><div class="hero-bg"></div><div class="hero-content"><div class="hero-badge">AI HOT</div><h1 class="hero-title">AI 晨报</h1><p class="hero-date">2026-06-05</p><div class="hero-stats"><div class="stat-item"><span class="stat-num">29</span><span class="stat-label">今日资讯</span></div><div class="stat-item"><span class="stat-num">5</span><span class="stat-label">版块</span></div><div class="stat-item"><span class="stat-num">5</span><span class="stat-label">类别</span></div></div><div class="hero-section-stats">模型发布/更新 4条 · 产品发布/更新 8条 · 行业动态 7条 · 论文研究 3条 · 技巧与观点 7条</div></div></header><nav class="nav-bar"><div class="nav-inner"><a href="#sec0" class="nav-link">模型发布/更新 <span class="nav-count">4</span></a><a href="#sec1" class="nav-link">产品发布/更新 <span class="nav-count">8</span></a><a href="#sec2" class="nav-link">行业动态 <span class="nav-count">7</span></a><a href="#sec3" class="nav-link">论文研究 <span class="nav-count">3</span></a><a href="#sec4" class="nav-link">技巧与观点 <span class="nav-count">7</span></a></div></nav><main class="main"><section class="section" id="sec0"><div class="section-header"><div class="section-badge">模型发布/更新</div><span class="section-count">4 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 0.05s"><div class="card-number">1</div><div class="card-body"><div class="card-meta"><span class="card-source">Hugging Face：Blog（RSS）</span></div><h3 class="card-title">Nemotron 3.5 Content Safety：面向全球企业AI的可定制多模态安全</h3><p class="card-summary">Nemotron 3.5 Content Safety基于Gemma 3 4B IT，提供128K上下文窗口，支持用户提示、可选图像与助手响应的统一多模态安全评估。新增自定义策略执行，允许企业用自然语言定义专属安全规则；THINK模式可输出...</p><div class="card-actions"><a href="https://huggingface.co/blog/nvidia/nemotron-3-5-content-safety" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.10s"><div class="card-number">2</div><div class="card-body"><div class="card-meta"><span class="card-source">X：硅基流动 SiliconFlow (@SiliconFlowAI)</span></div><h3 class="card-title">Nex-N2-Pro 发布：基于 Qwen3.5 的 397B MoE 推理模型，性能达 GPT-5.5 水平</h3><p class="card-summary">neolab 推出 Nex-N2-Pro，基于 Qwen3.5-397B-A17B，总参数 397B 的 MoE 推理模型，支持 262K 上下文与多模态（VLM），性能达到 GPT-5.5 和 Claude Opus 4.7 级别。模型可...</p><div class="card-actions"><a href="https://x.com/SiliconFlowAI/status/2062549952266723493" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.15s"><div class="card-number">3</div><div class="card-body"><div class="card-meta"><span class="card-source">NVIDIA Technical Blog（开发者技术博客 · RSS）</span></div><h3 class="card-title">NVIDIA Nemotron 3 Ultra 为长时间运行的智能体带来更快、更高效的推理能力</h3><p class="card-summary">NVIDIA 发布 Nemotron 3 Ultra 模型，专为长时间运行的 AI 智能体设计。该模型能够在多轮对话中保持上下文、调用工具、调用子智能体，并高效处理复杂工作流。随着多智能体协作导致模型 token 数量快速增长，Nemotr...</p><div class="card-actions"><a href="https://developer.nvidia.com/blog/nvidia-nemotron-3-ultra-powers-faster-more-efficient-reasoning-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.20s"><div class="card-number">4</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Google AI for Developers (@googleaidevs)</span></div><h3 class="card-title">Google Magenta RealTime 2 (MRT2) 实时音乐模型发布</h3><p class="card-summary">Google AI for Developers 宣布推出开放权重的实时音乐模型 Magenta RealTime 2 (MRT2)。该模型可通过 MIDI 键盘、实时文本提示甚至手势进行演奏。MRT2 在 MacBook 上原生运行，延迟...</p><div class="card-actions"><a href="https://x.com/googleaidevs/status/2062603374789263646" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec1"><div class="section-header"><div class="section-badge">产品发布/更新</div><span class="section-count">8 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 0.25s"><div class="card-number">5</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Replit (@Replit)</span></div><h3 class="card-title">Replit Agent 联手 Shopify 快速建店</h3><p class="card-summary">我们与 Shopify 合作，让你从想法到上线商店只需几分钟 只需告诉 Replit Agent 你想卖什么。它会： - 构建自定义店铺页面 - 创建你的 Shopify 商店 - 帮你添加商品 在 Shopify 中认领店铺，设置支付，即...</p><div class="card-actions"><a href="https://x.com/Replit/status/2062594881625940379" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.30s"><div class="card-number">6</div><div class="card-body"><div class="card-meta"><span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span></div><h3 class="card-title">Dreaming: ChatGPT 推出更强的记忆系统，更好记住用户偏好</h3><p class="card-summary">ChatGPT 推出名为 Dreaming 的新记忆系统，能够更有效地记住用户偏好，并在跨对话场景中保持上下文的新鲜感和相关性，从而提升助手的个性化体验。</p><div class="card-actions"><a href="https://openai.com/index/chatgpt-memory-dreaming" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.35s"><div class="card-number">7</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Gemini (@GeminiApp)</span></div><h3 class="card-title">Gemini macOS 双击 Command 附加活动窗口</h3><p class="card-summary">使用适用于 macOS 的 Gemini 应用，获取针对屏幕内容的定制帮助。💻 只需同时按下两个 Command ⌘ 键，即可将当前活动窗口无缝附加到聊天中，无需手动截图或切换标签页。</p><div class="card-actions"><a href="https://x.com/GeminiApp/status/2062652523945836770" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.40s"><div class="card-number">8</div><div class="card-body"><div class="card-meta"><span class="card-source">X：OpenAI Developers (@OpenAIDevs)</span></div><h3 class="card-title">OpenAI API 新增内容审核评分</h3><p class="card-summary">Moderation scores 现已在 Responses API 和 Completions API 中可用。 在与生成相同的请求流程中返回审核信号，然后由你的应用决定如何使用它们进行记录、路由、审核或拦截。 https://deve...</p><div class="card-actions"><a href="https://x.com/OpenAIDevs/status/2062619558440267801" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.45s"><div class="card-number">9</div><div class="card-body"><div class="card-meta"><span class="card-source">MarkTechPost（RSS）</span></div><h3 class="card-title">Meet OpenJarvis：一个本地优先的设备端个人AI智能体框架，支持工具、记忆与学习</h3><p class="card-summary">Stanford 研究人员发布 OpenJarvis，一个完全在设备端运行推理、智能体、记忆与学习的开源框架。它将个人 AI 系统分解为五个可组合原语：Intelligence、Engine、Agents、Tools &amp; Memory 和 ...</p><div class="card-actions"><a href="https://www.marktechpost.com/2026/06/03/meet-openjarvis-a-local-first-framework-for-on-device-personal-ai-agents-with-tools-memory-and-learning" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.50s"><div class="card-number">10</div><div class="card-body"><div class="card-meta"><span class="card-source">Hacker News 热门（buzzing.cc 中文翻译）</span></div><h3 class="card-title">Anthropic 开源 AI 驱动漏洞发现框架</h3><p class="card-summary">Anthropic 将其用于 AI 驱动漏洞发现的开源框架代码托管在 GitHub 上。该框架借助 AI 技术进行漏洞发现，旨在帮助识别软件中的安全缺陷。</p><div class="card-actions"><a href="https://github.com/anthropics/defending-code-reference-harness" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.55s"><div class="card-number">11</div><div class="card-body"><div class="card-meta"><span class="card-source">X：NotebookLM (@NotebookLM)</span></div><h3 class="card-title">NotebookLM 来源归属功能上线</h3><p class="card-summary">今天，我们推出又一项呼声很高的功能：来源归属！🥳 无需再猜测。现在你可以看到每个创作物背后所用的确切公式（提示词 + 来源）。想要调整？只需轻点“迭代”，随心定制 💖</p><div class="card-actions"><a href="https://x.com/NotebookLM/status/2062653124326863077" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.60s"><div class="card-number">12</div><div class="card-body"><div class="card-meta"><span class="card-source">X：OpenAI Developers (@OpenAIDevs)</span></div><h3 class="card-title">Codex 推出 iOS 应用构建插件</h3><p class="card-summary">更多 iOS 应用循环，现已集成至 Codex。 Build iOS Apps 插件让 Codex 可在应用内浏览器查看和测试你的 iOS 应用，打开 SwiftUI 预览，并无需离开 Codex 即可热重载编辑。</p><div class="card-actions"><a href="https://x.com/OpenAIDevs/status/2062599291479478275" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec2"><div class="section-header"><div class="section-badge">行业动态</div><span class="section-count">7 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 0.65s"><div class="card-number">13</div><div class="card-body"><div class="card-meta"><span class="card-source">The Verge：订阅版科技（RSS）</span></div><h3 class="card-title">台积电难以跟上AI需求：“我们只能支持这么多”</h3><p class="card-summary">全球最大芯片制造商台积电表示，通过美国本土生产满足客户需求可能需要“非常长的时间”，凸显AI需求带来的产能压力。</p><div class="card-actions"><a href="https://www.theverge.com/tech/943066/tsmc-ai-demand-struggles" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.70s"><div class="card-number">14</div><div class="card-body"><div class="card-meta"><span class="card-source">X：小互 (@xiaohu)</span></div><h3 class="card-title">Cloudflare Radar：机器人流量首次超过人类占比57.5%</h3><p class="card-summary">Cloudflare Radar 实时统计显示，过去一周（5月28日至6月4日）全球所有 HTML 网页请求流量中，57.5% 来自机器人（爬虫、AI 抓取、自动化脚本），仅42.5%来自真人浏览器，机器人流量首次超过人类。按所有 HTTP...</p><div class="card-actions"><a href="https://x.com/xiaohu/status/2062367357868355622" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.75s"><div class="card-number">15</div><div class="card-body"><div class="card-meta"><span class="card-source">IT之家（RSS）</span></div><h3 class="card-title">联合国报告：2030年AI数据中心水电消耗将翻倍</h3><p class="card-summary">联合国大学水、环境与健康研究所报告指出，受AI需求驱动，去年全球数据中心耗电448太瓦时（AI占五分之一），耗水4.5万亿升，碳排放1.89亿吨。预计到2030年，年耗电量将翻倍至945太瓦时（AI占40%），耗水增至9.3万亿升，碳排放升...</p><div class="card-actions"><a href="https://www.ithome.com/0/959/607.htm" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.80s"><div class="card-number">16</div><div class="card-body"><div class="card-meta"><span class="card-source">Bloomberg：Technology（RSS）</span></div><h3 class="card-title">微软AI负责人：Anthropic模型太贵，正自研更便宜的替代模型</h3><p class="card-summary">微软AI部门负责人表示，Anthropic推出的模型成本过高，公司目前正在内部研发更廉价的替代模型，以降低成本。</p><div class="card-actions"><a href="https://www.bloomberg.com/news/newsletters/2026-06-04/microsoft-says-anthropic-models-are-too-expensive" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.85s"><div class="card-number">17</div><div class="card-body"><div class="card-meta"><span class="card-source">X：OpenRouter (@OpenRouter)</span></div><h3 class="card-title">DeepSeek连续四周登顶Token份额榜</h3><p class="card-summary">DeepSeek 现已连续四周在我们平台的 token 份额排行榜上位居第一: https://openrouter.ai/rankings</p><div class="card-actions"><a href="https://x.com/OpenRouter/status/2062538625225548118" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.90s"><div class="card-number">18</div><div class="card-body"><div class="card-meta"><span class="card-source">X：NVIDIA (@nvidia)</span></div><h3 class="card-title">Nemotron Parakeet ASR 印尼语准确率达 97.7%</h3><p class="card-summary">当法律和监督依赖于转录内容时，70-80% 是不够的。 http://Rafiqspace.ai 通过微调 Nemotron Parakeet ASR 达到了 97.7% 的印尼语准确率（2.3% WER）—— 优于全球工具，同时每小时成本...</p><div class="card-actions"><a href="https://x.com/nvidia/status/2062647600424128773" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 0.95s"><div class="card-number">19</div><div class="card-body"><div class="card-meta"><span class="card-source">GitHub Blog</span></div><h3 class="card-title">GitHub Universe 回归：齐聚智能体时代</h3><p class="card-summary">GitHub Universe 2026 将于 10 月 28–29 日重返旧金山 Fort Mason Center，主题聚焦智能体（agentic）时代。</p><div class="card-actions"><a href="https://github.blog/news-insights/company-news/github-universe-is-back-all-together-now-in-the-agentic-era" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec3"><div class="section-header"><div class="section-badge">论文研究</div><span class="section-count">3 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 1.00s"><div class="card-number">20</div><div class="card-body"><div class="card-meta"><span class="card-source">Google Research：Blog（网页）</span></div><h3 class="card-title">Google Research 发布被动心率监测系统 PHRM</h3><p class="card-summary">Google Research 开发了一种被动心率监测系统（PHRM），利用智能手机前置摄像头在日常使用中（人脸解锁后数秒内）捕捉面部视频，通过深度学习估算心率，平均绝对百分比误差（MAPE）低于10%（对比心电图金标准），满足各肤色人群的...</p><div class="card-actions"><a href="https://research.google/blog/towards-passive-heart-health-monitoring-via-smartphone-camera" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.05s"><div class="card-number">21</div><div class="card-body"><div class="card-meta"><span class="card-source">Hugging Face：Blog（RSS）</span></div><h3 class="card-title">Nemotron 预训练的任务种子合成问答生成</h3><p class="card-summary">在 Nemotron-3 Nano 模型的 100B token 续训练实验中，任务种子合成数据生成（Task-Seeded SDG）使 MMLU-Pro 提升 1.8 分，平均代码提升 1.9 分，常识理解提升 1.6 分，GPQA 提升...</p><div class="card-actions"><a href="https://huggingface.co/blog/nvidia/task-seeded-sdg" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.10s"><div class="card-number">22</div><div class="card-body"><div class="card-meta"><span class="card-source">X：NVIDIA AI (@NVIDIAAI)</span></div><h3 class="card-title">NVIDIA PPISP：补偿光度变化提升3D重建</h3><p class="card-summary">辐射场的质量取决于其背后的图像。 PPISP 可帮助补偿不同拍摄之间的光度变化，使 3D 重建在光照和相机设置不完全一致时更加鲁棒。 🔗 项目：https://nvda.ws/43JeJpk</p><div class="card-actions"><a href="https://x.com/NVIDIAAI/status/2062358080222876041" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section><section class="section" id="sec4"><div class="section-header"><div class="section-badge">技巧与观点</div><span class="section-count">7 条</span></div><div class="card-grid"><article class="card" style="--card-delay: 1.15s"><div class="card-number">23</div><div class="card-body"><div class="card-meta"><span class="card-source">X：Kim (@kimmonismus)</span></div><h3 class="card-title">OpenAI称AI递归自我改进迹象初现</h3><p class="card-summary">OpenAI刚刚写道：“我们也看到了当今系统中递归自我改进（RSI）的早期迹象：AI开发本身正被AI加速。 我们预计这将加剧开发者与国家之间的竞争压力，并带来现有机构无法应对的治理挑战。 随着RSI的出现，社会将需要找到塑造AI发展轨迹的方...</p><div class="card-actions"><a href="https://x.com/kimmonismus/status/2062517474277675102" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.20s"><div class="card-number">24</div><div class="card-body"><div class="card-meta"><span class="card-source">LMSYS：Blog（Chatbot Arena 团队）</span></div><h3 class="card-title">Boson AI 与 LMSYS 发布基于 SGLang-Omni 的 Higgs Audio v3 TTS 端到端服务</h3><p class="card-summary">Boson AI 与 LMSYS 联合推出基于 SGLang-Omni 推理框架的 Higgs Audio v3 TTS 端到端服务。该模型约 4B 参数，基于 Qwen3-4B 骨干，支持 100 种语言（内部评测覆盖 111 种），在 ...</p><div class="card-actions"><a href="https://www.lmsys.org/blog/2026-06-04-higgs-audio-v3-tts" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.25s"><div class="card-number">25</div><div class="card-body"><div class="card-meta"><span class="card-source">Hugging Face：Blog（RSS）</span></div><h3 class="card-title">Nemotron 3.5 ASR：为你的语言、领域或口音进行微调</h3><p class="card-summary">Nemotron 3.5 ASR 是一个 600M 参数的多语言流式语音识别模型，单个检查点覆盖 40 种语言-地区（含英、西、德、法、意、日、韩、中、阿拉伯等）。采用 Cache-Aware FastConformer 编码器与 RNNT...</p><div class="card-actions"><a href="https://huggingface.co/blog/nvidia/fine-tuning-nemotron-35-asr" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.30s"><div class="card-number">26</div><div class="card-body"><div class="card-meta"><span class="card-source">Ethan Mollick：One Useful Thing（RSS）</span></div><h3 class="card-title">共存与协同智能的终结</h3><p class="card-summary">Ethan Mollick 在 One Useful Thing 博客中，以“共存与协同智能的终结”为题，并附带介绍了如何向 AI 推销一本书。</p><div class="card-actions"><a href="https://www.oneusefulthing.org/p/co-existence-and-the-end-of-co-intelligence" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.35s"><div class="card-number">27</div><div class="card-body"><div class="card-meta"><span class="card-source">OpenRouter：Announcements（RSS）</span></div><h3 class="card-title">OpenRouter 翻遍 11 款 LLM 找最快的决策模型：Claude vs. Grok 领衔</h3><p class="card-summary">OpenRouter 用总价 482 美元的推理花费，让 11 款大语言模型在 30 轮实时决策的“大逃杀”挑战中正面竞争。实验结果表明，传统的静态 benchmark 排名无法反映模型在需要即时反应的智能体任务（如自主控制机器人）中的真实...</p><div class="card-actions"><a href="https://openrouter.ai/announcements/royale-last-agent-standing" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.40s"><div class="card-number">28</div><div class="card-body"><div class="card-meta"><span class="card-source">Dwarkesh Patel：Podcast &amp; Blog（RSS）</span></div><h3 class="card-title">Alex Imas 和 Phil Trammell：AGI 后什么仍然稀缺？</h3><p class="card-summary">经济学家 Alex Imas 和 Phil Trammell 指出，AGI 时代机器人数量可以快速复制增长，但人类独特技能（以芭蕾舞演员为例）的数量保持不变，揭示了即使技术大幅进步，某些稀缺资源仍不可替代。</p><div class="card-actions"><a href="https://www.dwarkesh.com/p/alex-imas-phil-trammell" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article><article class="card" style="--card-delay: 1.45s"><div class="card-number">29</div><div class="card-body"><div class="card-meta"><span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span></div><h3 class="card-title">OpenAI 发布《智能时代的生物防御》行动计划，以 AI 驱动生物韧性</h3><p class="card-summary">OpenAI 提出一项名为“Biodefense in the Intelligence Age”的行动计划，旨在利用 AI 增强生物防御与韧性。该计划聚焦于构建 AI 驱动的生物安全能力，以应对未来可能出现的生物威胁。</p><div class="card-actions"><a href="https://openai.com/index/biodefense-in-the-intelligence-age" target="_blank" rel="noopener noreferrer" class="card-btn">阅读原文 →</a></div></div></article></div></section></main><footer class="footer"><p>本期共收录 <strong>29</strong> 条资讯，数据来源：<a href="https://aihot.virxact.com" target="_blank" rel="noopener noreferrer">AI HOT</a></p><p>自动生成于 6月5日 08:00</p></footer><button class="scroll-top" id="scrollTop" title="回到顶部">↑</button><script>var btn=document.getElementById("scrollTop");window.addEventListener("scroll",function(){if(window.scrollY>300)btn.classList.add("visible");else btn.classList.remove("visible")});btn.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});</script>
+<body class="antialiased">
+<div id="root"></div>
+<script>
+window.SRVD=[{"id": "sAUG20", "date": "2026-08-20", "level": "HIGH", "vendor": "market", "cat": "market", "title": "存储超级周期全面爆发：DRAM/NAND价格创新高，AI算力虹吸先进产能红利到2027", "source": "上海证券报", "time": "2026-08-20", "summary": "2026年全球存储芯片行业处于15年一遇的超级景气周期。Q2一般型DRAM合约价环比上涨58%-63%，NAND Flash合约价环比上涨70%-75%。DDR4 8Gb现货7月均价24美元，环比6月涨14.3%创2016年以来最高。美国银行将2026年全球超大云厂商资本支出预测上调至8000亿美元以上（+67%），2027年将突破1万亿美元。三大原厂把先进产能优先投向HBM，消费电子被迫节衣缩食。", "analysis": {"facts": ["Q2 DRAM合约价环比+58%-63%，NAND合约价环比+70%-75%", "DDR4 8Gb现货7月均价24美元创2016年6月以来新高，环比+14.3%", "美国银行预测2026全球云厂商capex超8000亿美元（+67%），2027突破1万亿美元"], "significance": "存储涨价直接推高服务器BOM成本，HBM缺货+通用DRAM涨价意味着浪潮信息毛利率会承受双向挤压；渠道侧客户报价必须加上存储溢价", "impact": "浪潮的大存储客户（映客/视频/推荐/广告/超算）要接受10-20%提价，西北片区要提前和客户锁定内存采购长单，避免Q4价格再涨30%", "action": "渠道层面立即通知所有西北客户：8月-10月下单锁定内存价格，11月后接单毛利率会被压缩到3-4%，涨价压力必须转嫁给客户"}, "url": "https://finance.china.com.cn/industry/20260815/6320758.shtml"}, {"id": "sAUG19", "date": "2026-08-17", "level": "MED", "vendor": "inspur", "cat": "market", "title": "浪潮信息股价突破80元高位换手，机构目标价84.96元，Q3超节点订单集中落地预期强", "source": "东方财富", "time": "2026-08-17", "summary": "8月17日浪潮信息收盘80.68元，距52周高点96.37元仍有19.5%上行空间，距机构过去90天目标均价84.96元约5%空间。半年报预告归母净利润26-31亿元（+226%-288%），Q2单季净利润19.95-24.95亿元创上市以来新高。公司478亿元存货储备成为供应链议价关键筹码，HBM缺口51%-58%环境下龙头拿能力大超中小厂商。", "analysis": {"facts": ["股价收盘80.68元，机构90日目标均价84.96元（+5%），52周区间55-98元", "Q2单季归母净利19.95-24.95亿元，环比Q1增230%-312%，创单季盈利新高", "478亿元存货储备是把供应链紧张转化为议价能力的关键筹码，HBM缺口51%-58%"], "significance": "资本市场的预期已从「业绩预告」兑现转向「Q3超节点订单集中落地」，借货能力是当前浪潮最大的护城河", "impact": "对比天风证券给联想目标价52港元（+55%空间），浪潮的空间在估值兑现后剩余有限，但西北片区仍要借业绩热度抢客", "action": "渠道报价策略上，478亿存货代表提价抗通胀能力，西北客户对涨价接受度更高；可以趁机上调AI服务器定价的同时不涨传统通用服务器，维持份额"}, "url": "https://www.toutiao.com/article/7674917005006422551/"}, {"id": "sAUG18", "date": "2026-08-15", "level": "MED", "vendor": "inspur", "cat": "product", "title": "浪潮信息超节点进入出货放量期：元脑SD200完成Kimi/DeepSeek/GLM大模型软硬协同优化", "source": "每日经济新闻", "time": "2026-08-15", "summary": "浪潮信息发布超节点AI服务器元脑SD200和超扩展AI服务器元脑HC1000，已完成Kimi、DeepSeek、GLM等主流大模型软硬协同优化。元脑SD200运用多主机低延迟内存语义通信架构，单机实现64路国产AI芯片高速统一互连，可承载4万亿参数单体模型；元脑HC1000推理成本首次击破1元/百万token。国产AI卡超节点产品预计下半年规模化出货。", "analysis": {"facts": ["元脑SD200单机64路国产AI芯片高速互联，可承载4万亿参数单体模型", "元脑HC1000推理成本首破1元/百万token，为推理商业化树立新标杆", "基于国产AI卡的超节点产品预计2026下半年规模化出货，Q3业绩将体现"], "significance": "浪潮超节点+推理卡组合是应对昇腾生态的主要筹码，1元/百万token的成本优势对推理客户吸引力大", "impact": "Kimi/DeepSeek/GLM适配意味着互联网大厂推理服务器采购浪潮仍有优势，但运营商推理市场对昇腾生态依赖度太高", "action": "把1元/百万token的成本数据和元脑SD200/HC1000技术参数做成材料，重点对西北片区的互联网推理需求（推荐/搜索/安防视频分析）打一波攻势，弥补运营商推理份额损失"}, "url": "https://xueqiu.com/5370468097/404887661"}, {"id": "sAUG16", "date": "2026-08-14", "level": "HIGH", "vendor": "sugon", "cat": "product", "title": "中科曙光全国产十万卡集群曙光8000落成运营：首周日均15万作业、启动第二套80亿募投", "source": "上海证券报", "time": "2026-08-14", "summary": "中科曙光宣布中国首个全国产十万卡AI超集群「曙光8000（登峰）」正式落成并接入国家超算互联网。上线首周即满载运行，日均处理作业超过15万个、单日峰值超50万个，已完成近千项超智融合应用适配。同时公司与北京科学智能研究院启动第二套全国产十万卡超智融合算力系统建设，80亿元可转债募投项目将重点建设先进算力集群、下一代AI训推一体机和国产化先进存储。", "analysis": {"facts": ["曙光8000全国产十万卡集群接入国家超算互联网郑州核心节点，首周满载日均15万作业", "启动第二套全国产十万卡超智融合算力系统，80亿可转债募投先进算力集群项目", "ScaleX640通信域扩展至640卡，scaleFabric提供400Gb/s带宽和＜1μs时延，支持10万卡以上集群扩展"], "significance": "中科曙光+海光全栈闭环能力已完整体现，十万卡集群意味着超节点+超大规模集群进入规模化交付期", "impact": "对浪潮信息的威胁集中在国家超算互联网项目和国资智算项目总包市场，浪潮要在渠道层绑定省级智算中心投资人；同时液冷+海光芯片的适配机型要跟紧", "action": "西北片区如果有国资AIDC项目（甘肃庆阳、宁夏中卫、内蒙古和林格尔），中科曙光很可能带海光整体方案介入，浪潮要提前带上自研液冷方案对标"}, "url": "https://www.cfi.cn/p20260814002354.html"}, {"id": "sAUG15", "date": "2026-08-13", "level": "HIGH", "vendor": "xfusion", "cat": "market", "title": "超聚变创业板IPO预计8月底上会：3778万股发行，80亿募资投向新一代算力基础设施", "source": "证券时报", "time": "2026-08-13", "summary": "超聚变创业板IPO问询阶段结束，预计2026年8月底前上会。公司拟发行不超过3778万股，募资80亿元用于新一代算力基础设施研发及产业化。2023-2025年营收从250.92亿元增至582.46亿元（CAGR 52.36%），归母净利润从5.07亿元增至10.30亿元，AI服务器收入占比从25.03%升至50.91%。截至2025年底在手订单226.85亿元，客户覆盖移动、阿里、腾讯等头部。", "analysis": {"facts": ["2023-2025营收250.92→442.67→582.46亿元（CAGR 52.36%），归母净利润5.07→7.22→10.30亿元", "AI服务器收入从62.78亿(25%)增至296.29亿(51%)，成为核心增长引擎", "毛利率从14.27%降至8.58%且经营现金流连续三年为负，呈「高增长低毛利强投入」特征"], "significance": "若上会成功将成为河南史上最大IPO（80亿），超聚变估值修复到合理区间后会进一步提升渠道打单能力和现金储备", "impact": "对浪潮是智算赛道最强的直接对手：西北互锁型智算中心项目和移动联通集采里，超聚变上市后融资能力会明显增强，价格战可能加剧", "action": "重点关注其上市后募投项目落地节奏（高性能AI训练/推理服务器），相应调整自家产品毛利预期，渠道报价要留足弹性"}, "url": "https://guba.eastmoney.com/news,601108,1758455232,d.html"}, {"id": "sAUG14", "date": "2026-08-12", "level": "MED", "vendor": "h3c", "cat": "product", "title": "新华三AI产业生态峰会合肥举行：发布S90000全液冷整机+X20000 AI原生存储+102.4T智算芯片", "source": "新华三官网", "time": "2026-08-12", "summary": "新华三在合肥举办「徽·聚数智」AI产业生态峰会，正式发布S90000高密全液冷整机服务器、X20000 AI原生存储、全系列单芯片102.4T智算交换芯片。UniPoD S80000超节点覆盖32卡至1024卡规模，最高可弹性扩展至16384卡，训练性能提升70%、推理性能提升3倍。同时发布灵犀智算解决方案，已在杭州、郑州、咸阳、马鞍山、贵阳、西宁等城市推出「图灵小镇」模式。", "analysis": {"facts": ["S90000高密全液冷整机+X20000 AI原生存储+单芯片102.4T智算产品三套组合拳", "UniPoD S80000覆盖32卡至1024卡，弹性扩至16384卡，训练性能+70%、推理+3倍", "灵犀智算方案覆盖大规模训练/私域训推一体/智能体应用，已在6城落地图灵小镇"], "significance": "新华三把「算网存云安维」全栈打包成生态联盟，通过城市云+图灵小镇下沉到区域AIDC市场，和浪潮的渠道打法正面冲突", "impact": "西北片区政企客户收新华三整栈方案的概率提升；S90000单机柜1024卡超节点对应浪潮元脑SD200是同档位竞品，需要立即对标技术规格和报价", "action": "和西安/兰州/银川的城市云项目接触时，要把浪潮超节点+液冷+存储打包推荐，避免被新华三整套方案锁定"}, "url": "https://www.h3c.com/cn/d_202608/2893487_30008_0.htm"}, {"id": "sAUG17", "date": "2026-08-12", "level": "MED", "vendor": "inspur", "cat": "market", "title": "中国移动推理AI服务器集采浪潮仅2.97亿元份额垫底，在昇腾类CUDA两生态间被边缘化", "source": "C114通信网", "time": "2026-08-12", "summary": "中国移动51.12亿推理型AI服务器集采全部落地，浪潮信息在类CUDA生态标包中获得2.97亿元份额，在9家中标候选人中垫底。相比中兴8.85亿、河南昆仑（超聚变）8.37亿、华鲲振宇6.68亿、新华三5.48亿、宝德4.95亿，浪潮份额明显偏弱。昇腾CANN生态占比66%也进一步压缩了浪潮在传统CUDA推理市场的空间。", "analysis": {"facts": ["9家中标中浪潮2.97亿垫底，对比超聚变子公司河南昆仑8.37亿差距明显", "昇腾系供应商（昆仑/华鲲/长江/宝德/软通/华启）合计约33亿份额占66%", "类CUDA生态还剩17.31亿，但主要由中兴、新华三切割，浪潮未进入第一梯队"], "significance": "运营商集采是利润率最高、最稳定的渠道，浪潮份额掉队直接影响2026年业绩兑现，Q2-Q3业绩预告226-288%增长主要来自互联网大单，运营商短板需要快速补", "impact": "浪潮西北片区移动、电信、联通推理项目会全面落后于中兴/新华三/超聚变，需要靠昇腾适配机型+整机柜液冷+超节点能力在下一轮扳回", "action": "立即评估西北各省运营商推理集采的下一轮周期（预计2027年初），优先绑定陕西电信、宁夏移动、山西联通的AI智算项目并提前布局售前资源"}, "url": "https://m.toutiao.com/is/JpCeVCX5mh4/"}, {"id": "s08", "date": "2026-08-11", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息伦交所ESG评级升至B-，A股同行业9家公司中排第4", "source": "新浪财经/鹰眼工作室", "time": "08-11 今日", "summary": "伦交所发布最新ESG评级，浪潮信息获得B-级（上年C+），A股电脑与外围设备行业9家公司中位居第4名。", "analysis": {"impact": "ESG提升利于机构的持续配置，同时印证合规与可持续性进展。", "action": "ESG评级非核心经营指标，但作为渠道话术可作附加加分项（政企客户普遍在招标关注ESG）。"}, "url": ""}, {"id": "sAUG11", "date": "2026-08-11", "level": "HIGH", "vendor": "lenovo", "cat": "market", "title": "联想史上最强财报：FY27Q1营收1834亿+43%，AI服务器订单储备从210亿→540亿美元", "source": "每日经济新闻", "time": "2026-08-13", "summary": "联想发布2026/27财年第一财季报告，营收269.43亿美元（约1834亿元）同比增长43%，经调整净利润10.75亿美元（约73亿元）增长176%，经调整净利率4%。ISG基础设施方案业务营收85.1亿美元（约579亿元）同比增98%，经营利润率从-2.1%升至9.1%。AI服务器订单储备从上季210亿美元大幅增至540亿美元（约3600亿元），环比增长157%。财报发布后股价大涨20%，市值站稳4000亿港元。", "analysis": {"facts": ["第一财季营收1834亿元人民币，同比+43%，经调整净利73亿元，利润率4%接近翻倍", "ISG经营利润率从-2.1%升至9.1%（+11.1pct），AI服务器订单储备540亿美元", "AI业务收入同比增长60%至634亿元，占集团35%；AI PC份额25.1%全球第一"], "significance": "联想ISG完成了从连续四季度亏损到利润率9.1%的史诗级反转，标志AI基础设施从投入期进入兑现期", "impact": "对浪潮信息是双刃剑：联想拿到540亿美元订单储备意味着全球需求仍强，但渠道和CSP竞争加剧；国内企业采购时联想筹码增加", "action": "渠道侧：联想AI服务器交付能力和海豚（Neptune）液冷方案成熟度提升，给移动/联通/电信的智算项目报价会更硬；浪潮要加快超节点和液冷的出货节奏"}, "url": "https://www.toutiao.com/article/7673698222136623635/"}, {"id": "sAUG12", "date": "2026-08-11", "level": "HIGH", "vendor": "zte", "cat": "market", "title": "中兴通讯拿下中国移动2笔大单：X86 PC服务器40%份额+AI推理服务器50%份额共计21亿元", "source": "同花顺财经", "time": "2026-08-12", "summary": "中国移动2026年核心服务器集采连续落地两笔大单：32亿元X86 PC服务器集采中中兴独占40%最大份额，对应约13亿元；17亿元AI通用推理计算设备集采中中兴拿下超50%份额，对应约8.85亿元。两笔订单合计超21亿元，2026-2027年逐步交付。中兴算力产品营收占比已升至27%，成为仅次于运营商网络的第二增长曲线。", "analysis": {"facts": ["X86 PC服务器32亿集采中兴占40%份额约13亿元，通用服务器赛道断层领先", "AI推理设备17亿集采中兴占超50%份额约8.85亿元，运营商AI算力核心供应商", "算力产品营收占比升至27%（＋政企算力收入全年有望翻倍，服务器贡献约20%归母净利增量）"], "significance": "运营商市场正在形成双寡头格局：超聚变+中兴分食通用+AI份额，浪潮在移动显得偏弱", "impact": "西北片区运营商客户（陕西/宁夏/山西/内蒙古/甘肃移动联通电信）在AI推理项目上中兴已成为事实标准，渠道谈判时浪潮要避开中兴强势区域、强调昇腾合作伙伴差异化", "action": "移动联通的西北集采里浪潮份额被中兴挤压明显，要重点关注下季度电信AI推理集采，优先打二线省份保份额"}, "url": "https://www.toutiao.com/a7673154149915214338"}, {"id": "sAUG13", "date": "2026-08-11", "level": "HIGH", "vendor": "huawei", "cat": "market", "title": "中国移动51.12亿推理AI服务器集采落地：昇腾生态占66%，中兴/新华三/浪潮分食类CUDA份额", "source": "C114通信网", "time": "2026-08-11", "summary": "中移动2025-2026年AI通用计算设备（推理型）集采全部落地，总金额51.12亿元、7058台推理AI服务器分6个标包。昇腾CANN生态两个标包总额约33.81亿元（占66%），类CUDA生态四个标包17.31亿元。9家中标候选人为：中兴8.85亿、河南昆仑（超聚变子公司）8.37亿、华鲲振宇6.68亿、长江计算5.97亿、新华三5.48亿、宝德4.95亿、软通4.27亿、华启智慧3.56亿、浪潮2.97亿。", "analysis": {"facts": ["51.12亿推理型服务器集采分6标包7058台，昇腾生态占约66%（33.81亿）", "类CUDA生态17.31亿由中兴+新华三+浪潮三家候选，中兴份额最大", "9家中标候选人里昇腾系（河南昆仑/华鲲/长江计算/宝德/软通/华启）共6家约33亿，浪潮仅2.97亿份额垫底"], "significance": "运营商推理集采是国产算力确定性最强的渠道，该订单结构标志昇腾生态对类CUDA已占压倒性优势", "impact": "浪潮在推理赛道拿份额明显落后于超聚变/中兴/新华三，移动2.97亿是西北大区需要重点关注的弱项；昇腾生态整机厂商（华鲲/昆仑）实质在切浪潮蛋糕", "action": "西北片区要立即跟片区移动公司对接下一轮集采预期，同时加强和升腾适配机型（NF5488/M6等）报价竞争力，避免推理型项目全军覆没"}, "url": "https://m.toutiao.com/is/JpCeVCX5mh4/"}, {"id": "sA10", "date": "2026-08-10", "level": "mid", "vendor": "sugon", "cat": "domestic", "title": "中科曙光「曙光8000(登峰)』登场WAIC：中国首个全国产十万卡AI超集群", "source": "雷峰网/腾讯网", "time": "08-10", "summary": "WAIC 2026上曙光发布曙光8000（登峰），中国首个全国产十万卡AI超集群，支持FP64到INT8全精度，已接入国家超算互联网。", "analysis": {"impact": "十万卡级超集群建构不是纸上谈兵，曙光离子真正落地市场——而臻超集群运营的数据将会给整个业务链定价重心。", "action": "曙光液冷集采风格与浪潮完全不同：曙光更看重集群国产化和政府侧智算项目，两者打差异化互锁。"}, "url": ""}, {"id": "s09", "date": "2026-08-10", "level": "mid", "vendor": "huawei", "cat": "domestic", "title": "华为汪涛率团访西安交大，昇腾 AI 算力合作高校布局密", "source": "搜狐/决策杂志", "time": "08-06", "summary": "华为轮值董事长汪涛带队访问西安交大，探讨AI算力中心、城市公共云、鸿蒙人才生态等合作。同日江苏与华为签深化战略合作协议，人工智能为核心牵引。", "analysis": {"impact": "华为用高校合作逐步构建昇腾算力的根系，先从西南、西北撇去浪潮的传统优势市场做突破。", "action": "西安将是华为今年的昇腾AI算力塔尖城市，至少应该布点增加昇腾兼容方案的咨询全球。客户上门从业界经常拿华为说事——只管推荐浪潮+鲲鹏/海光的组合超百搭，能歌善舞。"}, "url": ""}, {"id": "s01", "date": "2026-08-10", "level": "high", "vendor": "huawei", "cat": "domestic", "title": "华为昇腾950超节点WAIC2026首展：1024卡NPU互联，单超节点总算力1 EFLOPS", "source": "雷峰网/腾讯网", "time": "08-10", "summary": "华为首次公开展出昇腾950超节点：1024张昇腾NPU，单超节点总算力1 EFLOPS(FP8)，256TB全局统一内存编址，NPU互联带宽达TB/s级，RTT 3μs超低时延，成业界最大规模超节点。", "analysis": {"impact": "昇腾950直接对标英伟达NVL72架构，1024卡互联TB/s压制NVLink 6的理论优势。", "action": "华为8800系列的真机首展给了浪潮刀具的空间——不要拿昇腾950去和SD200火拼性能，是不对称竞争。"}, "url": ""}, {"id": "s02", "date": "2026-08-10", "level": "mid", "vendor": "xfusion", "cat": "domestic", "title": "超聚变发布数据监控指标采集方法专利：实现差异化采集与系统资源平衡", "source": "同花顺投顾平台", "time": "08-09", "summary": "国家知识产权局信息显示，超聚变新专利CN122526941A，通过不同采集周期差异化处理监控指标，优化资源使用效率。", "analysis": {"impact": "超聚变在核心技术专利上的持续储备，让整机厂商在智能化管理上越来越难出招。", "action": "客户对运维现关注越来越落地，运维智能化品牌是超聚变往AIOPS方向的隐性出牌。"}, "url": ""}, {"id": "s03", "date": "2026-08-10", "level": "high", "vendor": "xfusion", "cat": "domestic", "title": "超聚变创业板IPO获受理：拟募投80亿，河南史上最大IPO", "source": "腾讯网/深交所", "time": "08-10", "summary": "深交所受理超聚变创业板IPO申请，计划募集资金80亿元。2025年营收582.46亿元（AI服务器占比50.91%），净利润10.30亿，即将成为河南史上最大IPO。", "analysis": {"impact": "华为x86服务的终点不再是一家企业的事情：河南国资接管后的5年营收CAGR 52%，挑战浪潮龙头位置的筹码更足。", "action": "重点解析超聚变在西北区域、政企客户、运营商渠道的分销策略——他们正在从重点客户向县级客户下压。"}, "url": ""}, {"id": "s04", "date": "2026-08-10", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息8月10日收盘76.70元（-1.65%），主力暗盘逆势净流入9748万元", "source": "同花顺投顾平台", "time": "08-10", "summary": "8月10日收盘76.70元(-1.65%)，成交额45.83亿，换手率4.10%；明盘大单净流出1.89亿，暗盘资金逆势净流入9748万，近5日暗盘累计净流入18.89亿，是明盘的2倍以上。", "analysis": {"impact": "业绩暴增背景下资金在控盘洗盘，中高端客户被市场主力在低位吸筹。", "action": "中兴通讯、新华三等同周期面临拉近/分散投资的对比行情，暂时不要用盘面吓客户。"}, "url": ""}, {"id": "s05", "date": "2026-08-10", "level": "mid", "vendor": "inspur", "cat": "domestic", "title": "福州长乐机场4F升级：浪潮信息元脑NF5280/NF3280承担数据底座与数字仿真", "source": "微信公众号", "time": "08-10", "summary": "福州长乐国际机场第二跑道投运升至4F级最高等级，浪潮信息以元脑NF5280服务器构建机场业务数据底座、以NF3280服务器承载数字仿真与高性能计算业务。", "analysis": {"impact": "交通/民航类基础设施大客户持续进入，验证国产服务器在关键行业的渗透速度。", "action": "民航、机场、交通智算场景是公司在大西北片区的差异化战场，与元脑SD200错落有致。"}, "url": ""}, {"id": "s06", "date": "2026-08-10", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "元脑SD200超节点AI服务器实现Kimi K2.6万亿参数模型Token生成时间4.77ms", "source": "同花顺/公司报道", "time": "08-08", "summary": "元脑SD200在单机内实现64路本土AI芯片高速统一互连，单机可承载4万亿参数模型，Kimi K2.6上Token生成时间4.77ms，为Agent场景打下算力基础。", "analysis": {"impact": "单机架价值量从万元级跳到百万级，超节点改变单台出货的市场规模逻辑。", "action": "与中信/国海关于超节点毛利的报告口径对照，投标时打出SD200独有的卡tok数。"}, "url": ""}, {"id": "s07", "date": "2026-08-10", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息半年报前瞻：H1净利润26-31亿，同比+226%~288%，超过去年全年", "source": "腾讯网/公司公告", "time": "08-10", "summary": "预计2026上半年归母净利润26.0-31.0亿元（去年同期7.99亿），同比增226%-288%；单季归母约20-25亿创上市新高。驱动：AI服务器出货激增，从卖机器到和软件/服务深度融合。", "analysis": {"impact": "业绩反转验证从'代工厂'向'方案商'的转型逻辑，毛利率从3.45%修复至6.64%。", "action": "渠道可与AI业务相关的重点客户重点跟进，上半年签约节奏明显加速。"}, "url": ""}, {"id": "sA08", "date": "2026-08-07", "level": "mid", "vendor": "xfusion", "cat": "domestic", "title": "超聚变入列河南省第二批'美豫名品'品牌企业（郑州24家第一)", "source": "河南省质量强省战略工作领导小组办公室", "time": "08-07", "summary": "郑州市超聚变等24家企业入选河南省第二批'美豫名品'，郑州入选数量蝉联全省首位，占全省近1/4。", "analysis": {"impact": "河南国资侧的品牌背书持续加码，超聚变在政企市场的后来者优势还在扩大。", "action": "大西北的政企客户如国资背景项目（陕西集团下属、青海/甘肃区域子公司）可以反向推荐蓝海海域。"}, "url": ""}, {"id": "s08", "date": "2026-08-07", "level": "mid", "vendor": "xfusion", "cat": "domestic", "title": "超聚变入列河南省第二批'美豫名品'品牌企业（郑州24家第一）", "source": "河南省质量强省战略工作领导小组办公室", "time": "08-07", "summary": "郑州市超聚变等24家企业入选河南省第二批'美豫名品'，郑州入选数量蝉联全省首位，占全省近1/4。", "analysis": {"impact": "河南国资侧的品牌背书持续加码，超聚变在政企市场的后来者优势还在扩大。", "action": "大西北的政企客户如国资背景项目（陕西集团下属、青海/甘肃区域子公司）可以反向推荐蓝海海域。"}, "url": ""}, {"id": "s11", "date": "2026-08-06", "level": "mid", "vendor": "h3c", "cat": "domestic", "title": "新华三 UniPoD S80000 动态：支持32卡至1024卡，升腾白皮书主送者", "source": "同花顺股转资讯", "time": "08-06", "summary": "紫光股份旗下新华三在WAIC 2026展出UniPoD S80000超节点，覆盖32卡至1024卡全系列。行业分析师指出 UniPoD Linux在运营商智算集采里多年中标第一。", "analysis": {"impact": "从布局高中低端整连接到超节点unipod覆盖，新华三已完成了从单点向智算集采系列化的巩固。", "action": "在跨区客户（如河南、青海、东数西算）新华三因为南南集团背景该讲─商机征集，他们可以打包谈方案。"}, "url": ""}, {"id": "sA12", "date": "2026-08-05", "level": "high", "vendor": "zte", "cat": "domestic", "title": "中兴联合壁仞、曦智构建国产Matrix超节点，展出OEX系列", "source": "腾讯网/雷峰网", "time": "08-10", "summary": "WAIC 2026上中兴联合壁仞科技、曦智科技构建国产Matrix超节点解决方案，OEX超节点实现0线缆正交互连架构，延迟可压缩至纳秒级。", "analysis": {"impact": "中兴在B端政企客户有老底子，借助国产化政策红利从通信设备向算力多曲线跨界。", "action": "中兴因其5G全套OSP储备，设计TCO（运营商、省市信创园区集采）话语权会越来越高。"}, "url": ""}, {"id": "sA13", "date": "2026-08-03", "level": "mid", "vendor": "lenovo", "cat": "domestic", "title": "联想控股2026H1净利润预告增长186%+，AI服务器利润兑现期到来", "source": "中访网/港交所", "time": "08-03", "summary": "联想控股港交所披露正面盈利预告：2026上半年归母净利润保底20亿元（去年同期6.99亿），涨幅186%+。AI业务收入同比+84%，集团PC服务器利润兑现期到来。", "analysis": {"impact": "PC老大哥的AI翻身，发货行业内位置将稳步提升，从端到端覆盖的角度来看他们的中国分公司打法比超聚变完全不一样。", "action": "联想在海外分支机构+Long Term Ops（政企多年份协议）上的优势不要挺浪潮说没得谈，重点看其智能驾驶、医疗等有行政属性的行业。"}, "url": ""}, {"id": "s41", "date": "2026-07-30", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮数据举办战略新品发布会:首发自研AI数据操作系统,打通数据-算力-智能体全链路", "source": "微博/浪潮信息官网", "time": "07-30 今日", "summary": "浪潮数据7月30日于北京举办 'Data Inspire AI 数据激活智能' 战略新品发布会,首发自研AI数据操作系统。依托十年存算一体化积淀,打通数据、算力、智能体全链路,补齐产业底层短板,释放数据要素价值,夯实自主可控的国产AI基础设施根基。同时推出全域生态计划。", "analysis": {"impact": "AI数据操作系统是浪潮从硬件向平台软件层升级的关键一步,直接解决数据孤岛、算力空耗、软硬件割裂三大痛点", "action": "深入研究AI数据操作系统对浪潮产品矩阵的意义,准备客户沟通话术"}, "url": "https://weibo.com/3810000940/5325734743903497"}, {"id": "s42", "date": "2026-07-30", "level": "high", "vendor": "market", "cat": "market", "title": "苏州智博会开幕:华为昇腾950超节点+中科曙光ParaStor F9000等WAIC获奖产品转场", "source": "新华财经/新浪/今日头条", "time": "07-30", "summary": "7月30日2026人工智能产品应用博览会(苏州智博会)开幕,主题'一元复始 万象AI'。近400家企业参展,1500+展品。SAIL奖产品集体转场:华为昇腾950超节点(单柜64卡/8192卡扩展/FP8 1EFLOPS)首次在苏州展出;中科曙光ParaStor F9000全闪存储(IO500双榜世界第一)亮相。大量WAIC获奖产品从'概念'变'商品'。", "analysis": {"impact": "苏州智博会标志国产算力从技术验证进入规模化交付阶段,华为/曙光在展会上持续强化品牌影响力", "action": "关注苏州智博会浪潮参展情况,对比友商展台热度"}, "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_9406a6b0b2182252"}, {"id": "s43", "date": "2026-07-30", "level": "high", "vendor": "market", "cat": "market", "title": "算力板块集体大跌:浪潮信息-5.12%连续5天跌17%,紫光股份跌停,中科曙光-6.51%", "source": "新浪基金/东方财富", "time": "07-30", "summary": "7月30日A股算力板块集体大跌。浪潮信息跌5.12%报71.10元,连续5天累计跌幅17.17%,总市值1044亿。紫光股份跌停报33.60元(连续2天跌停)。中科曙光跌6.51%报81.00元,5日跌17.19%。汇添富基金旗下2只基金持仓浪潮信息浮亏。市场分歧加大,资金从高位算力股撤离。", "analysis": {"impact": "短期市场情绪退潮,但服务器行业基本面无变化,AI需求持续旺盛", "action": "短期回避算力高位股,但中期逻辑未变——Q3业绩继续环比增长是确定性事件"}, "url": "https://www.163.com/dy/article/L33H955305568W0A.html"}, {"id": "s44", "date": "2026-07-29", "level": "medium", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息中标中国电信卫星通信服务器准系统采购,长期协议定向供应", "source": "同花顺/中国电信阳光采购网", "time": "07-29", "summary": "中国电信卫星通信分公司公示服务器准系统采购直接采购,浪潮信息作为唯一供应商签订长期协议定向采购。因项目非依法必须招标,为保障重点战略物资稳定供应,采取直接采购方式。公示期7月29日至8月3日。", "analysis": {"impact": "浪潮在卫星通信等特种领域服务器供应上获得独家地位,拓展了商业航天赛道", "action": "卫星通信服务器市场虽小但毛利较高,可作为产品线多元化亮点"}, "url": "https://t.10jqka.com.cn/pid_667350891.shtml"}, {"id": "s46", "date": "2026-07-28", "level": "high", "vendor": "market", "cat": "market", "title": "国家统计局:上半年电子行业利润+96.9%,服务器整机制造+689.3%,算力需求强力支撑", "source": "经济参考报/国家统计局", "time": "07-28", "summary": "国家统计局发布1-6月规上工业企业利润数据:电子行业利润同比+96.9%,拉动全部工业企业利润增长8.5个百分点。其中服务器、高性能工作站领域,计算机整机制造利润+689.3%,计算机外围设备制造+305.8%;集成电路制造+2579.5%。上半智能算力规模达2185EFLOPS,同比+177%。", "analysis": {"impact": "官方数据确认AI算力产业进入业绩爆发期,浪潮/H3C/曙光等整机厂受益最大", "action": "使用国家统计局/工信部数据配合客户交流,增强浪潮市场领导力论证"}, "url": "https://www.toutiao.com/article/7667409407306727963/"}, {"id": "s45", "date": "2026-07-27", "level": "medium", "vendor": "sugon", "cat": "domestic", "title": "广州'越秀芯光'算力中心启动:以中科曙光为核心,2026年底投产,提供4050P算力", "source": "观点网/腾讯新闻", "time": "07-27", "summary": "广州'越秀芯光'AI生态发展大会上,'越秀芯光'算力中心项目正式启动。以曙光超智融合开放架构为核心,采用冷板式液冷技术,PUE低至1.194。占地面积2300㎡,计划2026年底投产,可提供4050P智能训练算力。将申报'国家先进计算产业创新中心广州市基地'等。", "analysis": {"impact": "曙光在城市算力枢纽建设中持续获得落地项目,超智融合路线在政务市场认可度高", "action": "关注曙光在区域算力中心市场的订单节奏,评估对西北区域项目的竞争"}, "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_4416a6b34fe21552"}, {"id": "s20", "date": "2026-07-25", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息AMD第二代AI服务器Helios全面投产,Q3末出货,市占率超52%", "source": "网易号/天眼查/公众号", "time": "07-25", "summary": "浪潮信息AMD第二代AI服务器Helios全面投产,三季度末即将出货。浪潮AI服务器国内市占率超52%,双供应链布局兼容英伟达+华为昇腾/海光国产平台。兆瓦级两相液冷已在智算中心落地,超节点推动毛利率改善,从'增收不增利'向'量利齐升'转型。", "analysis": {"impact": "Helios平台投产+国产芯片机型占比提升,浪潮在多元算力赛道全面布局", "action": "将Helios平台和国产芯片机型作为Q3-Q4客户推介重点"}, "url": "https://c.m.163.com/news/rec/YDJ1257UJLJ95ZZZ.html"}, {"id": "s40", "date": "2026-07-25", "level": "medium", "vendor": "powerleader", "cat": "domestic", "title": "宝德计算全栈智算矩阵亮相:国产化+x86双路线,覆盖训练/推理/边缘/超节点", "source": "腾讯新闻/宝德官方", "time": "07-25", "summary": "宝德计算基于国产化和x86双路线打造全栈智算产品矩阵:通用计算+AI训练+AI推理+边缘智能+超节点+高性能集群。AI服务器支持多NPU/GPU高速互联,万亿级参数训练;推理端高并发低延时毫秒级计算。截至6月底全国智能算力2185EFLOPS(FP16),同比+177%,建成万卡以上智算设施52个。", "analysis": {"impact": "宝德在国产化服务器赛道持续发力,在电信集采中入围", "action": "关注宝德在电信/政务国产化项目中的竞争动态"}, "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_0646a605c8d14152"}, {"id": "s27", "date": "2026-07-23", "level": "high", "vendor": "xfusion", "cat": "domestic", "title": "超聚变22亿算力工厂落地郑州航空港:与富士康共筑服务器双龙头,75亩地块落定", "source": "大河财立方/今日头条/公众号", "time": "07-21~23", "summary": "超聚变全资子公司河南龙湖智慧制造以4005万元竞得郑州航空港75.76亩工业用地,为IPO募投项目用地。项目总投资22.03亿元,用地226亩,建筑面积23万㎡,主要生产单板、整机服务器、开关电源、超充。与富士康形成郑州服务器制造双龙头格局。", "analysis": {"impact": "22亿产能扩张为超聚变IPO后规模化交付提供制造基础", "action": "关注超聚变产能扩张对浪潮制造端竞争压力的影响"}, "url": "https://www.dahecube.com/article.html?artid=280960"}, {"id": "s32", "date": "2026-07-23", "level": "medium", "vendor": "h3c", "cat": "domestic", "title": "新华三中标中国移动IPS集采第一(4292万/50%份额),安全赛道持续发力", "source": "微信公众号/通信行业资讯", "time": "07-23", "summary": "中国移动2026-2028年入侵防御设备(IPS)集采公示,新华三以4292万元中标50%份额排名第一。迪普27%、华为23%分列二三。新华三在网络安全设备赛道持续保持领先。", "analysis": {"impact": "新华三在运营商安全设备集采中持续领先,增强政企市场综合竞争力", "action": "关注新华三在运营商安全+算力双重布局对浪潮的间接竞争"}, "url": "https://mp.weixin.qq.com/s?__biz=MzI4OTc4MzI5OA==&mid=2247891365&idx=5&sn=845d95797236cffe98affface16b0b21"}, {"id": "s21", "date": "2026-07-22", "level": "medium", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息「元脑有观点」:原生液冷如何撑起MW级整机柜?", "source": "浪潮信息官网/公众号", "time": "07-22", "summary": "浪潮信息发布技术白皮书,阐述原生液冷设计范式。MW级整机柜代表AI算力向极高密度部署演进,原生液冷将热设计前置到系统定义阶段,与计算、互连、供电协同重构整机柜资源,使MW级从单纯功率指标转化为持续稳定的算力供给能力。", "analysis": {"impact": "原生液冷理念确立浪潮在液冷技术路线上的话语权", "action": "将原生液冷技术理念融入客户方案沟通,形成差异化技术叙事"}, "url": "https://www.ieisystem.com/about/news/23175.html"}, {"id": "s28", "date": "2026-07-22", "level": "high", "vendor": "xfusion", "cat": "domestic", "title": "超聚变IPO问询函回复:AI服务器占比50.91%,液冷整机柜+超节点全布局,中国第二", "source": "网易号/凤凰财经/北京商报", "time": "07-17~22", "summary": "超聚变回复深交所首轮审核问询函,披露:2025年数据中心服务器收入占比96.17%,其中AI服务器50.91%、通用计算45.26%、边缘计算2.47%。产品布局机架服务器+液冷整机柜+超节点三类,标准液冷和AI集群形成行业领先。底层架构'根技术'底座+硬件平台化+软件归一化。AI服务器中国市场第二。", "analysis": {"impact": "超聚变IPO信息全面披露,竞争底牌透明化,AI服务器占比过半是关键看点", "action": "逐条分析超聚变问询函回复中的技术/市场数据,更新竞品分析"}, "url": "https://c.m.163.com/news/a/L2FA2OK70553TB9L.html"}, {"id": "s29", "date": "2026-07-22", "level": "medium", "vendor": "xfusion", "cat": "domestic", "title": "超聚变首次入围《财富》中国500强第285位,郑州7家企业上榜", "source": "顶端新闻/搜狐/财富中文网", "time": "07-21~22", "summary": "2026年《财富》中国500强排行榜发布,超聚变数字技术股份有限公司首次上榜位列第285位。郑州共7家企业入围,超聚变作为'科技脊梁'代表郑州数字产业。", "analysis": {"impact": "财富500强背书提升超聚变品牌影响力,但与浪潮全球排名仍有差距", "action": "了解超聚变品牌势能变化,在客户对比中客观引用排名"}, "url": "https://www.topnews.cn/news/145ED7E647B84D79"}, {"id": "s35", "date": "2026-07-22", "level": "high", "vendor": "sugon", "cat": "domestic", "title": "曙光8000十万卡AI超集群WAIC 2026全球首秀,荣获'镇馆之宝',上线首周满载运行", "source": "中科曙光官网/每日经济新闻/公众号", "time": "07-17~22", "summary": "WAIC 2026上中科曙光中国首个全国产十万卡AI超集群——曙光8000(登峰)真机首次全球公开亮相,入选WAIC'镇馆之宝'。采用超智融合路线(FP64-INT8全精度),全球首创高密度机柜(算力密度较其他超节点提升20倍),自研scaleFabric类IB原生RDMA互连。上线首周满载运行,日均处理作业15万+,峰值50万+。已接入国家超算互联网,覆盖20+领域,70+应用万卡级落地。同步启动第二套十万卡系统建设。", "analysis": {"impact": "曙光8000是全国产算力的标杆工程,'镇馆之宝'品牌效应极强,在国产化替代市场对浪潮构成直接竞争", "action": "深入研究曙光8000技术路线(超智融合+海光芯片),对比浪潮国产芯片方案差异"}, "url": "https://www.sugon.com/cut?id=2933&nav_id=48"}, {"id": "s22", "date": "2026-07-21", "level": "medium", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息牵头业界首个服务器异构加速器故障信息转储团体标准立项", "source": "浪潮信息官网/公众号", "time": "07-21", "summary": "浪潮信息牵头业界首个服务器异构加速器(GPU/FPGA等)故障信息转储团体标准正式立项。统一触发机制、数据范围和存储格式,确保系统崩溃等极端场景下完整留存关键故障证据,故障定位时间从小时级压缩至分钟级。", "analysis": {"impact": "浪潮在智算集群运维标准制定上获得行业话语权", "action": "将标准制定者角色作为技术领导力的佐证材料"}, "url": "https://www.ieisystem.com/about/news/23174.html"}, {"id": "s30", "date": "2026-07-21", "level": "high", "vendor": "h3c", "cat": "domestic", "title": "新华三WAIC 2026重磅亮相:G-Link通用高速互连标准启动,全栈Token性价比方案", "source": "央视网/新华三官网/公众号", "time": "07-17~21", "summary": "新华三以'打造Token极致性价比'亮相WAIC 2026,完整展出'算-网-存-云-安-维'一体化AI基础设施。UniPoD S80000超节点(32-16384卡)+灵犀智算方案(TCO降30%+,能耗降40%)。7月18日联合主办AI算力技术架构创新论坛,正式启动G-Link通用高速互连标准编制,联合数十家企业破解国产算力互联碎片化。已落地政务云/大规模训练/医疗AI等场景。", "analysis": {"impact": "G-Link标准是新华三从产品竞争升级到标准竞争的关键动作,对国产算力生态影响力巨大", "action": "深入研究G-Link标准对浪潮开放计算路线的竞争影响"}, "url": "https://business.cctv.com/2026/07/21/ARTI8y659foXwrysqsDR5wzl260721.shtml"}, {"id": "s23", "date": "2026-07-20", "level": "medium", "vendor": "inspur", "cat": "domestic", "title": "元脑服务器推出CXL内存跨代扩展方案:DDR5和DDR4同机部署,容量+33%成本-25%", "source": "浪潮信息官网/公众号", "time": "07-20", "summary": "基于CXL技术,元脑服务器推出内存跨代扩展方案,打破DDR4与DDR5无法同平台部署限制。在保留DDR5基础上通过CXL扩展卡挂载DDR4,整机容量提升33%、成本降低25%。依托KOS操作系统智能调度,扩展内存性能媲美本地内存。", "analysis": {"impact": "CXL内存扩展方案直击数据中心'内存荒'痛点,形成差异化竞争优势", "action": "在内存密集型客户(如AI推理/数据库)中推介CXL方案"}, "url": "https://www.ieisystem.com/about/news/23169.html"}, {"id": "s36", "date": "2026-07-17", "level": "medium", "vendor": "sugon", "cat": "domestic", "title": "中科曙光第一份额入围中国移动最新存储集采,7年累计中标超10亿", "source": "中科曙光官网/公众号", "time": "07-17", "summary": "中科曙光以第一份额入围中国移动最新存储集采,7年累计中标超10亿元。ParaStor分布式存储在运营商存储市场持续领先。同时曙光在WAIC展示浸没式相变液冷技术。", "analysis": {"impact": "曙光在运营商存储市场持续领先,存储+算力双线布局形成综合竞争力", "action": "关注曙光存储+算力捆绑方案对浪潮存储产品线的竞争"}, "url": "https://www.sugon.com"}, {"id": "s38", "date": "2026-07-17", "level": "high", "vendor": "huawei", "cat": "domestic", "title": "华为昇腾950超节点WAIC真机首秀:1024卡互联/1EFLOPS FP8,384超节点已商用750+套", "source": "21世纪经济报道/上海证券报/每日经济新闻", "time": "07-17", "summary": "WAIC 2026华为昇腾950超节点(Atlas 950 SuperPoD)真机首次亮相。业界最大1024卡规模,1 EFLOPS FP8/2 EFLOPS FP4算力,256TB统一内存编址,TB级NPU互联带宽+3μs超低RTT。满配160个机柜(8192颗昇腾950DT芯片),2026 Q4上市。昇腾384超节点已商用750+套,覆盖互联网/运营商/金融/教育/医疗等。另展Atlas 850E风冷超节点(96卡,传统机房直接部署)。CANN开源1244万行代码,3000+合作伙伴/7000+行业方案/2000+政企客户。", "analysis": {"impact": "华为昇腾超节点商用规模+真机亮相标志着国产AI算力从芯片竞争进入系统级集群竞争", "action": "深入研究昇腾950 vs 浪潮超节点的技术路线差异,评估在国产化项目中的竞争策略"}, "url": "https://www.sfccn.com/2026/7-17/yMMDE0NDlfMjE4NDQyMw.html"}, {"id": "s39", "date": "2026-07-17", "level": "high", "vendor": "zte", "cat": "domestic", "title": "中兴OEX超节点WAIC发布:0线缆正交无背板架构,单柜128GPU,集群扩至1.6万卡", "source": "中国网/九派新闻/腾讯新闻", "time": "07-17~19", "summary": "WAIC 2026中兴通讯发布OEX超节点新品。业界首创正交无背板互联(OEX)架构,0线缆设计,计算托盘与交换托盘垂直交叉,信号路径缩短30%+,单柜128张GPU。兼容电交换+光互联,集群可平滑扩至16384卡。51.2T自研交换芯片(7nm Chiplet/36个800G端口)Q3头部云厂商验证+批量外供。联合壁仞/沐曦/燧原/天数智芯打造Matrix超节点,连续两年获SAIL之星。2026 Q1算力业务营收双位数增长,占比27%。", "analysis": {"impact": "中兴OEX超节点+自研交换芯片在架构创新上形成差异化,51.2T芯片是国内唯一商用", "action": "评估中兴OEX架构对浪潮超节点方案的竞争影响,关注自研交换芯片优势"}, "url": "https://www.toutiao.com/article/7663393656610636314/"}, {"id": "s24", "date": "2026-07-16", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "《吉瓦(GW)级开放智算中心框架技术报告》发布,浪潮信息核心参编", "source": "浪潮信息官网/公众号", "time": "07-16", "summary": "OCTS 2026上业界首个《GW级开放智算中心框架技术报告》发布。报告构建涵盖基础设施、IT设施、网络互连、系统软件的四层开放参考架构,将能源、冷却、计算与运维跨层协同,为全球超大规模智算中心建设提供系统级重构路径。浪潮信息核心参编。", "analysis": {"impact": "GW级AIDC框架确立浪潮在超大规模智算中心标准制定中的领导地位", "action": "在大型智算中心项目招投标中引用GW级框架作为技术参考"}, "url": "https://www.ieisystem.com/about/news/23166.html"}, {"id": "s34", "date": "2026-07-16", "level": "high", "vendor": "lenovo", "cat": "domestic", "title": "联想成NVIDIA Vera Rubin NVL72全球首发合作伙伴,申万宏源维持'买入'", "source": "格隆汇/东方财富/申万宏源研报", "time": "07-16", "summary": "联想已成为NVIDIA Vera Rubin NVL72全球首发合作伙伴,计划基于新一代平台交付全液冷、机架级AI系统。申万宏源大幅上调联想盈利预测,预计FY28/29营收1445亿美元,净利41亿美元,PE 9倍。AI服务器订单储备持续扩大,ISG利润率持续改善。联想进入全球AI服务器第一梯队。", "analysis": {"impact": "联想+NVIDIA全球首发合作+全液冷机架级系统,直接竞争浪潮国际市场", "action": "评估联想Vera Rubin首发对浪潮NVIDIA平台产品线的竞争影响"}, "url": "https://guba.eastmoney.com/news,cfhpl,1744514089,d.html"}, {"id": "s37", "date": "2026-07-16", "level": "medium", "vendor": "sugon", "cat": "domestic", "title": "中科曙光与无锡市签署战略合作:超算+智算融合,国家超算中心升级样板", "source": "中科曙光官网/今日头条/公众号", "time": "07-16", "summary": "中科曙光与无锡市签署战略合作协议,在国家超算无锡中心基础上新增智算能力,做成超智融合一体化平台,深度融入全国算力网络。保留超算高精度数值模拟优势,同时引入AI训练与推理能力,通过全精度计算统一调度。无锡打出全国算力升级样板。", "analysis": {"impact": "超算+智算融合是曙光差异化路线,在科研/政府客户中形成独特竞争力", "action": "关注曙光超智融合模式对西北区域超算中心的竞争影响"}, "url": "https://www.sugon.com"}, {"id": "s25", "date": "2026-07-15", "level": "medium", "vendor": "inspur", "cat": "domestic", "title": "媒体观察:浪潮信息打造Agent基础设施,单柜4万+Agent并发,多模融合Token延迟4.77ms", "source": "浪潮信息官网/科技媒体", "time": "07-15", "summary": "2026开放计算大会浪潮发布CPU原生液冷整机柜(单柜384颗CPU支撑4万+Agent并发)+元脑SD200超节点(万亿参数模型Token延迟低至4.77ms)。构建海量智能体规模化算力底座,满足企业AI Agent落地算力需求。", "analysis": {"impact": "Agent基础设施概念将浪潮从'服务器厂商'重新定义为'AI算力基础设施平台'", "action": "将Agent基础设施作为客户高层交流的核心叙事"}, "url": "https://www.ieisystem.com/about/news/23159.html"}, {"id": "s33", "date": "2026-07-15", "level": "high", "vendor": "lenovo", "cat": "domestic", "title": "联想问天WA5685 G5训推一体AI服务器发布:AMD平台8-10卡600W GPU,风冷液冷双模", "source": "IT之家/联想官方/公众号", "time": "07-15", "summary": "联想问天WA5685 G5基于AMD最新平台打造训推一体AI服务器,支持8~10张600W GPU,兼容AMD Genoa与Turin两代处理器。配备大容量高带宽内存,13个PCIe槽位,支持风冷与液冷双模。定位推理为主训练为辅的混合负载性价比最优解。联想问天已升级为'中国AI算力基础设施领导者',Token工厂方法论+万全异构智算平台V5.0。", "analysis": {"impact": "联想问天品牌战略升维+WA5685 G5直接对标浪潮AI服务器产品线", "action": "对比WA5685 G5与浪潮同档位AI服务器的GPU配置/价格/交付能力"}, "url": "https://www.sohu.com/a/1050711017_122014422"}, {"id": "s0y", "date": "2026-07-09", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "🔥浪潮信息OCTS 2026今日北京举办:发布原生液冷Agent机柜+开放超节点,GW级智算", "source": "浪潮信息官网/同花顺/OCP", "time": "07-09 今日举办", "summary": "2026开放计算技术大会(OCTS 2026)今日(7.9)北京国际饭店举办,OCP+OCTC联合主办,浪潮/字节/阿里云/百度等50+企业参会。浪潮发布两大新品:(1)面向群智协同的原生液冷Agent机柜;(2)面向多模融合的开放超节点。技术分论坛聚焦GW级AI数据中心建设路径、原生液冷重构、AIDC模块化交付、Agent AI进入固件研发流程。浪潮副总赵帅发表\"多模融合+群智协同\"主题演讲。", "analysis": {"impact": "OCTS是浪潮年度最重要的行业大会,新品发布直接展示技术领导力,生态号召力超50家企业", "action": "立即组织渠道团队获取大会资料,提取新品亮点用于后续客户沟通和竞标加分"}, "url": "https://stock.10jqka.com.cn/20260708/c678049507.shtml"}, {"id": "s31", "date": "2026-07-09", "level": "medium", "vendor": "h3c", "cat": "domestic", "title": "新华三R4930 G7发布:行业唯一2U满配4张600W国产AI加速卡,破局高密算力瓶颈", "source": "新华三/今日头条/公众号", "time": "07-09", "summary": "新华三推出H3C UniServer R4930 G7 2U国产算力密集型服务器。行业唯一可满配4张600W高功耗AI加速卡的国产2U机型,GPU独立冗余供电+专用高功耗模组,长期运行不降频不掉卡。最高128核国产处理器,14个PCIe 5.0插槽+2个OCP 3.0。适配百亿级大模型推理、云桌面、图形渲染等场景。", "analysis": {"impact": "R4930 G7在国产高密算力赛道形成差异化,对浪潮国产芯片服务器构成直接竞争", "action": "对比浪潮国产芯片服务器与R4930 G7在功耗/密度/扩展性方面的差异"}, "url": "https://www.toutiao.com/article/7660451098532053530/"}, {"id": "s0z", "date": "2026-07-08", "level": "high", "vendor": "h3c", "cat": "domestic", "title": "新华三完成内资全控加速超节点部署,助力紫光股份抢滩AI赛道", "source": "新华三官网", "time": "07-07~08", "summary": "新华三完成内资全控后加速UniPoD S80000超节点部署,强化国产AI基础设施能力。紫光股份借此在AI赛道抢占先机。内资全控消除了HPE合资时期的战略不确定性,新华三决策自主权大幅提升。CEO王竑弢新任带来新战略方向。", "analysis": {"impact": "新华三内资全控后产品迭代和国产化节奏将加速,在政企市场竞争力进一步增强", "action": "关注新华三内资全控后的市场动作,评估在政务/运营商客户中的竞争策略"}, "url": "https://www.h3c.com/cn/d_202607/2880428_30008_0.htm"}, {"id": "s0a", "date": "2026-07-07", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "🔥浪潮信息半年报炸裂:H1净利26-31亿(+226-288%),Q2环比暴增312%,超去年全年", "source": "浪潮信息公告/财联社/IT之家", "time": "07-07 晚间", "summary": "浪潮信息(000977.SZ)7月7日晚间发布2026年半年度业绩预告:H1归母净利润26-31亿(去年同期7.99亿),同比增长226%-288%,超去年全年。Q2单季净利20-25亿,环比暴增超3倍。扣非净利润20.55-25.55亿。公司称主要系紧抓行业上行机遇,完善产品线布局,增强供应保障能力。字节跳动AI服务器核心供应商(供货占比超70%),订单已排至2027年。", "analysis": {"impact": "里程碑式业绩兑现,验证浪潮AI服务器龙头地位,对股价和客户信心双重提振", "action": "立即将业绩亮点整理为客户沟通材料,强化市场对浪潮的信心"}, "url": "https://www.ithome.com/0/973/772.htm"}, {"id": "s0b", "date": "2026-07-07", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息:字节跳动AI服务器核心供应商,供货占比超70%,订单已排至2027年", "source": "东方财富/金融界", "time": "07-07 23:59", "summary": "浪潮信息是国内AI服务器绝对龙头,字节跳动AI服务器核心供应商,供货占比超70%,订单已排至2027年。Q1营收354.7亿同比-24.3%,但Q2单季净利润飙升至20-25亿,说明大量订单在Q2集中交付。AI算力基建高景气度落地到龙头业绩端。", "analysis": {"impact": "字节跳动订单锁定为浪潮提供强确定性业绩支撑", "action": "在西北区域客户中重点强调浪潮的交付能力和大客户背书"}, "url": "https://caifuhao.eastmoney.com/news/20260707235907360894610"}, {"id": "s0c", "date": "2026-07-07", "level": "medium", "vendor": "xfusion", "cat": "domestic", "title": "从超聚变看服务器行业「生死局」:AI时代传统服务器厂商还有价值吗?", "source": "光锥智能/百度百家", "time": "07-07 17:48", "summary": "深度分析超聚变从华为剥离4年来从x86 OEM到全栈方案商的转型。2025年营收582亿净利10亿(毛利率8%),IPO募资80亿估值400-900亿。对比浪潮/新华三/联想,分析传统服务器厂商在AI时代的生存之道。", "analysis": {"impact": "行业深度分析对超聚变估值和商业模式提出质疑,但也认可其转型速度", "action": "将分析要点汇总为竞品简报,帮助团队理解超聚变的优势与短板"}, "url": "https://baijiahao.baidu.com/s?id=1870050135631774554"}, {"id": "s26", "date": "2026-07-07", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "元脑SD200超节点刷新大模型Token速度:万亿参数模型跑进5ms!", "source": "浪潮信息官网/公众号", "time": "07-07", "summary": "浪潮信息元脑SD200超节点完成Kimi K2.6、DeepSeek V4、GLM 5.2、MiniMax M3等开源大模型高性能优化。万亿参数模型单Token生成低至4.77ms,64卡本土AI芯片高密度扩展,EPAI多模融合支撑Agent集群算力需求。同步发布企业版(16卡Scale-up,TTFT降低40%+)。", "analysis": {"impact": "4.77ms Token延迟为业界领先水平,直接对标NVIDIA方案", "action": "将Token延迟数据作为技术性能的硬核佐证"}, "url": "https://www.ieisystem.com/about/news/23145.html"}, {"id": "s0w", "date": "2026-07-02", "level": "medium", "vendor": "h3c", "cat": "domestic", "title": "新华三率先完成业界首个800G智算网络全场景互通实测", "source": "新华三官网", "time": "07-02", "summary": "新华三完成业界首个800G智算网络全场景互通实测,标志着智算网络正式进入800G时代。这一里程碑对大规模GPU集群互联至关重要。", "analysis": {"impact": "800G网络技术突破提升新华三在超大规模智算中心的技术话语权", "action": "了解800G网络在客户场景中的需求"}, "url": "https://www.h3c.com/cn/d_202607/2877937_30008_0.htm"}, {"id": "s0v", "date": "2026-06-30", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "2026国产服务器厂商综合评估:浪潮信息蝉联第一,技术研发/工程/本地化全面领先", "source": "行业综合评估", "time": "06-30", "summary": "基于技术研发/工程经验/性价比/本地化服务/售后体系/行业资质等多维度,浪潮信息在国内8家主流服务器厂商中综合实力领先。CNPP 2026十大服务器品牌榜:浪潮/新华三/超聚变/Dell/联想/中兴/宁畅/曙光/HPE/宝德。", "analysis": {"impact": "多方评估确认浪潮综合实力领先", "action": "可作为客户交流佐证"}, "url": "https://www.cnpp.cn/focus/27333.html"}, {"id": "s0k", "date": "2026-06-30", "level": "high", "vendor": "sugon", "cat": "domestic", "title": "中科曙光拟募资80亿:25亿投向下一代高性能AI训推一体机项目", "source": "财经媒体/中科曙光公告", "time": "06-30", "summary": "中科曙光拟募资80亿元,其中25亿投向下一代高性能AI训推一体机项目(建设期3年),升级AI服务器业务线。此前中科曙光IO500登顶全球双料第一,斩获中国中车存储集采全标段订单。", "analysis": {"impact": "曙光募资将明显增强研发投入和产能,在中高端AI服务器市场对浪潮构成竞争压力", "action": "关注曙光融资进展,评估其AI训推一体机对浪潮竞品格局的影响"}, "url": "https://m.dtm.com.cn/news/202606/277317.html"}, {"id": "s0l", "date": "2026-06-30", "level": "medium", "vendor": "xfusion", "cat": "domestic", "title": "超聚变亮相ISC 2026汉堡国际超算大会,液冷算力平台+AI一体机展出", "source": "超聚变官网", "time": "06-30", "summary": "超聚变连续第四年参加ISC 2026(6月22-26日汉堡),携液冷算力平台、企业级AI一体机及全栈HPC解决方案亮相并发表主题演讲。同时与云豹智能签署DPU战略合作。", "analysis": {"impact": "超聚变通过国际顶级会议展示技术实力,强化全球品牌形象", "action": "对比浪潮在国际超算领域的曝光度和技术方案"}, "url": "https://www.xfusion.com/cn/news/xfusion-isc-2026"}, {"id": "s0m", "date": "2026-06-29", "level": "medium", "vendor": "h3c", "cat": "domestic", "title": "新华三人事重大变动:王竑弢出任总裁兼CEO,战略方向可能调整", "source": "新华三官网", "time": "06-29", "summary": "新华三集团宣布重大人事变动,王竑弢出任总裁兼首席执行官。此前新华三刚完成内资全控,高层变更+股权变更可能带来战略方向的系统性调整。", "analysis": {"impact": "新华三CEO更替+内资全控双重变量,战略方向需要持续观察", "action": "评估新华三新管理层对渠道策略和市场打法的影响"}, "url": "https://www.h3c.com/cn/d_202606/2872763_30008_0.htm"}, {"id": "s0r", "date": "2026-06-29", "level": "medium", "vendor": "lenovo", "cat": "domestic", "title": "联想投资者日:液冷成核心议题,ISG总裁强调「兆瓦级算力规模与落地能力」", "source": "新浪财经", "time": "06-25~29", "summary": "联想集团2026年投资者日上,液冷技术成为基础设施业务讨论的高频话题。ISG收入+214%,AI服务器累计在手订单超$200亿,Neptune液冷交付1GW+。", "analysis": {"impact": "联想液冷方案进入大规模交付阶段,对浪潮液冷业务形成直接竞争", "action": "对比浪潮液冷方案与联想Neptune在大规模交付方面的差异"}, "url": "https://finance.sina.com.cn/stock/bxjj/2026-06-29/doc-iniezxce7078975.shtml"}, {"id": "s0x", "date": "2026-06-24", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息生态伙伴大会:提出Humagent人机协同组织,发布Agent基础设施", "source": "浪潮信息官网", "time": "06-24", "summary": "2026浪潮信息生态伙伴大会在北京举办。首次提出Humagent(Human+Agent)人机协同组织新范式,发布完整Agent基础设施:Token工厂、EPAI开发平台、ClawManager智能体治理。升级元脑生态赋能伙伴。", "analysis": {"impact": "Humagent概念标志浪潮从硬件商向AI解决方案平台转型", "action": "立刻研读Humagent相关材料,准备西北区域渠道伙伴的AI转型培训"}, "url": "https://www.ieisystem.com/about/news/23043.html"}, {"id": "s0n", "date": "2026-06-24", "level": "high", "vendor": "lenovo", "cat": "domestic", "title": "联想发布Agentic AI推理创新方案:推理成本降低8倍,基于Intel Xeon 6新平台", "source": "联想官方新闻稿", "time": "06-24", "summary": "联想扩展Hybrid AI Advantage产品组合,推出AI推理和Agentic AI创新方案,帮助组织降低推理成本高达8倍。发布基于Intel Xeon 6的全新CPU推理平台和ThinkStation PGX工作站。", "analysis": {"impact": "联想在推理降本方面的突破可能吸引成本敏感型客户", "action": "对比浪潮EPA的推理优化方案与联想方案的差异"}, "url": "https://news.lenovo.com/pressroom/press-releases/"}, {"id": "s0s", "date": "2026-06-24", "level": "medium", "vendor": "inspur", "cat": "domestic", "title": "浪潮信息:今年搭载国产GPU/CPU的AI服务器规模将大幅增长", "source": "21世纪经济报道", "time": "06-24", "summary": "浪潮金融行业部方案架构师马宏宾在上海金融展接受采访透露:受益于智算需求爆发式增长,浪潮搭载国产GPU/CPU的服务器规模今年将大幅增长。", "analysis": {"impact": "国产芯片服务器放量,浪潮在国产化赛道建立先发优势", "action": "在西北政务/金融客户中重点推广国产芯片服务器方案"}, "url": "https://view.inews.qq.com/a/20260624A08BSV00"}, {"id": "s0t", "date": "2026-06-23", "level": "high", "vendor": "market", "cat": "market", "title": "中国移动43.5亿PC服务器集采:浪潮14.2亿(第一)/中兴13亿/联想8.8亿/H3C 7.5亿", "source": "通信世界网/搜狐/IT之家", "time": "06-23~24", "summary": "中国移动2026-2027年PC服务器集采X86架构计算均衡型(32亿)和公有云服务器(10.8亿)两个标包公示。浪潮约14.19亿(第一),中兴约12.95亿,联想约8.84亿,新华三约7.52亿。同时中国电信115亿国产服务器集采:华鲲/宝德/中兴/长江/昆仑/H3C/百信/浪潮入围。", "analysis": {"impact": "运营商集采是服务器市场风向标,浪潮在两个大单中均占据有利位置", "action": "将运营商集采结果作为浪潮市场地位的实证材料,更新客户交流PPT"}, "url": "https://www.sohu.com/a/1040943697_121124362"}, {"id": "s0o", "date": "2026-06-22", "level": "high", "vendor": "dell", "cat": "intl", "title": "Dell ISC发布PowerEdge XE8812:NVIDIA Rubin NVL4架构,每机架144 GPU/300kW+全液冷", "source": "Dell官方新闻稿", "time": "06-22", "summary": "ISC 2026汉堡大会上Dell发布PowerEdge XE8812服务器,搭载NVIDIA Vera Rubin NVL4架构,支持每机架144个GPU、300kW+功耗,全液冷设计。同时宣布为美国DOE建造下一代超算Doudna。全球AI Factory客户超5000家。2027年初上市。", "analysis": {"impact": "Dell在Rubin平台上的先发优势可能影响国际客户GPU服务器选型", "action": "Dell在中国市场受限,国内影响有限;关注Rubin架构对液冷方案的推动作用"}, "url": "https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2026~06~the-dell-ai-factory-with-nvidia-advances-supercomputing-class-infrastructure-powering-the-next-generation-of-hpc-and-ai.htm"}, {"id": "s0q", "date": "2026-06-22", "level": "high", "vendor": "inspur", "cat": "domestic", "title": "浪潮彭震AIEC大会首提Humagent:企业AI转型70%阻力来自组织而非技术", "source": "浪潮信息官网", "time": "06-22", "summary": "AIEC大会浪潮信息董事长彭震提出Humagent全新企业单元概念。企业AI转型70%阻力来自组织而非技术,需从文化/管理/流程/数据四大变革落地。", "analysis": {"impact": "浪潮最高层亲自推动AI组织转型理念,战略决心明确", "action": "将彭震Humagent理念作为高层客户交流的核心话题"}, "url": "https://www.ieisystem.com/about/news/23042.html"}, {"id": "s8", "date": "2026-06-12", "level": "medium", "vendor": "lenovo", "cat": "domestic", "title": "联想ThinkSystem服务器支撑FIFA世界杯全球转播,10路IPTV信号实时处理", "source": "雪球", "time": "06-12", "summary": "2026 FIFA世界杯,联想ThinkSystem服务器在达拉斯国际广播中心10路IPTV信号实时向北美16座球场传输。联想作为FIFA官方技术合作伙伴,展示服务器全球部署能力。", "analysis": {"impact": "联想借助世界杯全球营销大幅提升品牌影响力", "action": "关注联想世界杯营销对政企客户采购决策的影响"}, "url": "https://xueqiu.com/8848703595/394370985"}, {"id": "s0u", "date": "2026-06-02", "level": "medium", "vendor": "dell", "cat": "intl", "title": "Dell/HPE/Supermicro三巨头Q2财报分化:AI服务器竞争进入服务化阶段", "source": "GATE/Datacenter Knowledge", "time": "06-02", "summary": "5月底至6月初,Dell/HPE/Supermicro相继发布最新财报。Dell从卖盒子转向卖服务,AI服务器相关收入快速增长但中国市场受限。HPE在边缘计算和混合云有优势。Supermicro以快速交付和灵活定制著称。", "analysis": {"impact": "Dell等在中国的政策限制为国产厂商提供空间", "action": "在政企客户中明确强调国产化政策优势"}, "url": "https://www.gate.com/blog/hpe-dell-supermicro-ai-server-market-leaders-next-infrastructure-growth-cycle"}, {"id": "s0p", "date": "2026-06-01", "level": "high", "vendor": "dell", "cat": "intl", "title": "HPE COMPUTEX发布ProLiant DL394 Gen12:搭载NVIDIA Vera CPU,专为Agentic AI设计", "source": "HPE官方新闻稿", "time": "06-01", "summary": "COMPUTEX 2026上HPE发布ProLiant DL394 Gen12,搭载NVIDIA Vera CPU,2U服务器,集成NVL2模块和ConnectX-8网卡。另HPE Discover 2026发布ProLiant Gen12全系、AMD Helios AI机架方案。", "analysis": {"impact": "HPE率先发布Vera CPU服务器,在ARM架构服务器赛道抢占先机", "action": "密切关注ARM服务器架构在国内的接受度,评估对x86服务器市场的影响"}, "url": "https://www.hpe.com/us/en/newsroom/press-release/2026/05/hpe-introduces-cpu-server-with-nvidia-vera-cpu-purpose-built-for-agentic-ai.html"}, {"id": "s9", "date": "2026-05-28", "level": "high", "vendor": "lenovo", "cat": "domestic", "title": "联想与NVIDIA扩大合作:联合发布全新液冷AI服务器,100%直接温水冷却", "source": "联想官网", "time": "05-28", "summary": "联想集团与NVIDIA联合发布ThinkSystem Neptune第六代液冷AI服务器。100%直接温水冷却、支持100KW+机架无需专用空调、功耗降低40%、支持10万亿参数AI模型。", "analysis": {"impact": "联想液冷技术+全球渠道+NVIDIA合作,在高端AI服务器市场紧追浪潮", "action": "对比浪潮液冷方案与联想Neptune的技术路线差异"}, "url": "https://www.lenovo.com.cn/wiki/article-48562.html"}, {"id": "s15", "date": "2026-05-25", "level": "high", "vendor": "lenovo", "cat": "domestic", "title": "中国AI服务器三强财报:联想+50%、浪潮稳定、新华三强劲增长,三强格局确立", "source": "IT之家", "time": "05-25", "summary": "联想集团/浪潮信息/紫光股份三家AI服务器头部公司同步财报。联想AI服务器收入增长50%,三强格局正式确立。中国AI基础设施进入「系统竞争」阶段。", "analysis": {"impact": "联想凭借全球渠道+世界杯营销+NVIDIA合作,增速最快", "action": "强化西北渠道防守,利用本地化服务优势对抗联想全球品牌"}, "url": "https://www.ithome.com/0/954/953.htm"}, {"id": "s12", "date": "2026-05-22", "level": "high", "vendor": "xfusion", "cat": "domestic", "title": "超聚变递交创业板IPO:2025年营收582亿净利10亿,募资80亿,13天闪电问询", "source": "腾讯新闻/澎湃/百度百家", "time": "05-24~06-09", "summary": "超聚变5月22日提交IPO申请,5月24日获受理,6月9日进入问询(仅13天创纪录)。保荐人中信证券。2025年营收582亿,净利10亿,毛利率8%(远低于浪潮/中科曙光)。IPO募资80亿投向算力基础设施。", "analysis": {"impact": "IPO闪电推进,超聚变资金弹药将大幅扩充,但低毛利率是隐患", "action": "跟踪问询回复和上会时间节点"}, "url": "https://baijiahao.baidu.com/s?id=1867511115864513318"}, {"id": "s10", "date": "2026-05-20", "level": "high", "vendor": "xfusion", "cat": "domestic", "title": "超聚变探索者大会2026:发布智企全栈战略+TokenBox™企业Token生产平台", "source": "超聚变官网/搜狐", "time": "05-20~21", "summary": "超聚变5月20-21日在郑州举办探索者大会2026,主题\"共建智能体时代\"。发布智企全栈战略+TokenBox™(支持单机运行DeepSeek V4,35dB静音)+宏机柜方案+智企ERP。", "analysis": {"impact": "超聚变从服务器厂商升级为全栈AI解决方案商,战略对标浪潮元脑生态", "action": "对比浪潮EPA/元脑生态与超聚变TokenBox/智企ERP的差异"}, "url": "https://www.sohu.com/a/1026210984_610727"}, {"id": "s13", "date": "2026-05-08", "level": "high", "vendor": "h3c", "cat": "domestic", "title": "新华三NAVIGATE 2026领航者峰会:发布UniPoD S80000超节点等7大核心产品", "source": "新华三/百度百科", "time": "05-08", "summary": "新华三成立10周年,NAVIGATE 2026北京举办。发布UniPoD S80000全系列超节点(32-1024卡,弹扩16384卡)+高密全液冷整机+百T级智算交换机+AI原生存储+AI智能云+AI防火墙+灵犀运维智能体。", "analysis": {"impact": "新华三全栈算力产品矩阵完整度极高,对浪潮在政企市场构成体系化竞争", "action": "逐一分析7大产品对浪潮对应产品线的威胁"}, "url": "https://baike.baidu.com/item/NAVIGATE%202026%E9%A2%86%E8%88%AA%E8%80%85%E5%B3%B0%E4%BC%9A/67756177"}, {"id": "s14", "date": "2026-05-08", "level": "high", "vendor": "h3c", "cat": "domestic", "title": "新华三「图灵小镇+芯模社区」模式:90+模型/10+芯片/5000+行业方案", "source": "NAVIGATE 2026/百度百家", "time": "05-08", "summary": "新华三以\"图灵小镇+芯模社区\"双引擎打造AI产业公共底座。芯模社区涵盖10+主流芯片/90+大模型/60+镜像/5000+行业适配方案,发布国内首个AI芯模适配测评标准。", "analysis": {"impact": "芯模社区解决AI落地最大痛点——芯片与模型适配", "action": "了解浪潮是否有类似适配平台,对比差距"}, "url": "https://baijiahao.baidu.com/s?id=1864626451752069285"}, {"id": "s16", "date": "2026-04-28", "level": "high", "vendor": "market", "cat": "market", "title": "IDC 2025中国x86服务器市场:浪潮31.3%第一,超聚变12.7%第二,新华三12.5%第三", "source": "IDC/东方财富", "time": "04-28", "summary": "IDC最新报告:2025年中国x86服务器市场,浪潮信息份额31.3%(2024年27.8%),超聚变12.7%(2024年13.8%↓),新华三12.5%,联想10.7%,中兴8.5%。前五合计约76%。全球Q1 2026:浪潮$40.1亿排第四(3.3%份额,-7% YoY),但Q2已强势反弹。", "analysis": {"impact": "浪潮国内份额持续扩大并创历史新高,全球Q1下滑但Q2暴增验证反弹", "action": "引用IDC最新数据更新客户材料,注意区分国内vs全球数据"}, "url": "https://caifuhao.eastmoney.com/news/20260428052426833230720"}, {"id": "s17", "date": "2026-04-07", "level": "medium", "vendor": "sugon", "cat": "domestic", "title": "中科曙光AI服务器+液冷存储双驱动,国产服务器生态建设加速", "source": "搜狐财经", "time": "04-07", "summary": "中科曙光在AI服务器和液冷存储领域双线布局。2026年液冷服务器全球市场规模预计突破1200亿元(中国257亿)。", "analysis": {"impact": "曙光液冷+存储方案对大型数据中心客户吸引力强", "action": "曙光液冷份额数据需进一步验证"}, "url": "https://www.sohu.com/a/1006422591_122362510"}];
+window.UPD=[{"id": "uAUG09", "date": "2026-08-19", "level": "MED", "vendor": "intel", "cat": "product", "title": "Intel Crescent Island显存升级至480GB LPDDR5X：350W风冷PCIe卡，Hot Chips 2026对标Rubin/MI400", "source": "Hot Chips", "time": "2026-08-19", "summary": "Intel官方将Crescent Island推理GPU显存从160GB LPDDR5X更新至最高480GB，同时保持350W风冷PCIe卡形态。480GB容量超过AMD MI455X的432GB也高于NVIDIA Rubin的288GB，支持FP4/MXFP4/FP64等多精度格式。Intel未公布显存带宽、scale-up互联和峰值算力，产品仍处于开发测试阶段，预计2026下半年向客户送样。", "analysis": {"facts": ["Crescent Island显存从160GB升级至480GB LPDDR5X，超过AMD MI455X的432GB和NVIDIA Rubin的288GB", "350W风冷PCIe卡形态，可直接进入常规企业服务器无需液冷整柜", "Xe3P架构支持FP4/MXFP4/FP64，软件沿用Arc Pro平台的Xe生态"], "significance": "Intel选择「大容量+低功耗PCIe卡」差异化路线，避开NVIDIA/AMD液冷整柜主战场，切企业推理长尾", "impact": "480GB让单卡能承载更多模型权重+KV Cache减少切分，对国产推理服务器厂商（如浪潮NF5688G8）是一个差异化选择", "action": "浪潮在国产化推理机型上可关注Crescent Island量产后的性价比，如果带宽规格过关，可能成为H20/B30A之外的推理补充"}, "url": "https://hotchips.org/"}, {"id": "uAUG10", "date": "2026-08-15", "level": "HIGH", "vendor": "samsung", "cat": "market", "title": "三星HBM4 12层样品能效+16%，2026H2量产价格700美元，较HBM3E溢价20-30%", "source": "TrendForce", "time": "2026-08-15", "summary": "三星交付12层HBM4样品，能效较上一代提升16%、热阻特性改善逾14%。12层48GB版本报价约700美元，较HBM3E溢价20-30%。除12层48GB版本外还将推出32GB（8层）和64GB（16层）版本覆盖不同客户需求。SK海力士随后预计跟进涨价至同等区间，HBM4将成为2026-2027年AI超节点服务器的关键物料。三星/SK海力士Q1-Q2营业利润预计将创历史新高（摩根士丹利预测三星全年+464%、海力士+280%）。", "analysis": {"facts": ["三星12层HBM4样品能效+16%、热阻改善14%，2026H2量产价格约700美元较HBM3E+20-30%", "三星HBM4产品线覆盖8层32GB/12层48GB/16层64GB，量产节奏按客户时间表推进", "摩根士丹利预测三星2026全年营业利润+464%，海力士+280%，存储超级周期全面兑现"], "significance": "HBM4涨价直接推高AI超节点服务器BOM成本的20-30%，浪潮元脑SD200、超聚变、新华为三1024卡超节点的报价需要提前考虑HBM溢价", "impact": "渠道报价上2026下半年-2027上半年任何AI超节点整机柜项目都必须包含15-20%的HBM溢价，否则毛利率被直接压缩到不可接受水平", "action": "浪潮应加快和三星/SK海力士的HBM4长单锁定谈判，避免Q4进一步涨价10%+；同时通知客户HBM4整机柜2026 H2出货会贵20%"}, "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260602143044a72b4ab7"}, {"id": "uAUG08", "date": "2026-08-13", "level": "HIGH", "vendor": "amd", "cat": "product", "title": "AMD Helios机架级AI平台正式进入生产：72颗MI455X+Zen 6 Venice CPU+31TB HBM4，OpenAI下季部署", "source": "EE Times Asia", "time": "2026-08-13", "summary": "AMD在Advancing AI 2026宣布Helios机架级AI平台已进入生产阶段。Helios包含72颗Instinct MI455X GPU、18颗EPYC「Venice」9006系列（Zen 6，台积电2nm）CPU、Pensando网络，整机提供31TB HBM4容量、1.4PB/s聚合带宽、2.9 ExaFLOPS FP4推理/1.4 ExaFLOPS FP8训练、260TB/s scale-up UALoE带宽。AMD与Anthropic合作部署最高2GW MI450系列容量，OpenAI计划2026 Q4上线Helios。", "analysis": {"facts": ["Helios整架72 MI455X+18 EPYC Venice CPU、31TB HBM4、1.4-1.7PB/s聚合带宽", "FP4推理2.9 ExaFLOPS、FP8训练1.4 ExaFLOPS，scale-up 260TB/s UALoE，scale-out 43TB/s", "Anthropic签2GW MI450系合约、微软Azure/Meta/Oracle/OpenAI均为客户，OpenAI 2026 Q4起部署"], "significance": "AMD从GPU芯片商向机架级系统商战略转型全面落地，Helios对标NVIDIA NVL72且采用OCP Open Rack Wide开放标准，给超节点市场多了一个玩家", "impact": "对浪潮等整机商是双刃剑：AMD Helios采用开放标准了更多整柜集成空间，但OEM设计主导权会受AMD挤压；国产化上可与海光对标学习", "action": "浪潮要跟踪AMD Venice CPU+Helios的出货节奏，并考虑在下一代超节点产品中同时支持NVIDIA Rubin和AMD Helios两套生态，避免被单一供应商绑定"}, "url": "https://www.eetasia.com/lisa-su-puts-rack-scale-ai-at-center-of-amds-next-growth-phase"}, {"id": "uAUG07", "date": "2026-08-11", "level": "HIGH", "vendor": "nvidia", "cat": "product", "title": "NVIDIA Rubin GPU正式量产：chiplet架构+288GB HBM4+50PFLOPS FP4，Hot Chips 2026重点展示", "source": "Hot Chips", "time": "2026-08-11", "summary": "NVIDIA宣布Rubin GPU进入量产爬坡和系统出货阶段。Rubin是NVIDIA首个chiplet架构GPU，由两颗接近光罩上限的计算die通过NV-HBI封装内连接，芯片规模3360亿晶体管含224个SM和896个Tensor Core。单颗GPU配288GB HBM4、带宽22TB/s，第三代Transformer Engine提供50 PFLOPS NVFP4推理算力。配套的Vera Rubin NVL72机架含72颗Rubin GPU+36颗Vera CPU，20.7TB HBM4、NVLink 6总带宽260TB/s。", "analysis": {"facts": ["Rubin GPU为chiplet架构，3360亿晶体管、224 SM、896 Tensor Core，两颗die经NV-HBI封装互连", "单GPU 288GB HBM4、带宽22TB/s、NVFP4推理50 PFLOPS；Vera CPU为88核Arm架构", "NVL72整柜72 GPU+36 Vera CPU，20.7TB HBM4、带宽汇总1580TB/s、NVLink 6交换260TB/s"], "significance": "Rubin+ Vera CPU+NVLink 6+ConnectX-9+BlueField-4形成一套完整硬件软件体系，量产后将定义2027年AI基础设施标准", "impact": "浪潮超节点（元脑SD200）要在Rubin NVL72出货前抢下国产智算客户，超节点降规格（288GB HBM3.5）带来的性价比优势是时间窗口", "action": "渠道和客户谈2027年AI基建规划时，必须把「Rubin+国产算力双轨方案」作为标配，避免客户被NVIDIA独家绑定；同时浪潮HC1000推理1元/百万token的成本优势要早打出"}, "url": "https://hotchips.org/"}, {"id": "u09", "date": "2026-08-10", "level": "high", "vendor": "amd", "cat": "upstream", "title": "AMD Instinct MI455X参数公布：432GB HBM4，23.3TB/s带宽，对标Rubin", "source": "LeCompute/gpulnsights", "time": "08-07", "summary": "AMD Instinct MI455X与NVIDIA Rubin对标参数披露：单GPU 432GB HBM4（23.3TB/s带宽），8 XCD+2 IOD芯片chiplets架构。Helios 方案72 GPU+31TB总HBM，Scale-Up bandwidth与NVLink 6持平3.6TB/s，Scale-Out 43.2TB/s 高于Rubin的28.8TB/s 50%。", "analysis": {"impact": "AMD在HBM性价比上的代际优势首次超越NV持平：同样的训练白花下MI455X会便宜20%+，这将是AMD在AI服务器反弹的分水岭。", "action": "如果客户对成本敏感，2026-2027想推荐 MI455X。为后当集采就要为集采店里布局各类产品预览。"}, "url": ""}, {"id": "u10", "date": "2026-08-06", "level": "high", "vendor": "samsung", "cat": "upstream", "title": "三星也警告内存短缺将持续到2027年", "source": "韩联社/每日经济新闻", "time": "08-06", "summary": "三星电子也警示称内存供应短缺将持续到2027年，与SK海力士的全 sinc共识。华福国际点评指出：供给与电力约束正在成为AI算力的新瓶颈，英伟达通过降低单卡HBM容量换取更多GPU交付。", "analysis": {"impact": "三星+SK海力士联手声明短缺到2027，说明这不是个短期性问题，是AI算力扩张的结构性约束。", "action": "直面客户时不要只用价格说话——现在说的是'都能不能交上货'。"}, "url": ""}, {"id": "u15", "date": "2026-07-28", "level": "high", "vendor": "market", "cat": "market", "title": "国家统计局:上半年集成电路制造利润暴增2579.5%,服务器+689.3%,电子行业+96.9%", "source": "国家统计局/经济参考报", "time": "07-28", "summary": "国家统计局发布:上半年全国规上工业企业利润39479.9亿元,同比+18.7%。电子行业利润+96.9%为增速最高行业。细分:计算机整机制造+689.3%,集成电路制造+2579.5%,电子专用材料制造+209.7%,半导体分立器件+31.2%。截至6月底智能算力2185EFLOPS(+177%)。工信部称将加速算电一体化布局。", "analysis": {"impact": "官方数据确认AI和算力产业链进入超级景气周期,上游芯片、中游整机、下游应用全面受益", "action": "在国家统计局数据加持下,客户对企业IT投资的信心将增强"}, "url": "https://www.toutiao.com/article/7667409407306727963/"}, {"id": "u16", "date": "2026-07-28", "level": "high", "vendor": "hygon", "cat": "cpu", "title": "海光信息H1预告:营收85-93亿(+55~70%),净利润17-18.3亿(+41~52%),国产CPU龙头加速放量", "source": "海光信息公告/经济参考报", "time": "07-28", "summary": "国产CPU龙头海光信息发布H1预告:营收85-93亿元(+55.56~70.20%),归母净利润17-18.3亿元(+41.50~52.32%)。国产x86 CPU+DCU双轮驱动,HSL高速互联+CUDA兼容构筑国产算力底座。下游服务器整机厂商(浪潮/联想等)对国产CPU需求持续增长。", "analysis": {"impact": "海光超预期增长印证国产CPU在服务器市场渗透加速,利好浪潮国产芯片机型放量", "action": "海光CPU供应充足情况下,加大国产芯片服务器在政企市场的推广力度"}, "url": "https://www.toutiao.com/article/7667409407306727963/"}, {"id": "u0y", "date": "2026-07-09", "level": "high", "vendor": "skhynix", "cat": "memory", "title": "SK海力士股价今早大涨7%+,三星涨3%+,韩国存储芯片股强势反弹", "source": "财联社/科创板日报", "time": "07-09 08:02", "summary": "7月9日早盘,SK海力士股价上涨逾7%,三星电子涨超3%。此前SK海力士9个交易日从近300万韩元跌至210万韩元(跌约30%),今日强势反弹。三星Q2业绩炸裂(利润89.4万亿韩元+1810%)后市场恐慌情绪消化,存储板块修复。", "analysis": {"impact": "存储芯片价格上行周期未变,短期恐慌后快速修复,对服务器BOM影响可控", "action": "Q3 DDR5/HBM采购节奏无需调整,维持原有备货计划"}, "url": "https://www.chinastarmarket.cn/detail/2421075"}, {"id": "u0z", "date": "2026-07-09", "level": "high", "vendor": "skhynix", "cat": "memory", "title": "SK海力士明日(7.10)纳斯达克上市!290亿美元ADR创外资企业赴美IPO历史纪录", "source": "快科技/同花顺/百度百家", "time": "07-06~09", "summary": "SK海力士计划7月10日以约290亿美元ADR规模在纳斯达克全球精选市场挂牌交易(代码SKHY),定价166美元/股。超过沙特阿美(256亿)和阿里巴巴(250亿),创美国史上最大规模海外公司IPO。资金用于韩国龙仁半导体集群和清州P&T7工厂建设。纳入纳斯达克100指数后将带来巨额被动资金流入。", "analysis": {"impact": "SK海力士美股上市后融资能力和全球影响力大增,对HBM/DDR5产能扩张形成强力支撑", "action": "关注SK海力士上市首日表现,评估对存储供应链定价权的长期影响"}, "url": "https://stock.10jqka.com.cn/20260707/c678009836.shtml"}, {"id": "u0w", "date": "2026-07-09", "level": "high", "vendor": "nvidia", "cat": "gpu", "title": "IDC:Q1 2026全球服务器市场$1226亿(+30.4%),非x86暴涨107.6%,AI驱动结构性变革", "source": "IDC/InfotechLead/Electronics Weekly", "time": "06-16/07-09综合", "summary": "IDC Q1 2026全球服务器市场报告:总营收$1226亿(+30.4% YoY)。关键数据:(1)非x86服务器营收$587亿(+107.6%)占47.9%逼近x86;(2)GPU加速服务器$689亿占56.2%;(3)Dell $202.8亿(+244%)份额16.5%登顶,SMCI $93.3亿(+129%)第二,联想$56.2亿(+36.5%)第三,浪潮$40.1亿(-7%)第四,HPE $37.2亿(+17%)第五;(4)中国$192亿(+30.9%)。ODM Direct份额从64.1%骤降至50.2%。", "analysis": {"impact": "浪潮全球份额下滑但Q2业绩暴增说明Q2大幅反弹;非x86架构+ARM生态加速渗透,国产服务器路线选择需重视", "action": "IDC Q1数据中浪潮份额下滑与Q2暴增对比强烈,需向客户解释Q1属季度性波动,Q2已强势回弹"}, "url": "https://infotechlead.com/networking/global-server-market-surges-30-4-to-122-6-bn-in-q1-2026-as-ai-infrastructure-spending-accelerates-worldwide-96582"}, {"id": "u0v", "date": "2026-07-08", "level": "high", "vendor": "huawei", "cat": "gpu", "title": "华为Atlas 950超节点真机将亮相WAIC 2026,单柜64卡弹连8192卡,国产算力进入超节点时代", "source": "腾讯新闻/新浪财经/雪球", "time": "07-08 午后", "summary": "华为7月8日宣布业界最大规模AI超节点Atlas 950真机将在7月17日WAIC 2026首次公开展示。Atlas 950基于自研高速互联协议,单柜64卡起步,最多弹性连接8192张昇腾芯片。此前华为轮值董事长徐直军称Atlas 950将是2026-2028年全球算力最强的AI超节点。被视为国产算力从芯片到系统级能力跃升的标志。", "analysis": {"impact": "华为昇腾超节点进入规模化商用,在中高端AI服务器市场对浪潮等x86阵营形成直接竞争", "action": "密切跟踪华为昇腾生态进展,评估在国产化替代项目中的竞争策略;关注WAIC 2026(7.17-20)华为展台"}, "url": "https://news.qq.com/rain/a/20260708A066A900"}, {"id": "u0t", "date": "2026-07-08", "level": "medium", "vendor": "market", "cat": "market", "title": "WAIC 2026将于7.17-20上海举办:1100+企业/3000+展品/300+新品首发,三地四馆史上最大", "source": "新华财经/新浪财经", "time": "07-07~09", "summary": "2026世界人工智能大会(WAIC)7月17-20日上海举办,主题\"智能伙伴,共创未来\"。首次采用世博/张江/西岸\"三地四馆\"布局,展览面积突破10万㎡。华为Atlas 950超节点/300+新品全球首发。智算和具身智能两大赛道各汇聚超200家企业。", "analysis": {"impact": "WAIC是年度最重要AI展会,国产算力/AI服务器全线产品密集亮相", "action": "组织团队关注WAIC展会动态,重点跟踪华为/寒武纪/海光等国产芯片厂商发布"}, "url": "https://finance.sina.com.cn/jjxw/2026-07-09/doc-inihczph8280750.shtml"}, {"id": "u0a", "date": "2026-07-07", "level": "high", "vendor": "intel", "cat": "cpu", "title": "Intel官宣服务器CPU涨价:旗舰6980P涨幅约12%,最高涨价$1495,波及Xeon全系", "source": "科创板日报/Tom's Hardware", "time": "07-06~07", "summary": "Intel 7月4日确认上调消费级和服务器CPU价格。Xeon 6 Granite Rapids和Emerald Rapids系列服务器CPU涨价数百至上千美元,旗舰6980P从$12,460涨至$13,955,涨幅约12%。理由:成本上升+需求旺盛。直接影响所有服务器厂商BOM成本。", "analysis": {"impact": "Intel涨价直接推高服务器采购成本,浪潮作为大客户有一定议价空间,但中小渠道商压力增大", "action": "立即评估Intel涨价对Q3-Q4服务器报价的影响,提前与客户沟通价格预期"}, "url": "https://view.inews.qq.com/a/20260706A03TE400"}, {"id": "u0s", "date": "2026-07-07", "level": "high", "vendor": "samsung", "cat": "memory", "title": "三星Q2业绩炸裂:利润89.4万亿韩元(+1810%)超英伟达,存储芯片涨价潮汹涌", "source": "财联社/百度百家/同花顺", "time": "07-07", "summary": "三星电子7月7日公布Q2初步业绩:营收171万亿韩元(+129% YoY),营业利润89.4万亿韩元(+1810%),连续三季刷新单季盈利纪录,单季利润超越英伟达。DRAM季度涨幅超40%,NAND涨幅超50%。但\"炸裂\"成绩单反引发市场恐慌,当天三星/海力士双跌超10%,KOSPI暴跌8%触发熔断。次日(7.8)SK海力士反弹+1%。今日(7.9)SK海力士大涨7%+。", "analysis": {"impact": "存储芯片涨价周期确认深度,服务器BOM中内存成本占比持续攀升", "action": "紧急评估Q3 DDR5/HBM采购预算,考虑提前锁定长协价格"}, "url": "https://baijiahao.baidu.com/s?id=1870014980222142364"}, {"id": "u0b", "date": "2026-07-07", "level": "high", "vendor": "samsung", "cat": "memory", "title": "韩国KOSPI暴跌8%触发熔断!SK海力士9天市值蒸发超2600亿美元,存储板块\"利好出尽\"", "source": "21世纪经济报道/每日经济新闻", "time": "07-07 13:49", "summary": "7月7日韩国KOSPI一度暴跌8.03%触发熔断20分钟。SK海力士9个交易日从近300万韩元跌至210万韩元,市值蒸发超2600亿美元。三星Q2\"炸裂\"成绩单(利润+1810%)反引发\"利好出尽\"恐慌抛售。但7月9日SK海力士已反弹7%+,市场情绪修复。SK海力士明日(7.10)纳斯达克上市,290亿美元ADR。", "analysis": {"impact": "短期恐慌不改变存储芯片供需紧张基本面,HBM/DDR5价格上行趋势未变", "action": "关注SK海力士美股上市后走势,评估对A股存储板块传导效应"}, "url": "https://view.inews.qq.com/a/20260707A05LBV00"}, {"id": "u0c", "date": "2026-07-06", "level": "medium", "vendor": "skhynix", "cat": "memory", "title": "HBM混合键合凉了!三星/SK海力士急刹车:HBM4用不上 HBM5也悬", "source": "驱动之家/华尔街见闻", "time": "07-06 15:00~16:00", "summary": "三星电子与SK海力士双双推迟HBM混合键合技术导入。随着HBM厚度标准放宽、散热替代方案出现,混合键合全面应用时间点被接连后移。即使到HBM5也可能暂不采用。封装技术路线发生重大转向。", "analysis": {"impact": "HBM3E/HBM4标准路线不变,但封装技术转向可能影响成本和良率", "action": "关注HBM供应节奏变化,评估对GPU服务器交付的影响"}, "url": "https://view.inews.qq.com/a/20260706A07DP900"}, {"id": "u0d", "date": "2026-07-06", "level": "medium", "vendor": "market", "cat": "cpu", "title": "Arm CEO雷内·哈斯:CPU需求已「爆表」,AI时代CPU从配角重返C位", "source": "机器之心", "time": "07-06 07:32", "summary": "Arm CEO表示过去两年AI基础设施主角是GPU,但CPU需求正迎来爆发。服务器CPU市场被AMD/Intel垄断的格局面临Arm架构挑战。NVIDIA Vera Rubin的ARM CPU方案正在改变游戏规则。IDC数据:非x86服务器Q1暴涨107.6%至$587亿,占比47.9%。", "analysis": {"impact": "ARM架构在服务器CPU市场的渗透加速,非x86已占近半壁江山", "action": "跟踪ARM服务器生态发展,评估对浪潮产品路线图的影响"}, "url": "https://view.inews.qq.com/a/20260705A086ZV00"}, {"id": "u1", "date": "2026-07-06", "level": "high", "vendor": "skhynix", "cat": "memory", "title": "HBM之父金正浩:AI的本质是内存,GPU真正利用率仅10%-30%", "source": "IT之家/华尔街见闻", "time": "07-06 07:55", "summary": "韩国KAIST金正浩教授(HBM之父)接受采访表示:AI核心竞争力正从GPU转向内存。GPU在AI推理中的利用率远低于理论水平,每次输出都必须先从HBM读取数据传到GPU计算再写回内存。", "analysis": {"impact": "内存厂商在AI价值链中的地位将进一步提升,上游议价能力增强", "action": "关注HBM/DDR5对服务器BOM成本的影响,提前评估供应链风险"}, "url": "https://view.inews.qq.com/a/20260706A02DKM00"}, {"id": "u2", "date": "2026-07-06", "level": "medium", "vendor": "nvidia", "cat": "cooling", "title": "液冷服务器概念大涨:NVIDIA Rubin全液冷+45℃冷却技术引爆A股", "source": "财联社", "time": "07-06 09:52", "summary": "液冷服务器概念表现活跃,大元泵业涨停,飞龙股份逼近涨停。光大证券研报认为AI/HPC算力攀升致热密度提高,传统风冷已难以满足需求。NVIDIA Rubin平台100%全液冷方案成为催化剂。", "analysis": {"impact": "液冷从可选变为刚需,浪潮液冷方案(20%份额)需加速推广", "action": "将NVIDIA Rubin全液冷趋势作为客户沟通切入点,推动液冷方案升级"}, "url": "https://view.inews.qq.com/a/20260706A03BLL00"}, {"id": "u3", "date": "2026-07-05", "level": "high", "vendor": "skhynix", "cat": "memory", "title": "SK海力士超越三星26年来首登顶,DDR5利润优先于HBM4扩产", "source": "TechTimes/Wccftech", "time": "07-02~05", "summary": "SK海力士26年来首次超越三星成为全球最大内存厂商。选择优先保障DDR5利润而非加速HBM4扩产,表明DDR5市场利润空间仍然可观。DDR5理论毛利率超90%。", "analysis": {"impact": "DDR5供应紧张可能加剧,影响所有服务器厂商Q3交付", "action": "紧急评估Q3 DDR5供应风险,提前备货"}, "url": "https://www.techtimes.com/articles/319016/20260624/sk-hynix-dethroned-samsung-after-26-years-now-choosing-ddr5-profits-over-hbm4-ramp.htm"}, {"id": "u4", "date": "2026-07-03", "level": "medium", "vendor": "nvidia", "cat": "cooling", "title": "芯片冷却涌现大量黑科技:英伟达Rubin取消风扇100%依赖液冷", "source": "半导体产业纵横", "time": "07-03 18:04", "summary": "英伟达下一代AI平台Rubin彻底取消风扇,100%依赖液冷运行。KAIST团队发表论文展示将室温水直接注入芯片内部微管道的技术。", "analysis": {"impact": "液冷技术路线快速演进,浪潮需跟进最新冷却方案", "action": "关注浸没式液冷和芯片级冷却技术,评估对产品路线图的影响"}, "url": "https://view.inews.qq.com/a/20260703A09QPB00"}, {"id": "u0e", "date": "2026-07-03", "level": "low", "vendor": "nvidia", "cat": "gpu", "title": "NVIDIA参投Together AI融资8亿美元估值83亿,模型使用量一年增三倍", "source": "ZPotentials", "time": "07-03 10:02", "summary": "开源AI云服务商Together AI完成8亿美元C轮融资估值83亿。Aramco Ventures领投,NVIDIA跟投。AI算力云服务赛道持续火热。", "analysis": {"impact": "AI云服务商快速扩张拉动GPU服务器需求,利好浪潮等服务器厂商", "action": "关注AI云服务商客户机会,评估西北地区潜在算力租赁项目"}, "url": "https://view.inews.qq.com/a/20260703A03SRX00"}, {"id": "u0f", "date": "2026-07-03", "level": "medium", "vendor": "nvidia", "cat": "gpu", "title": "GPU帝国松动:哪些推理芯片正在重写AI算力格局?", "source": "未尽研究", "time": "07-03 23:34", "summary": "深度分析AI算力从通用GPU向专用推理芯片分化的趋势。通用GPU两个弱点:并非最低成本推理方案,要求围绕单一GPU集群构建系统。AI算力正按任务重新分工。", "analysis": {"impact": "推理芯片多元化可能削弱NVIDIA GPU垄断,但短期内高端训练仍依赖GPU", "action": "关注国产推理芯片进展,评估对浪潮AI服务器产品策略的影响"}, "url": "https://view.inews.qq.com/a/20260703A0D1DL00"}, {"id": "u6c", "date": "2026-06-29", "level": "medium", "vendor": "market", "cat": "cooling", "title": "液冷概念走高美利信涨停,机构预测2026数据中心液冷市场942亿", "source": "财联社", "time": "06-29 10:00", "summary": "液冷服务器概念持续走高,美利信触及20cm涨停。机构研报分析2026年数据中心液冷市场规模942亿元,2027年增至1478亿元,同比+56.8%。", "analysis": {"impact": "液冷市场爆发确认,浪潮液冷方案需加速抢占市场份额", "action": "加大液冷方案在西北区域的推广力度,抓住市场爆发窗口期"}, "url": "https://view.inews.qq.com/a/20260629A0314N00"}, {"id": "u6d", "date": "2026-06-29", "level": "low", "vendor": "nvidia", "cat": "gpu", "title": "澳企Firmus将为印尼360MW AI工厂导入17万NVIDIA GPU,至2034年", "source": "IT之家", "time": "06-29 09:50", "summary": "澳大利亚Neocloud Firmus宣布在印尼峇淡建设360MW的NVIDIA DSX液冷AI工厂。与NVIDIA达成2034年战略合作。", "analysis": {"impact": "全球AI工厂建设加速,GPU需求持续旺盛,服务器厂商受益", "action": "关注海外大型AI工厂项目,评估是否有供应链机会"}, "url": "https://view.inews.qq.com/a/20260629A02XGL00"}, {"id": "u6a", "date": "2026-06-26", "level": "high", "vendor": "market", "cat": "cooling", "title": "集邦咨询:液冷渗透率今年有望达50%+,2027-2028年达65%+", "source": "证券日报/集邦咨询", "time": "06-26", "summary": "集邦咨询研究经理龚明德表示液冷技术渗透率今年有望达到五成以上,2027-2028年达到65%以上。国内外主流服务器厂商纷纷将液冷作为新一代算力基础设施标配。", "analysis": {"impact": "液冷从「可选」变为「标配」,浪潮液冷方案(20%份额)需加速扩张", "action": "立即更新客户方案模板,将液冷作为AI服务器方案的标配推荐"}, "url": "https://finance.sina.com.cn/jjxw/2026-06-26/doc-inietnfw1935899.shtml"}, {"id": "u6b", "date": "2026-06-26", "level": "high", "vendor": "amd", "cat": "cpu", "title": "2027年AMD EPYC Venice服务器CPU出货量将反超NVIDIA Vera", "source": "摩根士丹利/半导体产业纵横", "time": "06-26 17:53", "summary": "摩根士丹利研报预估2027年AMD EPYC Venice CPU出货量可达675万颗,较NVIDIA Vera高出17%。AMD在服务器CPU市场持续扩大优势。", "analysis": {"impact": "AMD CPU优势扩大可能影响服务器架构选择", "action": "评估AMD EPYC路线图对浪潮产品规划的影响"}, "url": "https://view.inews.qq.com/a/20260626A08QDC00"}, {"id": "u7", "date": "2026-06-25", "level": "medium", "vendor": "nvidia", "cat": "cooling", "title": "中金:未来高端AI服务器有望采用金刚石热沉+全液冷复合散热方案", "source": "每日经济新闻", "time": "06-25 08:03", "summary": "中金公司研报认为H100/Blackwell/Rubin系列GPU功耗持续突破千瓦级,铜铝材料热传导瓶颈凸显。金刚石具备2000W/m·K超高热导率。", "analysis": {"impact": "下一代散热技术路线可能改变液冷竞争格局", "action": "跟踪金刚石散热技术进展"}, "url": "https://view.inews.qq.com/a/20260625A01SIZ00"}, {"id": "u7a", "date": "2026-06-24", "level": "medium", "vendor": "skhynix", "cat": "memory", "title": "SK海力士增产DDR5追逐超90%理论毛利率,DRAM供应持续紧张", "source": "芯智讯", "time": "06-24 09:38", "summary": "SK海力士计划将更多新增产能转向DDR5和LPDDR5产品。其DDR5理论毛利率预计可超过90%,远超HBM。", "analysis": {"impact": "DDR5产能继续向高利润倾斜,可能持续挤压传统服务器内存供应", "action": "紧急评估Q3 DDR5供应,协调采购部门提前锁定产能"}, "url": "https://view.inews.qq.com/a/20260624A033VD00"}, {"id": "u8", "date": "2026-06-22", "level": "high", "vendor": "nvidia", "cat": "cooling", "title": "英伟达Rubin服务器实现100%液冷:45℃冷却液入口温度,彻底取消风扇", "source": "界面新闻/财联社", "time": "06-22 17:29", "summary": "NVIDIA发文宣布最新Rubin AI基础设施实现全系统100%液冷。关键突破:冷却液入口温度提升至45℃反而带来更高能效。", "analysis": {"impact": "100%液冷方案成为行业风向标,液冷市场将加速爆发", "action": "将NVIDIA全液冷方案作为客户技术升级的参考"}, "url": "https://view.inews.qq.com/a/20260622A0AQ2100"}, {"id": "u9b", "date": "2026-06-12", "level": "medium", "vendor": "nvidia", "cat": "gpu", "title": "GPU不让卖了?NVIDIA改推Vera CPU,试图给中国AI业务「开侧门」", "source": "不一定有用的频道", "time": "06-12 20:26", "summary": "英伟达开始向中国云计算和数据中心客户推销Vera CPU,最快8月可供下单交付。GPU出口受限后,NVIDIA试图用CPU重新打开中国市场。Vera采用ARM架构,集成AI加速能力。", "analysis": {"impact": "如果NVIDIA Vera CPU成功进入中国,可能改变国产服务器CPU选型", "action": "密切关注Vera CPU的中国落地情况,评估对浪潮产品策略的影响"}, "url": "https://view.inews.qq.com/a/20260612A08XNK00"}, {"id": "u9c", "date": "2026-06-10", "level": "low", "vendor": "market", "cat": "memory", "title": "长鑫DDR5价格无优势:采购价与三星/SK海力士/美光基本持平", "source": "博奥Tech/Wccftech", "time": "06-10 13:01", "summary": "国产长鑫存储DDR5真实价格首次浮出水面,采购价格与三大国际巨头几乎处于同一水平,\"廉价国产内存\"说法不实。", "analysis": {"impact": "国产DDR5短期内无法缓解服务器内存成本压力", "action": "调整对国产内存降本的预期,维持现有采购策略"}, "url": "https://view.inews.qq.com/a/20260610A0503N00"}, {"id": "u9d", "date": "2026-06-01", "level": "medium", "vendor": "intel", "cat": "cpu", "title": "Intel至强6+发布:18A工艺288核,比上代快2.26倍,首款18A数据中心CPU", "source": "驱动之家", "time": "06-01 18:55", "summary": "Intel正式发布至强6+处理器系列,代号Clearwater Forest。旗舰6990E+采用Darkmont E-core架构,288核576线程。", "analysis": {"impact": "Intel 18A工艺首次落地数据中心,但核心数仍落后AMD", "action": "评估至强6+在浪潮产品线中的定位"}, "url": "https://view.inews.qq.com/a/20260601A08BEH00"}, {"id": "u11", "date": "2026-05-21", "level": "high", "vendor": "nvidia", "cat": "cpu", "title": "NVIDIA:不再只卖GPU,目标成为全球最大CPU厂商,$200亿CPU收入", "source": "驱动之家", "time": "05-21 10:10", "summary": "NVIDIA Q1 FY2027营收$816亿(+85%)。CFO明确表示公司目标是成为全球领先的CPU供应商,今年CPU业务总收入将达$200亿。", "analysis": {"impact": "NVIDIA从GPU向CPU扩张,服务器供应链格局将根本性重构", "action": "评估NVIDIA CPU方案对浪潮服务器架构路线图的影响"}, "url": "https://view.inews.qq.com/a/20260521A034H800"}, {"id": "u12", "date": "2026-05-15", "level": "medium", "vendor": "amd", "cat": "cpu", "title": "AMD服务器CPU收入首超Intel,潜在市场从$600亿翻倍至$1200亿", "source": "华尔街见闻", "time": "05-06 10:52", "summary": "AMD数据中心收入$58亿首次超越Intel(DCAI $51亿)。服务器CPU TAM仅5个月即从$600亿翻倍至$1200亿。AMD实现历史性突破。", "analysis": {"impact": "AMD CPU优势凸显,浪潮作为AMD重要客户可获更优供应条件", "action": "强化与AMD合作关系,利用AMD CPU优势构建差异化"}, "url": "https://view.inews.qq.com/a/20260506A03BFE00"}, {"id": "u13", "date": "2026-04-15", "level": "medium", "vendor": "intel", "cat": "cpu", "title": "Intel/AMD全线涨价10%-15%,CPU交货周期最长6个月,供应链紧缺加剧", "source": "知乎/半导体行业观察", "time": "04-03", "summary": "2026年开年Intel、AMD双巨头官宣CPU全线涨价,交货周期从1-2周骤增至8-12周,高端型号等6个月。超大规模数据中心加速升级,库存几乎售罄。", "analysis": {"impact": "CPU涨价+交期延长是2026年服务器行业最大供应链风险", "action": "紧急评估CPU供应安全,与Intel/AMD确认浪潮大客户优先供货保障"}, "url": "https://zhuanlan.zhihu.com/p/2023425465000425338"}];
+window.HOT=[{"tag": "NVIDIA Rubin正式量产", "heat": 96, "trend": "up", "desc": "chiplet 3360亿晶体管+288GB HBM4，整柜72 GPU出货阶段"}, {"tag": "联想AI服务器订单540亿美元", "heat": 92, "trend": "up", "desc": "ISG利润率9.1%史诗反转，股价单日+20%"}, {"tag": "中移动51亿推理集采昇腾66%", "heat": 88, "trend": "up", "desc": "浪潮仅2.97亿元，昇腾生态占压倒性优势"}, {"tag": "HBM4涨价20-30%三星报价700美元", "heat": 85, "trend": "up", "desc": "摩根士丹利预测三星全年利润+464%"}, {"tag": "AMD Helios 31TB HBM4机架生产", "heat": 82, "trend": "up", "desc": "72 MI455X+Venice CPU，OpenAI Q4部署"}];
+window.ALERTS=[{"date": "2026-08-20", "level": "RED", "title": "存储超级周期或推高服务器BOM成本20%", "desc": "DRAM合约价Q2环比+58%-63%，NAND+70%-75%，立即通知客户锁定内存价格", "relatedVendor": "market"}, {"date": "2026-08-15", "level": "RED", "title": "HBM4涨价20-30%影响超节点成本", "desc": "三星HBM4报价约700美元，AI超节点服务器需包含15-20%物料溢价", "relatedVendor": "samsung"}, {"date": "2026-08-13", "level": "YELLOW", "title": "联想540亿美元订单储备冲击全球格局", "desc": "联想ISG利润率9.1%，股价+20%，渠道需关注其竞争打法", "relatedVendor": "lenovo"}, {"date": "2026-08-12", "level": "YELLOW", "title": "中移动推理集采浪潮份额2.97亿垫底", "desc": "昇腾占66%、中兴8.85亿、超聚变8.37亿，浪潮需调整运营商打法", "relatedVendor": "inspur"}, {"date": "2026-08-14", "level": "BLUE", "title": "中科曙光十万卡集群首周满载运营", "desc": "曙光8000日均15万作业+启动第二套80亿募投，国产算力跃进", "relatedVendor": "sugon"}];
+
+</script>
+<script type="text/babel">
+const {useState,useMemo,useEffect,useRef,useCallback}=React;
+
+const VN={inspur:'浪潮信息',xfusion:'超聚变',h3c:'新华三',lenovo:'联想',sugon:'中科曙光',huawei:'华为',zte:'中兴通讯',powerleader:'宝德',dell:'Dell',
+nvidia:'NVIDIA',amd:'AMD',intel:'Intel',skhynix:'SK海力士',samsung:'三星',hygon:'海光信息',market:'行业/政策'};
+const CATS={domestic:'厂商动态',upstream:'上游供应链',market:'政策市场'};
+
+// level 统一小写工具(数据里大小写不一)
+// level 统一小写工具(数据里大小写不一)
+const lv=x=>(x.level||'').toLowerCase();
+const isHigh=x=>lv(x)==='high';
+const isMed=x=>lv(x)==='med'||lv(x)==='medium'||lv(x)==='mid';
+
+// 数据汇总(放在最前,后续 TODAY/统计都用)
+const ALL0=[...SRVD.map(x=>({...x,__side:'srv',__cat:'domestic'})),...UPD.map(x=>({...x,__side:'up',__cat:'upstream'}))];
+// 当前数据最新日期作为"今天"基准
+const _dates=ALL0.map(x=>x.date||'').filter(Boolean).sort();
+const TODAY=_dates.length?_dates[_dates.length-1]:new Date().toISOString().slice(0,10);
+
+// 产业地图：vendors有数据的
+const MAP={
+  up:{label:'上游 · 芯片与部件',color:'violet',segs:[
+    {name:'芯片 / 算力',vendors:['nvidia','amd','intel','hygon']},
+    {name:'存储 / HBM',vendors:['skhynix','samsung']}
+  ]},
+  mid:{label:'中游 · 整机厂商',color:'blue',segs:[
+    {name:'通用 / AI 服务器',vendors:['inspur','xfusion','h3c','lenovo','sugon']},
+    {name:'超节点 / 国产算力',vendors:['huawei','zte','powerleader']},
+    {name:'国际厂商',vendors:['dell']}
+  ]},
+  down:{label:'下游 · 需求与政策',color:'emerald',segs:[
+    {name:'运营商智算集采',vendors:['market'],q:'集采'},
+    {name:'AI 大模型需求',vendors:['market'],q:'大模型'}
+  ]}
+};
+// 监控中暂无信号，一行展示不区分父级
+const WATCH=['英维克','申菱环境','台达','麦格米特','沪电股份','深南电路','中航光电','阿里云','腾讯云','字节跳动'];
+
+const ALL=ALL0.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+const UP_V=MAP.up.segs.flatMap(s=>s.vendors);
+const MID_V=MAP.mid.segs.flatMap(s=>s.vendors);
+function segOf(x){
+  if(UP_V.includes(x.vendor))return 'up';
+  if(MID_V.includes(x.vendor))return 'mid';
+  return 'down';
+}
+
+function pickByTab(tab){
+  if(tab==='全部')return ALL;
+  if(tab==='厂商动态')return ALL.filter(x=>x.__side==='srv');
+  if(tab==='上游供应链')return ALL.filter(x=>x.__side==='up');
+  if(tab==='政策市场')return ALL.filter(x=>x.vendor==='market');
+  return ALL;
+}
+function matchArticle(kw){
+  const words=kw.replace(/[：:,，、·\s]+/g,' ').split(' ').filter(w=>w.length>=2);
+  let best=null,bs=0;
+  for(const a of ALL){
+    const text=a.title+' '+(a.summary||'');
+    let s=0; for(const w of words){if(text.includes(w))s++;}
+    if(s>bs){bs=s;best=a;}
+  }
+  return bs>=2?best:null;
+}
+
+function Chip({children,color}){
+  const c={red:'bg-red-50 text-red-600 border-red-200 dark:bg-red-950/50 dark:text-red-400 dark:border-red-900',
+    blue:'bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-950/60 dark:text-blue-400 dark:border-blue-900',
+    slate:'bg-slate-100 text-slate-500 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'};
+  return <span className={`text-[11px] px-2 py-0.5 rounded-md border ${c[color]||c.slate} whitespace-nowrap`}>{children}</span>;
+}
+const IconSearch=()=>(<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>);
+const IconLink=()=>(<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/></svg>);
+const IconStar=({on})=>(<svg width="13" height="13" viewBox="0 0 24 24" fill={on?'#f59e0b':'none'} stroke={on?'#f59e0b':'currentColor'} strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>);
+const IconShare=()=>(<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>);
+const IconAI=()=>(<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"/><circle cx="12" cy="12" r="3"/></svg>);
+const IconSun=()=>(<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4l1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4l1.4-1.4"/></svg>);
+const IconMoon=()=>(<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>);
+
+// 卡片
+function CardItem({x,savedOn,toggleSave,hl}){
+  const impact=x.analysis&&x.analysis.impact?x.analysis.impact:'';
+  return <div id={'card-'+x.id} className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg shadow-sm px-4 py-3 fadein hover:shadow-md hover:border-blue-300 dark:hover:border-blue-800 transition ${hl?'flash':''}`}>
+    {/* row1: chips + time */}
+    <div className="flex items-center gap-1.5 flex-wrap mb-1.5">
+      {isHigh(x)&&<span className="text-[10px] font-bold text-red-600 dark:text-red-400 px-1.5 py-0.5 rounded bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900">重点</span>}
+      <Chip color="blue">{CATS[x.__cat]||''}</Chip>
+      <Chip color="slate">{VN[x.vendor]||x.vendor}</Chip>
+      <span className="ml-auto text-[11px] text-slate-400 tabular-nums">{x.time||x.date||''}</span>
+    </div>
+    {/* row2: title */}
+    <h3 className="font-bold text-[15px] leading-snug mb-1.5 txt-clamp-2 text-slate-900 dark:text-slate-100">{x.title}</h3>
+    {/* row3: AI interpret */}
+    {(impact||x.summary)&&<div className="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-md border-l-[3px] border-blue-500 mb-2">
+      <div className="text-[12px] leading-5.5 text-slate-600 dark:text-slate-300 txt-clamp-2">{impact||x.summary}</div>
+    </div>}
+    {/* row4: action */}
+    <div className="flex items-center gap-3 text-[12px] text-slate-500">
+      {x.url&&<a href={x.url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"><IconLink/>查看原文</a>}
+      <button onClick={()=>toggleSave(x.id)} className="flex items-center gap-1 hover:text-amber-600 transition">
+        <IconStar on={savedOn}/>{savedOn?'已收藏':'收藏'}</button>
+      <button className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-300 transition"
+        onClick={e=>{const t=x.title+' — 服务器行业情报中心';
+          if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>{const el=e.currentTarget;const o=el.textContent;el.textContent='已复制';setTimeout(()=>el.textContent=o,1200);});}}>
+        <IconShare/>分享</button>
+      <span className="ml-auto text-[11px] text-slate-400">{x.source||''}</span>
+    </div>
+  </div>;
+}
+
+function App(){
+  const [dark,setDark]=useState(()=>{try{return localStorage.getItem('sic_theme')==='dark'}catch(e){return false}});
+  useEffect(()=>{
+    document.documentElement.classList.toggle('dark',dark);
+    try{localStorage.setItem('sic_theme',dark?'dark':'light')}catch(e){}
+  },[dark]);
+
+  const [tab,setTab]=useState('全部');
+  const [vendor,setVendor]=useState(null);
+  const [time,setTime]=useState('近30天');
+  const [chain,setChain]=useState('产业链全部');
+  const [q,setQ]=useState('');
+  const [topBtn,setTopBtn]=useState(false);
+  const [hl,setHl]=useState(null);
+  const searchRef=useRef(null);
+  const [saved,setSaved]=useState(()=>{try{return JSON.parse(localStorage.getItem('sic_saved')||'[]')}catch(e){return[]}});
+  const toggleSave=useCallback(id=>setSaved(s=>{
+    const n=s.includes(id)?s.filter(x=>x!==id):[...s,id];
+    try{localStorage.setItem('sic_saved',JSON.stringify(n))}catch(e){}
+    return n;
+  }),[]);
+
+  useEffect(()=>{
+    const onScroll=()=>setTopBtn(window.scrollY>600);
+    window.addEventListener('scroll',onScroll);
+    const onKey=e=>{if(e.key==='/'&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='SELECT'){e.preventDefault();searchRef.current&&searchRef.current.focus();}};
+    window.addEventListener('keydown',onKey);
+    return ()=>{window.removeEventListener('scroll',onScroll);window.removeEventListener('keydown',onKey);};
+  },[]);
+
+  const base=useMemo(()=>pickByTab(tab),[tab]);
+  const filtered=useMemo(()=>{
+    let r=base;
+    if(vendor)r=r.filter(x=>x.vendor===vendor);
+    if(chain!=='产业链全部'){
+      const m={'上游':'up','中游':'mid','下游':'down'}[chain];
+      if(m)r=r.filter(x=>segOf(x)===m);
+    }
+    if(q.trim()){
+      const t=q.trim().toLowerCase();
+      r=r.filter(x=>(x.title+' '+(x.summary||'')+' '+(VN[x.vendor]||'')+' '+(x.source||'')).toLowerCase().includes(t));
+    }
+    if(time!=='全部时间'){
+      const days={'近7天':7,'近30天':30,'近90天':90}[time];
+      if(days){
+        const lim=new Date(TODAY);lim.setDate(lim.getDate()-days);
+        const cut=lim.toISOString().slice(0,10);
+        r=r.filter(x=>(x.date||'')>=cut);
+      }
+    }
+    return r;
+  },[base,vendor,chain,q,time]);
+
+  const timeline=useMemo(()=>{
+    const m={};
+    filtered.forEach(x=>{const d=x.date||'未知';(m[d]=m[d]||[]).push(x);});
+    return Object.entries(m).sort((a,b)=>b[0].localeCompare(a[0]));
+  },[filtered]);
+
+  const stats=useMemo(()=>({
+    high:ALL.filter(x=>isHigh(x)).length,
+    total:ALL.length,
+    today:ALL.filter(x=>(x.date||'')===TODAY).length
+  }),[]);
+
+  const pickVendor=v=>{
+    if(v===vendor){setVendor(null);return;}
+    setVendor(v);setQ('');setHl(null);
+    if(UP_V.includes(v))setTab('上游供应链');
+    else if(v==='market')setTab('政策市场');
+    else setTab('厂商动态');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  const openHot=kw=>{
+    const a=matchArticle(kw);
+    if(!a){setQ(kw.slice(0,12));return;}
+    setVendor(null);setQ('');setChain('产业链全部');
+    setTab(a.__side==='srv'?'厂商动态':(a.vendor==='market'?'政策市场':'上游供应链'));
+    setHl(a.id);
+    setTimeout(()=>{
+      const el=document.getElementById('card-'+a.id);
+      if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+    },180);
+    setTimeout(()=>setHl(null),2600);
+  };
+
+  const exportBrief=()=>{
+    const today=ALL.filter(x=>(x.date||'')===TODAY);
+    const items=(today.length?today:ALL.slice(0,10));
+    let md='# 服务器行业情报简报 · '+TODAY+'\n\n';
+    items.forEach((x,i)=>{
+      md+=`## ${i+1}. ${x.title}\n- 厂商：${VN[x.vendor]||x.vendor} ｜ 来源：${x.source||''} ｜ 时间：${x.time||x.date||''}\n- 摘要：${(x.summary||'').slice(0,150)}\n`;
+      if(x.analysis&&x.analysis.impact)md+=`- 影响：${x.analysis.impact}\n`;
+      if(x.url)md+=`- 链接：${x.url}\n`;
+      md+='\n';
+    });
+    md+='\n> by 服务器行业情报中心 · 识野Insight';
+    if(navigator.clipboard) navigator.clipboard.writeText(md).then(()=>alert('简报 Markdown 已复制到剪贴板'));
+  };
+
+  const hotColor=i=>i===0?'bg-red-500 text-white':i===1?'bg-orange-400 text-white':i===2?'bg-amber-400 text-white':'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+  const segColor={violet:'bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400',
+    blue:'bg-blue-100 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400',
+    emerald:'bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400'};
+
+  const isTimeline=tab==='时间线';
+
+  return <div className={`min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors`}>
+    {/* Header */}
+    <header className="sticky top-0 z-30 bg-white/85 dark:bg-slate-950/85 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+      <div className="max-w-[1440px] mx-auto px-6 h-16 flex items-center gap-5">
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2"><path d="M3 12l5-8 4 8 4-8 5 8-5 8-4-8-4 8-5-8z"/></svg>
+          </div>
+          <div className="leading-tight">
+            <div className="font-bold text-[15px] tracking-wide">服务器行业情报中心</div>
+            <div className="text-[11px] text-slate-400 tracking-wider">by 识野Insight</div>
+          </div>
+        </div>
+        <div className="relative flex-1 max-w-xl text-slate-400">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2"><IconSearch/></div>
+          <input ref={searchRef}
+            className="w-full h-10 pl-9 pr-16 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/25 focus:border-blue-400 transition dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100"
+            placeholder="搜索厂商 / 事件 / 关键词…" value={q} onChange={e=>setQ(e.target.value)}/>
+          <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 border border-slate-200 dark:border-slate-700 rounded px-1.5 py-0.5">/</kbd>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          {[ ['时间',time,setTime,['近7天','近30天','近90天','全部时间']],
+             ['产业链',chain,setChain,['产业链全部','上游','中游','下游']] ].map(([label,v,setV,opts])=>(
+            <div key={label} className="relative">
+              <label className="absolute -top-2 left-3 bg-white dark:bg-slate-950 px-1 text-[10px] text-slate-400 z-10">{label}</label>
+              <select className="h-10 pl-3 pr-8 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/25 cursor-pointer dark:bg-slate-900 dark:border-slate-800 dark:text-slate-200"
+                value={v} onChange={e=>setV(e.target.value)}>
+                {opts.map(o=><option key={o}>{o}</option>)}
+              </select>
+              <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          ))}
+          <button onClick={()=>setDark(d=>!d)} title="切换明暗模式"
+            className="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center text-slate-500 dark:text-amber-300 hover:border-blue-300 transition">
+            {dark?<IconSun/>:<IconMoon/>}
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main className="max-w-[1440px] mx-auto px-6 py-5 grid lg:grid-cols-[7fr_3fr] gap-6 items-start">
+      {/* ====== 左侧 70% ====== */}
+      <div className="space-y-3">
+        {/* AI 摘要 */}
+        <div className="rounded-xl border border-blue-200 dark:border-blue-900/60 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 p-4 fadein text-blue-600 dark:text-blue-400">
+          <div className="flex items-center gap-2 mb-2">
+            <IconAI/>
+            <span className="text-sm font-semibold text-blue-800 dark:text-blue-300">AI 行业核心摘要</span>
+            <div className="ml-auto flex items-center gap-2">
+              <span className="text-[11px] text-blue-500 dark:text-blue-400">SIC · {TODAY}</span>
+              <button onClick={exportBrief} className="text-[11px] px-2 py-0.5 rounded-lg bg-white/70 dark:bg-slate-800/70 border border-blue-200 dark:border-blue-900 text-blue-700 dark:text-blue-300 hover:bg-white transition">导出简报</button>
+            </div>
+          </div>
+          <p className="text-[13px] leading-6 text-slate-700 dark:text-slate-300">
+            共收录 <b>{stats.total}</b> 条行业信号，高优先级 <b>{stats.high}</b> 条、当日 <b>{stats.today}</b> 条（截至 {TODAY}）。
+            近日重点：NVIDIA Rubin 正式量产、联想 AI 服务器订单储备 540 亿美元、中移动 51 亿推理集采昇腾占 66%（浪潮仅 2.97 亿）、HBM4 涨价 20-30%、AMD Helios 31TB HBM4 机架进入生产。
+          </p>
+        </div>
+
+        {/* Tabs + count inline */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex items-center justify-between bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            {[['全部','全部'],['厂商动态','厂商动态'],['上游供应链','上游供应链'],['政策市场','政策市场'],['时间线','时间线']].map(([t,aria])=>(
+              <button key={t} onClick={()=>{setTab(t);if(t!=='时间线')setVendor(null);setHl(null);}}
+                className={`flex-1 px-4 py-2.5 text-[13px] font-medium transition whitespace-nowrap text-center
+                  ${tab===t?'bg-blue-600 text-white':'text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-100'}`}>
+                {aria}
+              </button>
+            ))}
+          </div>
+          {vendor&&<button onClick={()=>setVendor(null)}
+            className="text-[12px] px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900 hover:opacity-80">
+            {VN[vendor]} ✕
+          </button>}
+          <span className="text-xs text-slate-400 ml-auto whitespace-nowrap">{filtered.length} 条</span>
+        </div>
+
+        {/* 时间线视图 */}
+        {isTimeline?(
+          <div className="relative pl-6">
+            <div className="absolute left-[7px] top-1 bottom-1 w-px bg-slate-200 dark:bg-slate-800"/>
+            {timeline.map(([date,items])=>(
+              <div key={date} className="relative mb-6 fadein">
+                <div className="absolute -left-6 top-1 w-[15px] h-[15px] rounded-full border-[3px] border-blue-500 bg-white dark:bg-slate-950"/>
+                <div className="text-sm font-bold text-blue-600 dark:text-blue-400 mb-2 tabular-nums">{date}
+                  <span className="ml-2 text-[11px] font-normal text-slate-400">{items.length} 条</span></div>
+                <div className="space-y-2">
+                  {items.map(x=>(
+                    <div key={x.id} onClick={()=>{setTab('全部');setHl(x.id);
+                        setTimeout(()=>{const el=document.getElementById('card-'+x.id);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});},180);
+                        setTimeout(()=>setHl(null),2600);}}
+                      className="cursor-pointer bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2.5 hover:border-blue-300 dark:hover:border-blue-800 hover:shadow-sm transition">
+                      <div className="flex items-center gap-2 text-[11px] text-slate-400 mb-0.5">
+                        {isHigh(x)&&<span className="text-red-500">●</span>}
+                        <span className="text-blue-600 dark:text-blue-400 font-medium">{VN[x.vendor]||x.vendor}</span>
+                        <span>·</span><span>{CATS[x.__cat]}</span>
+                        <span className="ml-auto">{x.source||''}</span>
+                      </div>
+                      <div className="text-[13px] leading-5.5 text-slate-800 dark:text-slate-200 txt-clamp-2">{x.title}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ):(
+          <div className="space-y-2.5">
+            {filtered.map(x=><CardItem key={x.id} x={x} savedOn={saved.includes(x.id)} toggleSave={toggleSave} hl={hl===x.id}/>)}
+            {filtered.length===0&&<div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-10 text-center text-slate-400 text-sm">没有符合筛选条件的情报</div>}
+          </div>
+        )}
+      </div>
+
+      {/* ====== 右侧 30% ====== */}
+      <aside className="space-y-4 sticky top-[88px] self-start max-h-[calc(100vh-104px)] overflow-auto pr-1">
+        {/* 近日热点 */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+          <div className="flex items-baseline justify-between mb-3">
+            <div>
+              <div className="text-2xl font-black leading-none">近日热点</div>
+              <div className="text-[11px] text-slate-400 tracking-wider mt-1">点击定位到对应卡片</div>
+            </div>
+          </div>
+          <div className="space-y-1">
+            {HOT.slice(0,5).map((t,i)=>(
+              <button key={i} onClick={()=>openHot(t.tag||t.kw||'')}
+                className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/60 transition text-left group">
+                <span className={`w-6 h-6 rounded-md flex items-center justify-center text-[12px] font-bold shrink-0 ${hotColor(i)}`}>{i+1}</span>
+                <span className="text-sm text-slate-700 dark:text-slate-300 leading-tight txt-clamp-2 flex-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">{t.tag||t.kw||''}</span>
+                <span className="text-[11px] text-slate-400 tabular-nums shrink-0">{t.heat||t.cnt||''}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 产业地图（只显示有数据的厂商） */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+          <div className="text-sm font-bold mb-1">产业地图</div>
+          <div className="text-[11px] text-slate-400 mb-3">INDUSTRY MAP · 仅有信号的厂商</div>
+          <div className="space-y-4">
+            {Object.entries(MAP).map(([k,seg],si)=>(
+              <div key={k}>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${segColor[seg.color]}`}>{seg.label.split(' · ')[0]}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">{seg.label.split(' · ')[1]}</span>
+                </div>
+                <div className="space-y-2.5 pl-1">
+                  {seg.segs.map(sg=>(
+                    <div key={sg.name}>
+                      <div className="text-[10.5px] text-slate-400 mb-1 flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600 inline-block"/>{sg.name}
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {sg.vendors.includes('market')?
+                          <button onClick={()=>{setQ(sg.q);setVendor(null);setTab('政策市场');}}
+                            className="text-[11.5px] px-2.5 py-1 rounded-lg border bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400">
+                            查看相关 ⌕
+                          </button>
+                        :sg.vendors.map(v=>{
+                          const n=ALL.filter(x=>x.vendor===v).length;
+                          const on=vendor===v;
+                          return <button key={v} onClick={()=>pickVendor(v)}
+                            className={`text-[11.5px] px-2.5 py-1 rounded-lg border transition
+                              ${on?'bg-blue-600 border-blue-600 text-white':'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400'}`}>
+                            {VN[v]}<span className={`ml-1 text-[10px] ${on?'text-blue-200':'text-slate-400'}`}>{n}</span>
+                          </button>;
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {si<2&&<div className="mt-3 flex justify-center text-slate-300 dark:text-slate-700">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 4v14m0 0l-5-5m5 5l5-5"/></svg>
+                </div>}
+              </div>
+            ))}
+          </div>
+          {/* 监控中 */}
+          <div className="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800">
+            <div className="text-[10.5px] text-slate-400 mb-1.5">监控中 · 暂无信号</div>
+            <div className="flex flex-wrap gap-1.5">
+              {WATCH.map(w=><span key={w} title="监控中" className="text-[10.5px] px-2 py-0.5 rounded-md bg-slate-50 dark:bg-slate-800/60 text-slate-400">{w}</span>)}
+            </div>
+          </div>
+        </div>
+
+        {/* 信号统计 */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 shadow-sm">
+          <div className="text-sm font-bold mb-3">信号统计</div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            {[[stats.total,'全部信号','text-blue-600 dark:text-blue-400'],[stats.high,'高优先级','text-red-500'],[stats.today,'当日新增','text-emerald-500']].map(([n,l,c])=>(
+              <div key={l} className="bg-slate-50 dark:bg-slate-800/60 rounded-lg py-2">
+                <div className={`text-xl font-black tabular-nums ${c}`}>{n}</div>
+                <div className="text-[10.5px] text-slate-400 mt-0.5">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 品牌 */}
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-4 text-white text-xs leading-6">
+          <div className="font-bold text-sm mb-1">识野Insight · 服务器行业情报中心</div>
+          <div className="text-blue-100/90">数据来源于厂商官网 / 官方公众号 / 财报 / 政策发布 / 行业会议。由 AI 聚合分析，仅供参考。</div>
+        </div>
+      </aside>
+    </main>
+
+    {topBtn&&<button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
+      className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-xl bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition flex items-center justify-center fadein" title="回到顶部">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 20V4m0 0l-6 6m6-6l6 6"/></svg>
+    </button>}
+  </div>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
 </body>
 </html>
